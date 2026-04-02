@@ -9,8 +9,19 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         .font-montserrat { font-family: 'Montserrat', sans-serif; }
-        .nav-scrolled { background-color: #0B1F3F; padding-top: 0.75rem; padding-bottom: 0.75rem; shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
-        .nav-transparent { background-color: transparent; padding-top: 1.5rem; padding-bottom: 1.5rem; }
+        .nav-scrolled { 
+            background-color: #0B1F3F !important; 
+            padding-top: 0.75rem; 
+            padding-bottom: 0.75rem; 
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3); 
+        }
+        .nav-transparent { 
+            background-color: transparent; 
+            padding-top: 1.5rem; 
+            padding-bottom: 1.5rem; 
+        }
+        /* Fix for clickable areas */
+        .cta-btn { cursor: pointer !important; z-index: 50; position: relative; }
     </style>
 </head>
 <body class="bg-[#F8FAFC] text-[#0B1F3F] selection:bg-[#F5C518]/30 overflow-x-hidden text-left">
@@ -35,12 +46,13 @@
             </div>
             
             <div class="hidden md:flex items-center gap-8 font-bold text-[11px] uppercase tracking-widest">
-                <a href="#problem" id="nav-link-1" class="hover:text-[#F5C518] transition-colors">Problem</a>
-                <a href="#solution" id="nav-link-2" class="hover:text-[#F5C518] transition-colors">8-Pillar System</a>
-                <a href="#pricing" id="nav-link-3" class="hover:text-[#F5C518] transition-colors">Pricing</a>
-                <a href="mailto:risk@merricksolution.com" class="bg-[#F5C518] text-[#0B1F3F] px-6 py-3 rounded font-black hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-black/10">
+                <a href="#problem" class="nav-item hover:text-[#F5C518] transition-colors">Problem</a>
+                <a href="#solution" class="nav-item hover:text-[#F5C518] transition-colors">8-Pillar System</a>
+                <a href="#pricing" class="nav-item hover:text-[#F5C518] transition-colors">Pricing</a>
+                <!-- Nav Button -->
+                <button onclick="window.location.href='mailto:risk@merricksolution.com'" class="cta-btn bg-[#F5C518] text-[#0B1F3F] px-6 py-3 rounded font-black hover:brightness-110 active:scale-95 transition-all shadow-lg">
                     Request a Demo
-                </a>
+                </button>
             </div>
 
             <button id="menu-toggle" class="md:hidden">
@@ -53,7 +65,7 @@
             <a href="#problem" class="block text-white font-bold text-sm uppercase tracking-widest hover:text-[#F5C518]">Problem</a>
             <a href="#solution" class="block text-white font-bold text-sm uppercase tracking-widest hover:text-[#F5C518]">8-Pillar System</a>
             <a href="#pricing" class="block text-white font-bold text-sm uppercase tracking-widest hover:text-[#F5C518]">Pricing</a>
-            <a href="mailto:risk@merricksolution.com" class="block w-full bg-[#F5C518] text-[#0B1F3F] py-4 rounded font-black uppercase text-center text-xs">Request a Demo</a>
+            <button onclick="window.location.href='mailto:risk@merricksolution.com'" class="cta-btn block w-full bg-[#F5C518] text-[#0B1F3F] py-4 rounded font-black uppercase text-center text-xs">Request a Demo</button>
         </div>
     </nav>
 
@@ -72,14 +84,14 @@
                     We install structured compliance workflows that eliminate risk, enforce governance, and prepare your business for audit.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 text-center">
-                    <!-- Button 1 -->
-                    <a href="mailto:risk@merricksolution.com" class="bg-[#0B1F3F] text-white px-10 py-5 rounded-xl font-black text-xs uppercase tracking-widest hover:shadow-2xl transition-all flex items-center justify-center gap-3">
+                    <!-- Hero Button 1 -->
+                    <button onclick="window.location.href='mailto:risk@merricksolution.com'" class="cta-btn bg-[#0B1F3F] text-white px-10 py-5 rounded-xl font-black text-xs uppercase tracking-widest hover:shadow-2xl transition-all flex items-center justify-center gap-3">
                         Request a Demo <span>→</span>
-                    </a>
-                    <!-- Button 2 -->
-                    <a href="mailto:risk@merricksolution.com" class="border-2 border-slate-200 bg-white text-[#0B1F3F] px-10 py-5 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-slate-50 transition-all">
+                    </button>
+                    <!-- Hero Button 2 -->
+                    <button onclick="window.location.href='mailto:risk@merricksolution.com'" class="cta-btn border-2 border-slate-200 bg-white text-[#0B1F3F] px-10 py-5 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-slate-50 transition-all">
                         Secure Your System
-                    </a>
+                    </button>
                 </div>
             </div>
             
@@ -146,7 +158,7 @@
         </div>
     </section>
 
-    <!-- The Solution Section (8 PILLARS) -->
+    <!-- The Solution Section (ALL 8 PILLARS) -->
     <section id="solution" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-6 text-center mb-20">
             <h2 class="text-xs font-black uppercase tracking-[0.4em] text-[#F5C518] mb-4 font-montserrat">The Solution</h2>
@@ -159,42 +171,34 @@
         </div>
 
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
-            <!-- Pillar 1 -->
             <div class="p-8 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all">
                 <h4 class="text-xs font-black uppercase tracking-widest text-[#0B1F3F] mb-3 font-montserrat">01. Risk Definition</h4>
                 <p class="text-xs text-slate-500 font-medium leading-relaxed">Clear classification of high-risk clients based on your business model.</p>
             </div>
-            <!-- Pillar 2 -->
             <div class="p-8 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all">
                 <h4 class="text-xs font-black uppercase tracking-widest text-[#0B1F3F] mb-3 font-montserrat">02. Identity Verification (CIP)</h4>
                 <p class="text-xs text-slate-500 font-medium leading-relaxed">Collection and validation of ID and proof of address.</p>
             </div>
-            <!-- Pillar 3 -->
             <div class="p-8 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all">
                 <h4 class="text-xs font-black uppercase tracking-widest text-[#0B1F3F] mb-3 font-montserrat">03. Due Diligence (EDD)</h4>
                 <p class="text-xs text-slate-500 font-medium leading-relaxed">Source of wealth verification for high-risk or high-value clients.</p>
             </div>
-            <!-- Pillar 4 -->
             <div class="p-8 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all">
                 <h4 class="text-xs font-black uppercase tracking-widest text-[#0B1F3F] mb-3 font-montserrat">04. Screening & Triage</h4>
                 <p class="text-xs text-slate-500 font-medium leading-relaxed">Sanctions, PEP, and adverse media checks.</p>
             </div>
-            <!-- Pillar 5 -->
             <div class="p-8 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all">
                 <h4 class="text-xs font-black uppercase tracking-widest text-[#0B1F3F] mb-3 font-montserrat">05. Evidence Chain</h4>
                 <p class="text-xs text-slate-500 font-medium leading-relaxed">Structured documentation with timestamps for audit defense.</p>
             </div>
-            <!-- Pillar 6 -->
             <div class="p-8 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all">
                 <h4 class="text-xs font-black uppercase tracking-widest text-[#0B1F3F] mb-3 font-montserrat">06. Decision Logic</h4>
                 <p class="text-xs text-slate-500 font-medium leading-relaxed">Clear rules for approve vs reject outcomes based on operational data.</p>
             </div>
-            <!-- Pillar 7 -->
             <div class="p-8 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all">
                 <h4 class="text-xs font-black uppercase tracking-widest text-[#0B1F3F] mb-3 font-montserrat">07. Quality Assurance</h4>
                 <p class="text-xs text-slate-500 font-medium leading-relaxed">Systematic file review and enforcement of clean file standards.</p>
             </div>
-            <!-- Pillar 8 -->
             <div class="p-8 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all">
                 <h4 class="text-xs font-black uppercase tracking-widest text-[#0B1F3F] mb-3 font-montserrat">08. Board-Level Reporting</h4>
                 <p class="text-xs text-slate-500 font-medium leading-relaxed">Clear risk summaries and oversight data for leadership and regulators.</p>
@@ -205,7 +209,7 @@
     <!-- Pricing -->
     <section id="pricing" class="py-24 bg-slate-50 border-y border-slate-200">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 text-left">
-            <!-- Build Button -->
+            <!-- Pricing Button 1 -->
             <div class="bg-[#0B1F3F] text-white rounded-[3rem] p-12 shadow-2xl relative overflow-hidden group">
                 <h4 class="text-xs font-black uppercase tracking-[0.3em] text-[#F5C518] mb-6 font-montserrat">Execution</h4>
                 <h3 class="text-4xl font-black uppercase tracking-tighter mb-4 font-montserrat">Foundation Build</h3>
@@ -216,10 +220,10 @@
                     <li class="flex items-center gap-3 text-sm font-bold uppercase tracking-tight opacity-80"><span class="text-[#F5C518]">✔</span> Team training</li>
                     <li class="flex items-center gap-3 text-sm font-bold uppercase tracking-tight opacity-80"><span class="text-[#F5C518]">✔</span> Audit-ready file structure</li>
                 </ul>
-                <a href="mailto:risk@merricksolution.com" class="block text-center w-full bg-[#F5C518] text-[#0B1F3F] py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:brightness-110 transition-all font-montserrat">Install the System</a>
+                <button onclick="window.location.href='mailto:risk@merricksolution.com'" class="cta-btn block text-center w-full bg-[#F5C518] text-[#0B1F3F] py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:brightness-110 transition-all font-montserrat">Install the System</button>
             </div>
             
-            <!-- Subscribe Button -->
+            <!-- Pricing Button 2 -->
             <div class="bg-white border-2 border-slate-100 rounded-[3rem] p-12 shadow-sm flex flex-col justify-between hover:border-[#F5C518] transition-all text-left">
                 <div>
                     <h4 class="text-xs font-black uppercase tracking-[0.3em] text-slate-400 mb-6 font-montserrat">Management</h4>
@@ -231,33 +235,24 @@
                         <li class="flex items-center gap-3 text-sm font-bold uppercase tracking-tight text-slate-500"><span class="text-[#F5C518]">✔</span> Board-level reporting</li>
                     </ul>
                 </div>
-                <a href="mailto:risk@merricksolution.com" class="block text-center w-full bg-[#0B1F3F] text-white py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:shadow-xl transition-all font-montserrat">Subscribe to Oversight</a>
+                <button onclick="window.location.href='mailto:risk@merricksolution.com'" class="cta-btn block text-center w-full bg-[#0B1F3F] text-white py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:shadow-xl transition-all font-montserrat">Subscribe to Oversight</button>
             </div>
         </div>
     </section>
 
-    <!-- Authority -->
-    <section class="bg-white py-24">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <p class="text-2xl md:text-3xl font-black text-[#0B1F3F] uppercase tracking-tighter leading-tight mb-8 font-montserrat">
-                "Built by a compliance-focused insurance professional with real-world brokerage experience. Designed to meet regulator expectations and carrier standards."
-            </p>
-            <div class="h-1 w-20 bg-[#F5C518] mx-auto"></div>
-        </div>
-    </section>
-
-    <!-- Final CTA -->
+    <!-- Final CTA Section -->
     <section class="py-32 bg-white text-center border-t border-slate-200">
         <div class="max-w-4xl mx-auto px-6">
             <h2 class="text-4xl md:text-7xl font-black uppercase tracking-tighter text-[#0B1F3F] mb-8 leading-[0.9] font-montserrat">
                 Ready to eliminate <br /> <span class="text-[#F5C518] italic underline decoration-4 underline-offset-8">compliance risk?</span>
             </h2>
-            <a href="mailto:risk@merricksolution.com" class="bg-[#0B1F3F] text-white px-12 py-6 rounded-2xl font-black text-sm uppercase tracking-[0.2em] hover:shadow-2xl hover:scale-105 transition-all inline-flex items-center justify-center gap-4 group font-montserrat">
+            <!-- Final Button -->
+            <button onclick="window.location.href='mailto:risk@merricksolution.com'" class="cta-btn bg-[#0B1F3F] text-white px-12 py-6 rounded-2xl font-black text-sm uppercase tracking-[0.2em] hover:shadow-2xl hover:scale-105 transition-all inline-flex items-center justify-center gap-4 font-montserrat">
                 Book a 20-Minute Call <span>→</span>
-            </a>
+            </button>
             <div class="mt-20 flex flex-col sm:flex-row items-center justify-center gap-10 pt-10 border-t border-slate-100 opacity-50">
                 <div class="text-[10px] font-black uppercase tracking-widest">risk@merricksolution.com</div>
-                <div class="text-[10px] font-black uppercase tracking-widest uppercase">WWW.MERRICKSOLUTION.COM</div>
+                <div class="text-[10px] font-black uppercase tracking-widest">WWW.MERRICKSOLUTION.COM</div>
             </div>
         </div>
     </section>
@@ -281,30 +276,28 @@
     </footer>
 
     <script>
-        // Navbar scroll logic
         const navbar = document.getElementById('navbar');
         const logoTop = document.getElementById('logo-text-top');
         const logoBottom = document.getElementById('logo-text-bottom');
+        const navItems = document.querySelectorAll('.nav-item');
         const menuIcon = document.getElementById('menu-icon');
-        const navItems = [1, 2, 3].map(id => document.getElementById(`nav-link-${id}`));
 
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
                 navbar.className = 'fixed w-full z-50 transition-all duration-300 nav-scrolled';
-                logoTop.classList.add('text-white');
+                logoTop.style.color = 'white';
                 logoBottom.style.color = 'rgba(255,255,255,0.5)';
-                navItems.forEach(item => { if(item) item.classList.add('text-white'); });
-                document.getElementById('menu-icon').style.color = 'white';
+                navItems.forEach(item => item.style.color = 'white');
+                menuIcon.style.color = 'white';
             } else {
                 navbar.className = 'fixed w-full z-50 transition-all duration-300 nav-transparent';
-                logoTop.classList.remove('text-white');
+                logoTop.style.color = '#0B1F3F';
                 logoBottom.style.color = 'rgba(11,31,63,0.5)';
-                navItems.forEach(item => { if(item) item.classList.remove('text-white'); });
-                document.getElementById('menu-icon').style.color = 'inherit';
+                navItems.forEach(item => item.style.color = '#0B1F3F');
+                menuIcon.style.color = '#0B1F3F';
             }
         });
 
-        // Mobile menu toggle
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         menuToggle.addEventListener('click', () => {
