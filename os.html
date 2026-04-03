@@ -503,3 +503,243 @@
     </script>
 </body>
 </html>
+text-5xl p-16 shadow-[30px_30px_0px_#061021] font-mono border-[10px]">MC-000-000</div>
+                </header>
+
+                <div id="vault-gate-ui" class="industrial-card h-[900px] flex flex-col items-center justify-center space-y-20 bg-slate-50 border-[6px] border-dashed border-navy rounded-[4rem] shadow-[0_0_300px_rgba(6,16,33,0.1)]">
+                    <div class="text-center">
+                        <svg viewBox="0 0 24 24" class="w-56 h-56 text-navy mx-auto mb-20 animate-pulse" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        <h3 class="font-montserrat font-black text-7xl uppercase tracking-[0.5em] text-navy underline decoration-gold decoration-[15px] underline-offset-[40px] uppercase">Identity Required</h3>
+                        <p class="text-[20px] text-slate-400 font-bold uppercase tracking-[0.8em] mt-20">Input Master Architect Decryption Key</p>
+                    </div>
+                    <div class="flex flex-col items-center gap-16">
+                        <input type="password" id="vault-key" class="key-field w-[800px] border-[8px] border-navy bg-white uppercase tracking-[3em] text-8xl p-24 shadow-[50px_50px_0px_rgba(245,197,24,1)] font-mono" placeholder="••••••••">
+                        <button onclick="unlockVault()" class="bg-navy text-white py-12 px-60 font-black uppercase text-[28px] tracking-[1em] shadow-2xl hover:bg-gold hover:text-navy transition-all transform active:scale-95 border-b-[20px] border-black uppercase font-montserrat">Verify Authority Signature</button>
+                    </div>
+                    <p id="vault-err" class="text-red-500 font-black text-[24px] uppercase hidden tracking-[1em] animate-bounce">Neural Violation: Protocol Refused</p>
+                </div>
+
+                <div id="vault-main-ui" class="grid grid-cols-1 lg:grid-cols-12 gap-32 hidden animate-in fade-in duration-2000 slide-in-from-bottom-32">
+                    <aside class="lg:col-span-3 space-y-12">
+                        <div class="bg-white p-10 border-[6px] border-navy rounded-[3rem] shadow-2xl border-t-[30px] border-gold">
+                            <h3 class="text-[18px] font-black uppercase text-navy tracking-[0.5em] mb-12 border-b-4 border-slate-100 pb-10 uppercase font-montserrat underline underline-offset-[10px] decoration-gold decoration-4">Logic Modules</h3>
+                            <div id="vault-nav" class="space-y-4"></div>
+                        </div>
+                    </aside>
+                    <main class="lg:col-span-9 industrial-card min-h-[1600px] border-l-[60px] border-gold shadow-2xl bg-white p-24" id="vault-content-area"></main>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-threads" class="view-container">
+            <div class="max-w-6xl mx-auto space-y-20 text-navy">
+                <header class="border-b-[20px] border-navy pb-16 flex justify-between items-end">
+                    <div>
+                        <h2 class="font-montserrat font-black text-8xl uppercase tracking-tighter leading-none text-navy">Evidence Threading</h2>
+                        <p class="text-slate-400 font-bold text-[20px] uppercase tracking-[0.8em] mt-10 italic border-l-8 border-gold pl-10">Immutable Chain of Custody Hub</p>
+                    </div>
+                    <div class="unit-badge master-unit-code text-gold uppercase text-3xl p-16 font-mono shadow-2xl">MC-000-000</div>
+                </header>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-24">
+                    <div class="lg:col-span-4 space-y-12">
+                        <div class="industrial-card border-t-[20px] border-gold shadow-2xl bg-white border-navy border-2">
+                            <h3 class="text-xs font-black uppercase mb-12 text-navy underline underline-offset-[15px] decoration-8 tracking-[0.3em] font-montserrat">Forge Secure Link</h3>
+                            <div class="space-y-10">
+                                <div class="space-y-3">
+                                    <label class="text-[12px] font-black uppercase opacity-40 ml-1">Document Registry ID</label>
+                                    <input type="text" id="ev-doc-id" class="w-full bg-slate-50 border-4 border-slate-100 p-8 text-2xl font-black rounded-2xl outline-none focus:border-gold uppercase text-navy shadow-inner transition-all" placeholder="KYC-XXXX-XXXX">
+                                </div>
+                                <div class="space-y-3">
+                                    <label class="text-[12px] font-black uppercase opacity-40 ml-1 font-montserrat">Target Control Pillar</label>
+                                    <select id="ev-pillar" class="w-full bg-slate-50 border-4 border-slate-100 p-8 text-2xl font-black rounded-2xl outline-none focus:border-gold uppercase text-navy shadow-inner cursor-pointer font-mono"></select>
+                                </div>
+                                <button onclick="forgeThread()" class="w-full bg-navy text-white py-12 font-black uppercase text-[18px] tracking-[0.6em] mt-12 hover:bg-gold hover:text-navy transition-all shadow-2xl transform active:scale-95 uppercase font-montserrat border-b-[15px] border-black">Hard-Link Evidence</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-8 industrial-card border-l-[20px] border-navy shadow-2xl relative bg-white">
+                        <div class="flex justify-between items-end mb-20 border-b-4 border-slate-100 pb-12">
+                            <h3 class="text-xs font-black uppercase tracking-[0.4em] text-navy font-montserrat underline decoration-gold decoration-4 underline-offset-8">Live Persistent Evidence Trail</h3>
+                            <p class="text-8xl font-black text-navy font-mono tracking-tighter" id="thread-count-display">--</p>
+                        </div>
+                        <div class="space-y-12 h-[800px] overflow-y-auto pr-8 custom-scroll shadow-inner" id="thread-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="toast" class="fixed bottom-10 right-10 bg-[#0B1F3F] text-[#F5C518] px-8 py-4 border-l-[8px] border-[#F5C518] shadow-2xl font-black uppercase tracking-widest text-[10px] translate-y-40 transition-all duration-300 z-50">
+            Action Completed Successfully.
+        </div>
+    </main>
+
+    <script>
+        // =========================================================================
+        // MERRICK COMPLIANCE | MC-OS CORE LOGIC
+        // =========================================================================
+        const API_URL = "https://hooks.zapier.com/hooks/catch/27086469/unv0i53/";
+        
+        let db = { queue: [], archive: [] };
+        
+        // MC™ 8-PILLAR COMPLIANCE FRAMEWORK
+        const pillars = [
+            { id: "p1", name: "Risk Taxonomy" }, { id: "p2", name: "Customer ID (CIP)" },
+            { id: "p3", name: "Due Diligence (EDD)" }, { id: "p4", name: "Screen & Triage" },
+            { id: "p5", name: "Evidence Chain" }, { id: "p6", name: "Adjudication Logic" },
+            { id: "p7", name: "Quality Assurance" }, { id: "p8", name: "Board Reporting" }
+        ];
+
+        let targetSecureView = '';
+        let requiredKey = '';
+        const MASTER_KEY = "MC8VETO";
+        const VAULT_KEY = "VAULT99";
+        let currentUnitCode = null;
+        let finalVerdict = "PENDING";
+
+        document.addEventListener("DOMContentLoaded", () => {
+            if(sessionStorage.getItem('mc_os_unlocked') !== 'true') {
+                document.getElementById('access-gate').classList.remove('hidden');
+            } else {
+                initMasterOS();
+            }
+
+            renderMathInElement(document.body, {
+                delimiters: [ {left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false} ],
+                throwOnError: false
+            });
+        });
+
+        function unlockSystem() {
+            const key = document.getElementById('sys-key').value.trim().toUpperCase();
+            if (key === MASTER_KEY) {
+                sessionStorage.setItem('mc_os_unlocked', 'true');
+                document.getElementById('access-gate').classList.add('hidden');
+                initMasterOS();
+            } else {
+                const err = document.getElementById('err');
+                err.innerText = "SECURITY VIOLATION: INVALID MERRICK COMPLIANCE KEY";
+                err.classList.remove('hidden');
+                setTimeout(() => err.classList.add('hidden'), 2500);
+            }
+        }
+        
+        function unlockVault() {
+            const key = document.getElementById('vault-key').value.trim().toUpperCase();
+            if(key === VAULT_KEY) {
+                document.getElementById('vault-gate-ui').classList.add('hidden');
+                document.getElementById('vault-main-ui').classList.remove('hidden');
+                showToast("MC™ VAULT DECRYPTED: ARCHITECT MODE ACTIVE");
+            } else {
+                const err = document.getElementById('vault-err'); err.classList.remove('hidden');
+                setTimeout(() => err.classList.add('hidden'), 2000);
+            }
+        }
+
+        function initMasterOS() {
+            const p1 = Math.floor(Math.random() * 900) + 100;
+            const p2 = Math.floor(Math.random() * 900) + 100;
+            currentUnitCode = `MC-${p1}-${p2}`;
+            document.querySelectorAll('.master-unit-code').forEach(el => el.innerText = currentUnitCode);
+
+            const now = new Date().toISOString().split('T')[0].replace(/-/g, '.');
+            document.querySelectorAll('.sys-date').forEach(el => el.innerText = now);
+            
+            if(document.getElementById('prep-verification-date')) {
+                document.getElementById('prep-verification-date').valueAsDate = new Date();
+            }
+
+            syncDatabase();
+            startClock();
+        }
+
+        function startClock() {
+            setInterval(() => { 
+                const clock = document.getElementById('system-clock');
+                if(clock) clock.innerText = new Date().toLocaleTimeString('en-US', { hour12: false }) + " CST"; 
+            }, 1000);
+        }
+
+        async function syncDatabase() {
+            db.queue = JSON.parse(localStorage.getItem('mc_queue')) || [];
+            db.archive = JSON.parse(localStorage.getItem('mc_archive')) || [];
+            updateDashboard();
+            showToast("MC™ OS SYNCED WITH REGISTRY");
+        }
+
+        async function apiPost(payload) {
+            if(!API_URL || API_URL === "") return;
+            try {
+                await fetch(API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(payload),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                });
+
+                if (payload.action === 'create_escalation') { db.queue.push(payload); }
+                else if (payload.action === 'create_approval') { payload.verdict = 'CLEAN FILE APPROVED'; db.archive.push(payload); }
+                else if (payload.action === 'process_veto') {
+                    const idx = db.queue.findIndex(f => f.id === payload.id);
+                    if(idx > -1) {
+                        const file = db.queue[idx];
+                        file.verdict = "VETO REVIEWED & CLOSED"; file.architectAudit = true;
+                        db.queue.splice(idx, 1); db.archive.push(file);
+                    }
+                }
+                
+                localStorage.setItem('mc_queue', JSON.stringify(db.queue));
+                localStorage.setItem('mc_archive', JSON.stringify(db.archive));
+                
+                await syncDatabase(); 
+            } catch(e) {
+                console.error(e);
+                showToast("API DISPATCH FAILED - CHECK ZAPIER BRIDGE");
+            }
+        }
+
+        // Dashboard & Queue Updates
+        function updateDashboard() {
+            const badge = document.getElementById('queue-count');
+            if(badge) badge.innerText = db.queue.length;
+
+            const qTable = document.getElementById('veto-queue');
+            if(qTable) {
+                qTable.innerHTML = db.queue.length === 0 ? `<p class="text-[14px] opacity-20 italic text-center py-32 uppercase tracking-[0.4em] font-black">Strategic Inbox Cleared.</p>` : 
+                [...db.queue].reverse().map(f => `
+                    <div class="queue-pill text-[14px] font-black uppercase tracking-widest shadow-2xl animate-in fade-in duration-500">
+                        UNIT: ${f.id} <span class="float-right text-gold font-mono border-l-2 border-slate-100 pl-4 font-black">${f.entity} | ESCALATED</span>
+                    </div>
+                `).join('');
+            }
+
+            const archiveList = document.getElementById('veto-archive');
+            if(archiveList) {
+                archiveList.innerHTML = db.archive.length === 0 ? `<p class="text-center italic mt-10">Archive Empty</p>` :
+                [...db.archive].reverse().map(f => `
+                    <div class="p-10 bg-slate-50 border-4 border-navy rounded-2xl text-[14px] font-black uppercase opacity-80 shadow-2xl mb-6 border-l-[20px] ${f.verdict.includes('CLEAN') ? 'border-green-500' : 'border-gold'} font-mono">
+                        UNIT: ${f.id} // VERDICT: ${f.verdict} // ANALYST: ${f.analyst}
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Navigation
+        window.switchView = (id) => {
+            document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+            document.getElementById(`nav-${id}`)?.classList.add('active');
+            document.querySelectorAll('.view-container').forEach(v => v.classList.remove('active'));
+            document.getElementById(`view-${id}`)?.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            if(toast) {
+                toast.innerText = msg; 
+                toast.classList.remove('translate-y-40');
+                setTimeout(() => toast.classList.add('translate-y-40'), 3000);
+            }
+        }
+    </script>
+</body>
+</html>
