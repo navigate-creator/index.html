@@ -2,159 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE VAULT | MC™ 8-Pillar Framework</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --navy: #061021; --gold: #F5C518; --border: rgba(0,0,0,0.1); }
-        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: var(--navy); }
-        .font-montserrat { font-family: 'Montserrat', sans-serif; }
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
-
-        .pillar-box { border-left: 4px solid var(--navy); background: #f8fafc; padding: 20px; transition: 0.3s; }
-        .pillar-box:hover { border-left-color: var(--gold); background: #fffdf5; }
-        
-        .tier-card { border: 1px solid #e2e8f0; border-top: 4px solid var(--navy); border-radius: 4px; }
-        .tier-header { font-weight: 900; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block; }
-        
-        .watermark { 
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); 
-            font-size: 8vw; font-weight: 900; opacity: 0.03; pointer-events: none; white-space: nowrap;
-        }
+        :root { --navy: #0B1F3F; --gold: #F5C518; --border: #E2E8F0; }
+        body { font-family: 'Inter', sans-serif; background: white; color: var(--navy); padding: 60px; position: relative; }
+        .pillar-def { border-left: 3px solid var(--navy); padding: 15px 25px; margin-bottom: 20px; background: #F8FAFC; }
+        .pillar-def h4 { font-size: 11px; font-weight: 900; text-transform: uppercase; margin-bottom: 5px; }
+        .pillar-def p { font-size: 11px; color: #64748B; line-height: 1.5; font-weight: 500; }
+        .tier-tag { font-size: 8px; font-weight: 900; padding: 3px 8px; border-radius: 2px; text-transform: uppercase; margin-right: 10px; }
+        .watermark { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 10vw; font-weight: 900; opacity: 0.02; pointer-events: none; white-space: nowrap; }
     </style>
 </head>
-<body class="p-8 md:p-16 relative">
-
+<body>
     <div class="watermark">PROPRIETARY IP</div>
-
-    <div class="max-w-5xl mx-auto space-y-16">
-        
-        <header class="border-b-8 border-navy pb-8">
-            <div class="flex justify-between items-start">
-                <div>
-                    <h1 class="font-montserrat font-black text-5xl uppercase tracking-tighter">The Vault</h1>
-                    <p class="text-gold font-bold text-xs uppercase tracking-[0.5em] mt-2">Private Operating Logic Hub</p>
-                </div>
-                <div class="text-right">
-                    <span class="bg-navy text-white px-4 py-1 text-[10px] font-black uppercase tracking-widest">Locked IP</span>
-                    <p class="text-[9px] font-mono mt-2 opacity-40">REF: MC-LOGIC-v1.0</p>
-                </div>
-            </div>
+    <div class="max-w-4xl mx-auto space-y-12">
+        <header class="border-b-4 border-navy pb-6">
+            <span style="font-size:9px; font-weight:900; color:var(--gold); letter-spacing:4px; text-transform:uppercase;">Proprietary Vault</span>
+            <h2 style="font-family:Montserrat; font-weight:900; font-size:32px; text-transform:uppercase; letter-spacing:-1.5px;">MC™ 8 Pillar Framework</h2>
         </header>
 
-        <section id="pillars" class="space-y-8">
-            <div class="flex items-center gap-4">
-                <h2 class="font-montserrat font-black text-xl uppercase tracking-widest border-b-4 border-gold inline-block">01 // 8-Pillar Architecture</h2>
-            </div>
-            <p class="text-slate-500 font-medium italic">"Defines the full compliance architecture (end-to-end) ensuring consistent enforcement and audit-readiness."</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="pillar-box">
-                    <span class="text-[10px] font-black text-gold uppercase tracking-widest">Pillar 01</span>
-                    <h3 class="font-bold text-sm uppercase mb-2">Risk Taxonomy</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">Defines "high risk" thresholds for your business to ensure objective client tiering.</p>
-                </div>
-                <div class="pillar-box">
-                    <span class="text-[10px] font-black text-gold uppercase tracking-widest">Pillar 02</span>
-                    <h3 class="font-bold text-sm uppercase mb-2">CIP (ID Verification)</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">Mandatory baseline identity and document set required for every file.</p>
-                </div>
-                <div class="pillar-box">
-                    <span class="text-[10px] font-black text-gold uppercase tracking-widest">Pillar 03</span>
-                    <h3 class="font-bold text-sm uppercase mb-2">EDD (Enhanced Due Diligence)</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">Deep-dive checks (Source of Wealth) required for elevated risk categories.</p>
-                </div>
-                <div class="pillar-box">
-                    <span class="text-[10px] font-black text-gold uppercase tracking-widest">Pillar 04</span>
-                    <h3 class="font-bold text-sm uppercase mb-2">Screening & Triage</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">Standardized handling of Sanctions, PEP, and Adverse Media results.</p>
-                </div>
-                <div class="pillar-box">
-                    <span class="text-[10px] font-black text-gold uppercase tracking-widest">Pillar 05</span>
-                    <h3 class="font-bold text-sm uppercase mb-2">Evidence Chain</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">The "Golden Thread" of timestamped evidence supporting every outcome.</p>
-                </div>
-                <div class="pillar-box">
-                    <span class="text-[10px] font-black text-gold uppercase tracking-widest">Pillar 06</span>
-                    <h3 class="font-bold text-sm uppercase mb-2">Adjudication Logic</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">Hard rules for approve vs. reject (gut-feel decisions are prohibited).</p>
-                </div>
-                <div class="pillar-box">
-                    <span class="text-[10px] font-black text-gold uppercase tracking-widest">Pillar 07</span>
-                    <h3 class="font-bold text-sm uppercase mb-2">QA Protocols</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">Second-line review cycle to detect and correct operational slippage.</p>
-                </div>
-                <div class="pillar-box">
-                    <span class="text-[10px] font-black text-gold uppercase tracking-widest">Pillar 08</span>
-                    <h3 class="font-bold text-sm uppercase mb-2">Board Reporting</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">Transformation of operational logs into executive-level risk heatmaps.</p>
-                </div>
+        <section>
+            <h3 style="font-size:10px; font-weight:900; text-transform:uppercase; letter-spacing:2px; margin-bottom:20px; color:var(--gold);">01 // Framework Definitions</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="pillar-def"><h4>01 Risk Taxonomy</h4><p>Defining "high risk" thresholds based on business models and carrier expectations.</p></div>
+                <div class="pillar-def"><h4>02 Customer ID (CIP)</h4><p>Mandatory digital validation of identification and address for all entities.</p></div>
+                <div class="pillar-def"><h4>03 Diligence (EDD)</h4><p>Strict verification of source of wealth and professional standing for high-value files.</p></div>
+                <div class="pillar-def"><h4>04 Screen & Triage</h4><p>Automated Sanctions/PEP checks with standardized manual triage rules.</p></div>
+                <div class="pillar-def"><h4>05 Evidence Chain</h4><p>Immutable, timestamped history of compliance actions for future audit defense.</p></div>
+                <div class="pillar-def"><h4>06 Adjudication</h4><p>Non-negotiable approval vs rejection rules that eliminate individual human bias.</p></div>
             </div>
         </section>
 
-        <section id="matrix" class="space-y-8">
-            <div class="flex items-center gap-4">
-                <h2 class="font-montserrat font-black text-xl uppercase tracking-widest border-b-4 border-gold inline-block">02 // Risk Scoring Matrix</h2>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div class="tier-card p-6">
-                    <span class="tier-header text-green-600">Tier 1</span>
-                    <p class="text-[10px] font-bold text-slate-400 mb-4">Standard</p>
-                    <p class="text-xs font-medium">Standard checks; auto-approve if data is clean.</p>
-                </div>
-                <div class="tier-card p-6">
-                    <span class="tier-header text-blue-600">Tier 2</span>
-                    <p class="text-[10px] font-bold text-slate-400 mb-4">Manual Review</p>
-                    <p class="text-xs font-medium">Manual investigation required with defined SLA.</p>
-                </div>
-                <div class="tier-card p-6">
-                    <span class="tier-header text-orange-600">Tier 3</span>
-                    <p class="text-[10px] font-bold text-slate-400 mb-4">High Risk</p>
-                    <p class="text-xs font-medium">Full Source of Wealth + Architect sign-off.</p>
-                </div>
-                <div class="tier-card p-6">
-                    <span class="tier-header text-red-600">Tier 4</span>
-                    <p class="text-[10px] font-bold text-slate-400 mb-4">Immediate Halt</p>
-                    <p class="text-xs font-medium">Automatic escalation to Legal / MLRO reject.</p>
-                </div>
+        <section style="background:var(--navy); color:white; padding:40px;">
+            <h3 style="font-size:10px; font-weight:900; text-transform:uppercase; letter-spacing:2px; margin-bottom:25px; color:var(--gold);">02 // Risk Scoring Matrix</h3>
+            <div class="space-y-4">
+                <div class="flex items-center"><span class="tier-tag" style="background: #22c55e;">Tier 1</span><p style="font-size:11px; font-weight:600; opacity:0.8;">Standard checks. System auto-approve if 100% clean.</p></div>
+                <div class="flex items-center"><span class="tier-tag" style="background: #3b82f6;">Tier 2</span><p style="font-size:11px; font-weight:600; opacity:0.8;">Manual review required. Senior Analyst sign-off.</p></div>
+                <div class="flex items-center"><span class="tier-tag" style="background: #f59e0b;">Tier 3</span><p style="font-size:11px; font-weight:600; opacity:0.8;">Enhanced Due Diligence + Mandatory Architect sign-off.</p></div>
+                <div class="flex items-center"><span class="tier-tag" style="background: #ef4444;">Tier 4</span><p style="font-size:11px; font-weight:600; opacity:0.8;">Immediate Halt. Escalation to Legal and MLRO rejection.</p></div>
             </div>
         </section>
 
-        <section id="veto-logic" class="bg-navy p-10 text-white rounded-sm">
-            <h2 class="font-montserrat font-black text-xl uppercase tracking-widest text-gold mb-6">03 // The Architect’s Veto</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <div class="space-y-4">
-                    <p class="text-sm leading-relaxed opacity-80">
-                        Governance accountability dictates that while Analysts gather evidence and draft the narrative, only the **Architect** issues the final verdict.
-                    </p>
-                    <p class="text-sm leading-relaxed opacity-80">
-                        A file is never officially "closed" until the decision narrative is burnt into the registry and the status is finalized.
-                    </p>
-                </div>
-                <div class="border-l border-white/10 pl-10 space-y-6">
-                    <div>
-                        <span class="text-[9px] font-black text-gold uppercase tracking-widest">Protocol</span>
-                        <p class="text-xs font-bold uppercase mt-1">No Gut-Feel Approvals</p>
-                    </div>
-                    <div>
-                        <span class="text-[9px] font-black text-gold uppercase tracking-widest">Evidence</span>
-                        <p class="text-xs font-bold uppercase mt-1">Audit Trail Mandatory</p>
-                    </div>
-                    <div>
-                        <span class="text-[9px] font-black text-gold uppercase tracking-widest">Accountability</span>
-                        <p class="text-xs font-bold uppercase mt-1">Architect Final Sign-off</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <footer class="text-center py-12 border-t border-slate-100">
-            <p class="text-[10px] font-black uppercase tracking-[0.5em] text-slate-300">Proprietary Assets of Merrick Compliance</p>
+        <footer class="text-center opacity-30">
+            <p style="font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:4px;">&copy; 2024 Merrick Compliance Strategic Systems</p>
         </footer>
-
     </div>
-
 </body>
 </html>
