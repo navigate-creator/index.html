@@ -456,3 +456,355 @@
     </script>
 </body>
 </html>
+<div id="view-playbook" class="view-section hidden space-y-8 animate-in fade-in duration-500">
+                <div class="border-b-4 border-[#F5C518] pb-4">
+                    <h2 class="font-montserrat font-black text-2xl uppercase tracking-widest text-[#0B1F3F]">Ops Command Playbook</h2>
+                    <p class="text-slate-500 font-bold text-[10px] uppercase tracking-widest mt-1">Industrial SOP & Reference Guide</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="p-6 bg-slate-50 border-l-4 border-[#0B1F3F] rounded shadow-sm">
+                        <h4 class="font-black text-xs uppercase tracking-widest text-[#F5C518] mb-3">01 Risk Taxonomy</h4>
+                        <p class="text-[11px] font-bold text-slate-500 mb-2 leading-relaxed">PASS: Classification matches Matrix logic.</p>
+                        <p class="text-[11px] font-black text-[#ef4444] uppercase leading-relaxed">FAIL: High value entity under-classified to bypass diligence.</p>
+                    </div>
+                    <div class="p-6 bg-slate-50 border-l-4 border-[#0B1F3F] rounded shadow-sm">
+                        <h4 class="font-black text-xs uppercase tracking-widest text-[#F5C518] mb-3">02 Customer ID (CIP)</h4>
+                        <p class="text-[11px] font-bold text-slate-500 mb-2 leading-relaxed">PASS: Valid ID and Utility bill dated within 90 days collected.</p>
+                        <p class="text-[11px] font-black text-[#ef4444] uppercase leading-relaxed">FAIL: Blurry copies, expired docs, or residence proof older than 3 months.</p>
+                    </div>
+                    <div class="p-6 bg-slate-50 border-l-4 border-[#0B1F3F] rounded shadow-sm">
+                        <h4 class="font-black text-xs uppercase tracking-widest text-[#F5C518] mb-3">03 Due Diligence (EDD)</h4>
+                        <p class="text-[11px] font-bold text-slate-500 mb-2 leading-relaxed">PASS: Source of Wealth proven via bank letters or tax returns for Tier 3+.</p>
+                        <p class="text-[11px] font-black text-[#ef4444] uppercase leading-relaxed">FAIL: Wealth claimed without corroborating evidence or narrative logic.</p>
+                    </div>
+                    <div class="p-6 bg-slate-50 border-l-4 border-[#0B1F3F] rounded shadow-sm">
+                        <h4 class="font-black text-xs uppercase tracking-widest text-[#F5C518] mb-3">04 Screen & Triage</h4>
+                        <p class="text-[11px] font-bold text-slate-500 mb-2 leading-relaxed">PASS: Every Screening hit explained as false positive or risk escalated.</p>
+                        <p class="text-[11px] font-black text-[#ef4444] uppercase leading-relaxed">FAIL: PEP or Sanction hit ignored without technical commentary.</p>
+                    </div>
+                    <div class="p-6 bg-slate-50 border-l-4 border-[#0B1F3F] rounded shadow-sm">
+                        <h4 class="font-black text-xs uppercase tracking-widest text-[#F5C518] mb-3">05 Evidence Chain</h4>
+                        <p class="text-[11px] font-bold text-slate-500 mb-2 leading-relaxed">PASS: Every decision point has a timestamped document link in Hub.</p>
+                        <p class="text-[11px] font-black text-[#ef4444] uppercase leading-relaxed">FAIL: Decision made on missing files or unlinked evidence threads.</p>
+                    </div>
+                    <div class="p-6 bg-slate-50 border-l-4 border-[#0B1F3F] rounded shadow-sm">
+                        <h4 class="font-black text-xs uppercase tracking-widest text-[#F5C518] mb-3">06 Adjudication Logic</h4>
+                        <p class="text-[11px] font-bold text-slate-500 mb-2 leading-relaxed">PASS: Final outcome aligns with objective Vault rules without bias.</p>
+                        <p class="text-[11px] font-black text-[#ef4444] uppercase leading-relaxed">FAIL: Approval based on relationship tenure rather than technical criteria.</p>
+                    </div>
+                    <div class="p-6 bg-slate-50 border-l-4 border-[#0B1F3F] rounded shadow-sm">
+                        <h4 class="font-black text-xs uppercase tracking-widest text-[#F5C518] mb-3">07 Quality Assurance</h4>
+                        <p class="text-[11px] font-bold text-slate-500 mb-2 leading-relaxed">PASS: File contains documented second line review stamp before Veto.</p>
+                        <p class="text-[11px] font-black text-[#ef4444] uppercase leading-relaxed">FAIL: Analyst escalated directly to Architect bypassing QA gate.</p>
+                    </div>
+                    <div class="p-6 bg-slate-50 border-l-4 border-[#0B1F3F] rounded shadow-sm">
+                        <h4 class="font-black text-xs uppercase tracking-widest text-[#F5C518] mb-3">08 Board Reporting</h4>
+                        <p class="text-[11px] font-bold text-slate-500 mb-2 leading-relaxed">PASS: File metadata is structured for Governance Heatmap integration.</p>
+                        <p class="text-[11px] font-black text-[#ef4444] uppercase leading-relaxed">FAIL: Missing categorization fields preventing accurate executive reporting.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-queue" class="view-section hidden space-y-8 animate-in fade-in duration-500">
+                <div class="border-b-4 border-red-500 pb-4">
+                    <h2 class="font-montserrat font-black text-2xl uppercase tracking-widest text-red-600">Architect Veto Queue</h2>
+                    <p class="text-slate-500 font-bold text-[10px] uppercase tracking-widest mt-1">Escalated Files Awaiting Review</p>
+                </div>
+                <div class="bg-white border border-slate-200 shadow-xl overflow-hidden rounded">
+                    <table class="mc-table" id="queue-table">
+                        <thead><tr><th>File ID</th><th>Entity</th><th>Analyst</th><th>Date</th><th>Action</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="view-archive" class="view-section hidden space-y-8 animate-in fade-in duration-500">
+                <div class="border-b-4 border-[#F5C518] pb-4">
+                    <h2 class="font-montserrat font-black text-2xl uppercase tracking-widest text-[#0B1F3F]">File Archive</h2>
+                    <p class="text-slate-500 font-bold text-[10px] uppercase tracking-widest mt-1">Completed Audits & Architect Records</p>
+                </div>
+                <div class="bg-white border border-slate-200 shadow-xl overflow-hidden rounded">
+                    <table class="mc-table" id="archive-table">
+                        <thead><tr><th>File ID</th><th>Entity</th><th>Analyst</th><th>Verdict</th><th>Timestamp</th><th>Audit</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="view-vault" class="view-section hidden space-y-8 animate-in fade-in duration-500">
+                <div class="border-b-4 border-[#F5C518] pb-4">
+                    <h2 class="font-montserrat font-black text-2xl uppercase tracking-widest text-[#0B1F3F]">The Vault</h2>
+                    <p class="text-slate-500 font-bold text-[10px] uppercase tracking-widest mt-1">Proprietary Mathematical Adjudication Logic</p>
+                </div>
+                <div class="bg-[#0B1F3F] text-white p-10 rounded-xl shadow-2xl relative overflow-hidden border border-[#F5C518]">
+                    <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 20px 20px;"></div>
+                    <h3 class="font-montserrat font-black text-lg uppercase tracking-widest text-[#F5C518] mb-6 relative z-10">Risk Scoring Calculation</h3>
+                    <div class="bg-[#061021] p-6 border border-white/10 rounded font-mono text-gold overflow-x-auto relative z-10 text-lg">
+                        $$RiskScore = (SectorVolatility \times 1.5) + (GeoWeight \times 2.0) - (DiligenceCredit)$$
+                    </div>
+                    <h3 class="font-montserrat font-black text-lg uppercase tracking-widest text-[#F5C518] mb-6 mt-10 relative z-10">Adjudication Logic Matrix</h3>
+                    <div class="bg-[#061021] p-6 border border-white/10 rounded font-mono text-gold overflow-x-auto relative z-10 text-lg">
+                        $$FinalVerdict = \begin{cases} APPROVE & if\ Risk < 2.5 \\ ESCALATE & if\ Risk \in [2.5, 4.0] \\ REJECT & if\ Risk > 4.0 \end{cases}$$
+                    </div>
+                </div>
+            </div>
+
+            <div id="toast" class="fixed bottom-10 right-10 bg-[#0B1F3F] text-[#F5C518] px-8 py-4 border-l-[8px] border-[#F5C518] shadow-2xl font-black uppercase tracking-widest text-[10px] translate-y-40 transition-all duration-300 z-50">
+                Action Completed Successfully.
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // =========================================================================
+        // ZAPIER WEBHOOK CONNECTION
+        // =========================================================================
+        const API_URL = "https://hooks.zapier.com/hooks/catch/27086469/unv0i53/";
+        
+        let db = { queue: [], archive: [] };
+        
+        const pillars = [
+            { id: "p1", name: "Risk Taxonomy" }, { id: "p2", name: "Customer ID (CIP)" },
+            { id: "p3", name: "Due Diligence (EDD)" }, { id: "p4", name: "Screen & Triage" },
+            { id: "p5", name: "Evidence Chain" }, { id: "p6", name: "Adjudication Logic" },
+            { id: "p7", name: "Quality Assurance" }, { id: "p8", name: "Board Reporting" }
+        ];
+
+        let targetSecureView = '';
+        let requiredKey = '';
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // INITIAL SYSTEM GATE LOGIC
+            if(sessionStorage.getItem('mc_os_unlocked') !== 'true') {
+                document.getElementById('initial-auth-gate').classList.remove('hidden');
+            }
+
+            document.getElementById('audit-date').valueAsDate = new Date();
+            generateNewID();
+            renderScorecard();
+            syncDatabase(); 
+            startClock();
+            
+            renderMathInElement(document.body, {
+                delimiters: [ {left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false} ],
+                throwOnError: false
+            });
+        });
+
+        // GLOBAL SECURITY UNLOCK
+        function unlockSystem() {
+            const key = document.getElementById('initial-auth-input').value;
+            if (key === 'MC8SECURE') {
+                sessionStorage.setItem('mc_os_unlocked', 'true');
+                document.getElementById('initial-auth-gate').classList.add('hidden');
+            } else {
+                document.getElementById('initial-auth-error').classList.remove('hidden');
+            }
+        }
+        document.getElementById('initial-auth-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') unlockSystem();
+        });
+
+        function startClock() {
+            setInterval(() => { document.getElementById('system-clock').innerText = new Date().toLocaleTimeString('en-US', { hour12: false }) + " CST"; }, 1000);
+        }
+
+        function showLoader(show) {
+            document.getElementById('loader').classList.toggle('hidden', !show);
+        }
+
+        // --- ZAPIER API CALLS ---
+        async function syncDatabase() {
+            db.queue = JSON.parse(localStorage.getItem('mc_queue')) || [];
+            db.archive = JSON.parse(localStorage.getItem('mc_archive')) || [];
+            updateDashboard();
+            showToast("System State Synchronized.");
+        }
+
+        async function apiPost(payload) {
+            if(!API_URL || API_URL === "") return;
+            showLoader(true);
+            try {
+                // Send to Zapier
+                await fetch(API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(payload),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' } // Bypasses CORS blocks
+                });
+
+                // Update local storage to keep UI running
+                if (payload.action === 'create_escalation') { db.queue.push(payload); }
+                else if (payload.action === 'create_approval') { payload.verdict = 'CLEAN FILE APPROVED'; db.archive.push(payload); }
+                else if (payload.action === 'process_veto') {
+                    const idx = db.queue.findIndex(f => f.id === payload.id);
+                    if(idx > -1) {
+                        const file = db.queue[idx];
+                        file.verdict = "VETO REVIEWED & CLOSED"; file.architectAudit = true;
+                        db.queue.splice(idx, 1); db.archive.push(file);
+                    }
+                }
+                else if (payload.action === 'audit_file') {
+                    const file = db.archive.find(f => f.id === payload.id);
+                    if(file) file.architectAudit = true;
+                }
+                
+                localStorage.setItem('mc_queue', JSON.stringify(db.queue));
+                localStorage.setItem('mc_archive', JSON.stringify(db.archive));
+                
+                await syncDatabase(); 
+            } catch(e) {
+                console.error(e);
+                showToast("Action Failed to Save to Cloud.");
+            }
+            showLoader(false);
+        }
+
+        // --- ANALYST WORKFLOW ---
+        function generateNewID() {
+            const id = `MC-${Math.floor(Math.random()*900+100)}-${Math.floor(Math.random()*900+100)}`;
+            document.getElementById('current-file-id').innerText = id;
+            clearScorecard();
+            document.getElementById('entity-name').value = '';
+        }
+
+        function renderScorecard() {
+            const grid = document.getElementById('scorecard-grid');
+            grid.innerHTML = pillars.map(p => `
+                <div class="flex items-center justify-between p-4 bg-slate-50 border border-slate-200 rounded" data-pillar="${p.id}">
+                    <span class="text-[10px] font-black uppercase tracking-tight text-[#0B1F3F]">${p.name}</span>
+                    <div class="flex gap-2">
+                        <button onclick="scorePillar(this, 'pass')" class="stencil-btn px-3 py-1.5 text-[9px] font-black uppercase">Pass</button>
+                        <button onclick="scorePillar(this, 'fail')" class="stencil-btn px-3 py-1.5 text-[9px] font-black uppercase">Fail</button>
+                    </div>
+                </div>
+            `).join('');
+            checkScorecardLogic();
+        }
+
+        function scorePillar(btn, result) {
+            const parent = btn.closest('div[data-pillar]');
+            parent.querySelectorAll('button').forEach(b => b.classList.remove('active-pass', 'active-fail'));
+            btn.classList.add(result === 'pass' ? 'active-pass' : 'active-fail');
+            checkScorecardLogic();
+        }
+
+        function clearScorecard() {
+            document.querySelectorAll('.active-pass, .active-fail').forEach(el => el.classList.remove('active-pass', 'active-fail'));
+            checkScorecardLogic();
+        }
+
+        function checkScorecardLogic() {
+            const total = pillars.length;
+            const passes = document.querySelectorAll('.active-pass').length;
+            const fails = document.querySelectorAll('.active-fail').length;
+            const btnApprove = document.getElementById('btn-approve');
+            const btnEscalate = document.getElementById('btn-escalate');
+
+            btnApprove.disabled = true; btnApprove.classList.add('opacity-50', 'cursor-not-allowed');
+            btnEscalate.disabled = true; btnEscalate.classList.add('opacity-50', 'cursor-not-allowed');
+
+            if (passes + fails === total) {
+                if (fails > 0) {
+                    btnEscalate.disabled = false; btnEscalate.classList.remove('opacity-50', 'cursor-not-allowed');
+                } else {
+                    btnApprove.disabled = false; btnApprove.classList.remove('opacity-50', 'cursor-not-allowed');
+                    btnEscalate.disabled = false; btnEscalate.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+            }
+        }
+
+        function submitFile(action) {
+            const id = document.getElementById('current-file-id').innerText;
+            const entity = document.getElementById('entity-name').value || "UNKNOWN ENTITY";
+            const analyst = document.getElementById('analyst-name').value;
+            const date = document.getElementById('audit-date').value;
+
+            if(!analyst || !date) { alert("BLOCKER: Analyst Name and Audit Date are mandatory."); return; }
+
+            const payload = {
+                action: action === 'escalate' ? 'create_escalation' : 'create_approval',
+                id, entity, analyst, date,
+                timestamp: new Date().toLocaleString(),
+                architectAudit: false
+            };
+
+            apiPost(payload);
+            generateNewID();
+        }
+
+        function architectVeto(id) { apiPost({ action: 'process_veto', id: id, timestamp: new Date().toLocaleString() }); }
+        function architectAudit(id) { apiPost({ action: 'audit_file', id: id }); }
+
+        function updateDashboard() {
+            document.getElementById('queue-badge').innerText = db.queue.length;
+
+            const qTable = document.querySelector('#queue-table tbody');
+            qTable.innerHTML = db.queue.length === 0 ? `<tr><td colspan="5" class="text-center text-slate-400">No pending escalations.</td></tr>` : 
+                db.queue.map(f => `
+                    <tr>
+                        <td class="font-mono text-[#0B1F3F]">${f.id}</td>
+                        <td>${f.entity}</td>
+                        <td>${f.analyst}</td>
+                        <td>${f.date}</td>
+                        <td><button onclick="architectVeto('${f.id}')" class="bg-red-500 text-white px-3 py-1 text-[9px] font-black uppercase rounded hover:bg-red-600 transition">Review & Veto</button></td>
+                    </tr>
+                `).join('');
+
+            const aTable = document.querySelector('#archive-table tbody');
+            aTable.innerHTML = db.archive.length === 0 ? `<tr><td colspan="6" class="text-center text-slate-400">Archive is empty.</td></tr>` : 
+                db.archive.map(f => `
+                    <tr>
+                        <td class="font-mono text-[#0B1F3F]">${f.id}</td>
+                        <td>${f.entity}</td>
+                        <td>${f.analyst}</td>
+                        <td class="font-bold ${f.verdict.includes('CLEAN') ? 'text-green-600' : 'text-[#F5C518]'}">${f.verdict}</td>
+                        <td class="text-[10px] text-slate-500">${f.timestamp}</td>
+                        <td>
+                            ${(f.architectAudit === true || f.architectAudit === "true" || f.architectAudit === "TRUE") ? 
+                                `<span class="bg-[#0B1F3F] text-[#F5C518] px-2 py-1 text-[8px] font-black uppercase rounded">Audited</span>` : 
+                                `<button onclick="architectAudit('${f.id}')" class="border border-[#0B1F3F] text-[#0B1F3F] px-2 py-1 text-[8px] font-black uppercase rounded hover:bg-[#0B1F3F] hover:text-white transition">Stamp Audit</button>`
+                            }
+                        </td>
+                    </tr>
+                `).join('').split('').reverse().join('').split('</tr>').reverse().join('</tr>');
+        }
+
+        // --- NAVIGATION & MODULE SECURITY ---
+        function navigate(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.sidebar-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(`view-${viewId}`).classList.remove('hidden');
+            document.getElementById(`nav-${viewId}`).classList.add('active');
+        }
+
+        function attemptAccess(viewId, key) {
+            targetSecureView = viewId; requiredKey = key;
+            document.getElementById('auth-input').value = '';
+            document.getElementById('auth-error').classList.add('hidden');
+            document.getElementById('auth-modal').classList.remove('hidden');
+            document.getElementById('auth-prompt').innerText = `Accessing ${viewId.toUpperCase()} - Key Required`;
+            document.getElementById('auth-input').focus();
+        }
+
+        function verifyAccess() {
+            if(document.getElementById('auth-input').value === requiredKey) {
+                document.getElementById('auth-modal').classList.add('hidden');
+                navigate(targetSecureView);
+            } else {
+                document.getElementById('auth-error').classList.remove('hidden');
+            }
+        }
+
+        document.getElementById('auth-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') verifyAccess();
+        });
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg; toast.classList.remove('translate-y-40');
+            setTimeout(() => toast.classList.add('translate-y-40'), 3000);
+        }
+    </script>
+</body>
+</html>
