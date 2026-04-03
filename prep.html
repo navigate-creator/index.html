@@ -2,150 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANALYST PREP | MC™ 8-Pillar Framework</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@400;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --navy: #0B1F3F; --gold: #F5C518; --audit-red: #ef4444; --slate: #64748B; }
-        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; color: var(--navy); }
-        .font-montserrat { font-family: 'Montserrat', sans-serif; }
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        :root { --navy: #0B1F3F; --gold: #F5C518; --border: #E2E8F0; }
+        body { font-family: 'Inter', sans-serif; background: #FDFDFD; color: var(--navy); padding: 40px; }
+        .card { background: white; border: 1px solid var(--border); border-left: 5px solid var(--navy); padding: 20px; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; }
+        .card:hover { border-left-color: var(--gold); box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        .btn-action { border: 1.5px solid var(--navy); padding: 6px 16px; font-size: 9px; font-weight: 900; text-transform: uppercase; cursor: pointer; transition: 0.2s; }
+        .btn-action:hover { background: var(--navy); color: white; }
+        .active-btn { background: var(--gold) !important; border-color: var(--gold) !important; color: var(--navy) !important; }
         
-        /* Industrial UI Components */
-        .pillar-card { 
-            background: white; border: 1px solid #E2E8F0; border-left: 6px solid var(--navy); 
-            transition: all 0.3s ease; 
-        }
-        .pillar-card.active-pass { border-left-color: var(--gold); background: #FFFBF0; }
-        .pillar-card.active-fail { border-left-color: var(--audit-red); background: #FEF2F2; }
-
-        .stencil-btn { border: 2px solid var(--navy); font-weight: 900; text-transform: uppercase; font-size: 10px; transition: 0.2s; }
-        .btn-pass.selected { background: var(--gold); border-color: var(--gold); }
-        .btn-fail.selected { background: var(--audit-red); color: white; border-color: var(--audit-red); }
-
-        /* Lock Overlay */
-        #lock-screen {
-            display: none; position: fixed; inset: 0; background: rgba(6, 16, 33, 0.95);
-            z-index: 1000; flex-direction: column; align-items: center; justify-content: center;
-        }
+        #lock-overlay { display: none; position: fixed; inset: 0; background: rgba(255,255,255,0.9); z-index: 100; flex-direction: column; align-items: center; justify-content: center; }
     </style>
 </head>
-<body class="p-4 md:p-8">
-
-    <div id="lock-screen">
-        <h1 class="text-white font-montserrat font-black text-4xl mb-4">FILE LOCKED</h1>
-        <p class="text-gold font-mono text-sm tracking-widest uppercase">Deficiency Detected by Architect</p>
-        <p class="text-white/60 text-xs mt-8">READ-ONLY MODE ENABLED. TAMPERING BLOCKED.</p>
+<body>
+    <div id="lock-overlay">
+        <h1 style="font-family:Montserrat; font-weight:900; font-size:24px; color:#ef4444; letter-spacing:-1px;">FILE LOCKED</h1>
+        <p style="font-size:10px; font-weight:700; text-transform:uppercase; color:var(--navy); margin-top:10px;">Architect Resolution Required</p>
     </div>
 
-    <div class="max-w-6xl mx-auto space-y-8">
-        
-        <header class="bg-white border-[4px] border-navy p-8 shadow-[15px_15px_0px_#0B1F3F] flex flex-col md:flex-row justify-between items-center">
-            <div class="space-y-2">
-                <div class="flex items-center gap-3">
-                    <div class="bg-navy p-1 rounded">
-                        <svg viewBox="0 0 100 100" class="w-6 h-6" fill="white"><rect x="12" y="30" width="16" height="40"/><path d="M12 30H50V40H32V70H12V30Z"/><rect x="34" y="30" width="16" height="40"/><path d="M56 42H88V50H72V58H88V66H56V42Z"/><rect x="56" y="42" width="12" height="24"/></svg>
-                    </div>
-                    <h1 class="font-montserrat font-black text-2xl uppercase tracking-tighter">Analyst Prep Station</h1>
-                </div>
-                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.4em]">Proprietary Operating System v1.0</p>
+    <div class="max-w-4xl mx-auto space-y-6">
+        <header class="flex justify-between items-end border-b-2 border-navy pb-4">
+            <div>
+                <span style="font-size:9px; font-weight:900; color:var(--gold); letter-spacing:3px; text-transform:uppercase;">Analyst Station</span>
+                <h2 style="font-family:Montserrat; font-weight:900; font-size:28px; text-transform:uppercase; letter-spacing:-1px;">Preparation Phase</h2>
             </div>
-
-            <div class="text-right mt-6 md:mt-0">
-                <span id="unique-id" class="block font-mono font-black text-2xl text-navy">MC-000-000</span>
-                <span id="timestamp" class="text-[10px] font-bold text-gold uppercase tracking-widest">INITIALIZING...</span>
-            </div>
+            <div class="text-right"><input type="text" id="a-name" placeholder="ANALYST NAME" style="border:none; border-bottom:1px solid var(--border); background:transparent; font-size:10px; font-weight:700; text-align:right; width:200px; outline:none;"></div>
         </header>
 
-        <div class="bg-navy p-6 rounded text-white flex flex-col md:flex-row items-center gap-6">
-            <label class="font-black uppercase text-[11px] tracking-widest shrink-0">Performing Analyst:</label>
-            <input type="text" id="analyst-name" class="w-full bg-white/10 border border-white/20 p-3 rounded font-bold uppercase text-sm outline-none focus:border-gold" placeholder="Enter Full Name">
-        </div>
+        <div class="grid grid-cols-1 gap-3" id="pillar-list"></div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="pillar-grid">
-            </div>
-
-        <div class="pt-10 border-t-2 border-slate-200 flex flex-col md:flex-row gap-4">
-            <button onclick="processAction('APPROVE')" class="flex-1 bg-white border-4 border-navy py-6 font-black uppercase tracking-widest text-navy hover:bg-gold transition-all shadow-xl">Approve & Log Registry</button>
-            <button onclick="processAction('ESCALATE')" class="flex-1 bg-navy text-white py-6 font-black uppercase tracking-widest hover:brightness-125 transition-all shadow-xl border-b-8 border-gold">Escalate to Veto Queue</button>
-        </div>
+        <footer class="pt-8 flex gap-4">
+            <button onclick="send('APPROVE')" style="flex:1; background:var(--navy); color:white; padding:16px; font-weight:900; text-transform:uppercase; font-size:11px; letter-spacing:1px; border:none; cursor:pointer;">Approve & Log Registry</button>
+            <button onclick="send('ESCALATE')" style="flex:1; border:2px solid var(--navy); background:white; color:var(--navy); padding:16px; font-weight:900; text-transform:uppercase; font-size:11px; letter-spacing:1px; cursor:pointer;">Escalate to Veto</button>
+        </footer>
     </div>
 
     <script>
-        const PILLARS = [
-            "Risk Taxonomy", "Customer ID (CIP)", "Due Diligence (EDD)", "Screen & Triage",
-            "Evidence Chain", "Adjudication Logic", "Quality Assurance (QA)", "Board Reporting"
-        ];
-
-        let systemID = "";
-
-        // 1. Initialize Unique ID & Check Lock
-        window.onload = async () => {
-            const p1 = Math.floor(Math.random() * 900) + 100;
-            const p2 = Math.floor(Math.random() * 900) + 100;
-            systemID = `MC-${p1}-${p2}`;
-            document.getElementById('unique-id').innerText = systemID;
-            document.getElementById('timestamp').innerText = new Date().toLocaleString();
-            
-            renderPillars();
-            checkLockStatus(); // Pulse check to Google Sheets logic
-        };
-
-        function renderPillars() {
-            const grid = document.getElementById('pillar-grid');
-            grid.innerHTML = PILLARS.map((p, i) => `
-                <div class="pillar-card p-6 flex justify-between items-center" id="card-${i}">
-                    <span class="text-[11px] font-black uppercase tracking-tight">0${i+1} ${p}</span>
-                    <div class="flex gap-2">
-                        <button onclick="scorePillar(${i}, 'pass')" class="stencil-btn btn-pass px-4 py-2">Pass</button>
-                        <button onclick="scorePillar(${i}, 'fail')" class="stencil-btn btn-fail px-4 py-2">Fail</button>
-                    </div>
+        const P = ["Risk Taxonomy", "Customer ID (CIP)", "Due Diligence (EDD)", "Screen & Triage", "Evidence Chain", "Adjudication Logic", "Quality Assurance (QA)", "Board Reporting"];
+        const list = document.getElementById('pillar-list');
+        list.innerHTML = P.map((p, i) => `
+            <div class="card">
+                <span style="font-size:10px; font-weight:800; text-transform:uppercase;">0${i+1} ${p}</span>
+                <div class="flex gap-2">
+                    <button onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active-btn'));this.classList.add('active-btn')" class="btn-action">Pass</button>
+                    <button onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active-btn'));this.classList.add('active-btn')" class="btn-action">Fail</button>
                 </div>
-            `).join('');
-        }
+            </div>
+        `).join('');
 
-        function scorePillar(index, res) {
-            const card = document.getElementById(`card-${index}`);
-            card.classList.remove('active-pass', 'active-fail');
-            card.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
-            
-            if(res === 'pass') {
-                card.classList.add('active-pass');
-                card.querySelectorAll('button')[0].classList.add('selected');
-            } else {
-                card.classList.add('active-fail');
-                card.querySelectorAll('button')[1].classList.add('selected');
-            }
-        }
-
-        // 2. Pre-Flight Lock Check
-        async function checkLockStatus() {
-            // This would be a fetch to your Google Sheet status column
-            const isLocked = false; // Placeholder
-            if(isLocked) {
-                document.getElementById('lock-screen').style.display = 'flex';
-                document.querySelectorAll('input, button').forEach(el => el.disabled = true);
-            }
-        }
-
-        // 3. Process Action (Zapier Hooks)
-        async function processAction(type) {
-            const name = document.getElementById('analyst-name').value;
-            if(!name) return alert("MANDATORY: Analyst Name required for audit trail.");
-
-            const payload = {
-                id: systemID,
-                analyst: name,
-                type: type,
-                timestamp: new Date().toISOString()
-            };
-
-            console.log(`MC-LOG: Sending ${type} to Google Workspace...`, payload);
-            
-            // fetch(type === 'APPROVE' ? ZAPIER_PASSED_LOG : ZAPIER_VETO_QUEUE, { method: 'POST', ... });
-
-            alert(`SYSTEM LOGGED: File ${systemID} has been ${type === 'APPROVE' ? 'Sent to Registry' : 'Escalated to Veto'}.`);
+        function send(type) {
+            if(!document.getElementById('a-name').value) return alert("Analyst Name Required.");
+            alert(type + " Request Logged.");
             location.reload();
         }
     </script>
