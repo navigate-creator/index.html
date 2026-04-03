@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <!--
+    =======================================================================
     MERRICK COMPLIANCE | MASTER OPERATING SYSTEM v12.0
     INDUSTRIAL GRADE ARCHITECTURE - FULLY PERSISTENT - AUDIT DEFENSIBLE
     PROPRIETARY SYSTEM - DO NOT DUPLICATE
+    -----------------------------------------------------------------------
+    LEGAL NOTICE: This system is the intellectual property of Merrick Compliance.
+    Unauthorized distribution or reproduction is strictly prohibited.
+    =======================================================================
 -->
 <head>
     <meta charset="UTF-8">
@@ -21,12 +26,12 @@
             --audit-red: #ef4444;
             --audit-green: #22c55e;
             --slate: #64748B;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         /* CORE LAYOUT PHYSICS 
-           --------------------------------------------------
-           Ensuring 100% viewport containment and zero overflow
+           -------------------------------------------------------------------
+           Ensuring 100% viewport containment and zero overflow on body
         */
         html, body { 
             height: 100%; 
@@ -44,7 +49,7 @@
         .dot-grid { background-image: radial-gradient(rgba(245, 197, 24, 0.05) 1px, transparent 1px); background-size: 25px 25px; }
 
         /* NAVIGATION ARCHITECTURE 
-           --------------------------------------------------
+           -------------------------------------------------------------------
         */
         .sidebar { 
             width: 280px; 
@@ -73,8 +78,8 @@
         .sidebar-item:hover { background: rgba(255, 255, 255, 0.05); color: white; }
         .sidebar-item.active { background: var(--gold-muted); color: var(--gold); border-left-color: var(--gold); }
 
-        /* SECURITY LAYERS 
-           --------------------------------------------------
+        /* SECURITY ACCESS LAYERS 
+           -------------------------------------------------------------------
         */
         #access-gate { 
             position: fixed; 
@@ -101,7 +106,7 @@
         }
 
         /* CONTENT WORKSPACE PHYSICS 
-           --------------------------------------------------
+           -------------------------------------------------------------------
            Fluid Scroll Architecture solves the 100% zoom cutoff issue
         */
         main.content-area { 
@@ -117,7 +122,7 @@
             height: 100%; 
             overflow-y: auto; 
             padding: 50px; 
-            padding-bottom: 350px; /* Strategic Bottom Buffer */
+            padding-bottom: 400px; /* Massive Strategic Bottom Buffer */
             scrollbar-width: thin; 
             scrollbar-color: var(--gold) transparent; 
         }
@@ -131,13 +136,13 @@
         .view-container::-webkit-scrollbar-thumb:hover { background: var(--gold); }
 
         /* INDUSTRIAL UI COMPONENTS 
-           --------------------------------------------------
+           -------------------------------------------------------------------
         */
         .industrial-card { 
             background: rgba(255,255,255,0.02); 
             border: 1px solid var(--border); 
             border-radius: 4px; 
-            padding: 35px; 
+            padding: 40px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
         }
         .stencil-btn { 
@@ -149,9 +154,9 @@
             font-weight: 900; 
             text-transform: uppercase; 
             font-size: 10px; 
-            padding: 10px 20px; 
+            padding: 10px 22px; 
             border-radius: 2px; 
-            letter-spacing: 1px; 
+            letter-spacing: 1.5px; 
         }
         .active-pass { background-color: var(--gold) !important; color: var(--navy) !important; border-color: var(--gold) !important; box-shadow: 0 0 20px rgba(245, 197, 24, 0.4); }
         .active-fail { background-color: var(--audit-red) !important; color: white !important; border-color: var(--audit-red) !important; }
@@ -161,29 +166,29 @@
             border-left: 8px solid var(--navy-light); 
             background: rgba(255,255,255,0.03); 
             transition: var(--transition); 
-            padding: 30px; 
+            padding: 35px; 
             border-radius: 4px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15); 
         }
         .pillar-card.pass-state { border-left-color: var(--gold); background: rgba(245, 197, 24, 0.04); }
         .pillar-card.fail-state { border-left-color: var(--audit-red); background: rgba(239, 68, 68, 0.04); }
 
         /* AUTHORITY STAMPING ENGINE 
-           --------------------------------------------------
+           -------------------------------------------------------------------
         */
-        .stamp-box { border: 3px dashed var(--gold); background: rgba(245, 197, 24, 0.05); padding: 35px; position: relative; overflow: hidden; border-radius: 4px; }
+        .stamp-box { border: 3px dashed var(--gold); background: rgba(245, 197, 24, 0.05); padding: 40px; position: relative; overflow: hidden; border-radius: 4px; }
         .stamp-box::after { 
             content: "CERTIFIED"; position: absolute; top: 50%; left: 50%; 
             transform: translate(-50%, -50%) rotate(-15deg); 
-            font-size: 5rem; font-weight: 900; color: var(--gold); 
-            opacity: 0.03; pointer-events: none; 
+            font-size: 6rem; font-weight: 900; color: var(--gold); 
+            opacity: 0.04; pointer-events: none; 
         }
 
-        .unit-badge { background: #000; border: 1px solid var(--gold); color: var(--gold); font-family: 'JetBrains Mono'; font-size: 11px; padding: 6px 18px; font-weight: 700; letter-spacing: 2px; }
-        .tech-box { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 18px; font-family: 'JetBrains Mono'; font-size: 11px; color: #94A3B8; margin-top: 15px; border-radius: 4px; line-height: 1.6; }
+        .unit-badge { background: #000; border: 1px solid var(--gold); color: var(--gold); font-family: 'JetBrains Mono'; font-size: 11px; padding: 8px 20px; font-weight: 700; letter-spacing: 2.5px; }
+        .tech-box { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 20px; font-family: 'JetBrains Mono'; font-size: 11px; color: #94A3B8; margin-top: 20px; border-radius: 4px; line-height: 1.8; }
 
-        .logic-table th { font-size: 10px; text-transform: uppercase; color: var(--gold); padding: 20px; text-align: left; border-bottom: 2px solid var(--gold); background: rgba(255,255,255,0.03); letter-spacing: 2px; }
-        .logic-table td { font-size: 12px; padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); line-height: 1.8; vertical-align: top; }
+        .logic-table th { font-size: 10px; text-transform: uppercase; color: var(--gold); padding: 22px; text-align: left; border-bottom: 2px solid var(--gold); background: rgba(255,255,255,0.03); letter-spacing: 2px; }
+        .logic-table td { font-size: 13px; padding: 22px; border-bottom: 1px solid rgba(255,255,255,0.05); line-height: 1.8; vertical-align: top; }
 
         .btn-locked { opacity: 0.15; cursor: not-allowed !important; filter: grayscale(1); pointer-events: none; }
         .hidden { display: none !important; }
@@ -191,53 +196,53 @@
         @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
 
         /* VETO QUEUE SYSTEM 
-           --------------------------------------------------
+           -------------------------------------------------------------------
         */
         .queue-pill { 
             background: rgba(255, 255, 255, 0.03); 
             border: 1px solid var(--border); 
             color: white; 
-            padding: 20px; 
-            margin-bottom: 15px; 
-            border-radius: 4px; 
+            padding: 22px; 
+            margin-bottom: 18px; 
+            border-radius: 6px; 
             cursor: pointer; 
-            transition: 0.2s; 
+            transition: 0.25s; 
             border-left: 0 solid var(--gold); 
         }
-        .queue-pill:hover { border-color: var(--gold); background: var(--gold-muted); border-left-width: 10px; }
-        .queue-pill.active { border-color: var(--gold); background: var(--gold-muted); border-left-width: 10px; }
+        .queue-pill:hover { border-color: var(--gold); background: var(--gold-muted); border-left-width: 12px; }
+        .queue-pill.active { border-color: var(--gold); background: var(--gold-muted); border-left-width: 12px; }
         
-        /* Checkbox Logic */
+        /* Adjudication Checks */
         .task-check { 
-            width: 22px; height: 22px; accent-color: var(--gold); cursor: pointer; 
+            width: 24px; height: 24px; accent-color: var(--gold); cursor: pointer; 
             border: 2px solid var(--gold); background: transparent;
         }
 
         /* SECOND LAYER SECURITY: THE VAULT 
-           --------------------------------------------------
+           -------------------------------------------------------------------
         */
         #vault-gate-ui { 
             background: rgba(0,0,0,0.85); 
-            backdrop-filter: blur(40px); 
+            backdrop-filter: blur(45px); 
             border: 2px dashed var(--gold); 
-            height: 700px; 
+            height: 750px; 
             display: flex; flex-direction: column; align-items: center; justify-content: center; 
             border-radius: 12px; z-index: 100; 
-            box-shadow: 0 0 100px rgba(0,0,0,1); 
+            box-shadow: 0 0 120px rgba(0,0,0,1); 
         }
 
         /* PDF DISPATCH OVERRIDES (risk@merricksolution.com)
-           --------------------------------------------------
+           -------------------------------------------------------------------
         */
         @media print {
             .sidebar, nav, #access-gate, .sidebar-item, button, .stencil-btn, select, .task-check, .key-field { display: none !important; }
             body { background: white !important; color: black !important; overflow: visible !important; }
-            .view-container { display: block !important; padding: 50px !important; height: auto !important; overflow: visible !important; }
-            .industrial-card, .pillar-card { border: 2px solid #000 !important; background: transparent !important; color: black !important; margin-bottom: 40px !important; page-break-inside: avoid; border-left-width: 15px !important; }
+            .view-container { display: block !important; padding: 60px !important; height: auto !important; overflow: visible !important; }
+            .industrial-card, .pillar-card { border: 2px solid #000 !important; background: transparent !important; color: black !important; margin-bottom: 50px !important; page-break-inside: avoid; border-left-width: 20px !important; }
             .text-white, .text-gold, .master-unit-code { color: black !important; }
-            .unit-badge { border: 2px solid black !important; color: black !important; background: white !important; padding: 10px !important; }
-            .stamp-box { border: 4px solid black !important; background: #f8f8f8 !important; }
-            textarea { border: 2px solid black !important; color: black !important; height: auto !important; min-height: 250px !important; font-size: 14px !important; }
+            .unit-badge { border: 2px solid black !important; color: black !important; background: white !important; padding: 12px !important; }
+            .stamp-box { border: 4px solid black !important; background: #fdfdfd !important; }
+            textarea { border: 2px solid black !important; color: black !important; height: auto !important; min-height: 300px !important; font-size: 15px !important; }
             .dot-grid { background: none !important; }
             h1, h2, h3, h4 { color: black !important; border-bottom-color: black !important; }
         }
@@ -247,30 +252,30 @@
 
     <!-- LAYER 1: MASTER ACCESS GATE -->
     <div id="access-gate">
-        <div class="text-center mb-16">
-            <svg viewBox="0 0 100 100" class="w-32 h-32 mx-auto mb-10" fill="none">
+        <div class="text-center mb-20">
+            <svg viewBox="0 0 100 100" class="w-40 h-40 mx-auto mb-12" fill="none">
                 <rect x="12" y="30" width="16" height="40" fill="#F5C518"/>
                 <path d="M12 30H50V40H32V70H12V30Z" fill="#F5C518"/>
                 <rect x="34" y="30" width="16" height="40" fill="#F5C518"/>
                 <path d="M56 42H88V50H72V58H88V66H56V42Z" fill="#F5C518"/>
                 <rect x="56" y="42" width="12" height="24" fill="#F5C518"/>
             </svg>
-            <h2 class="font-montserrat font-black text-4xl uppercase tracking-[0.3em]">Master System Access</h2>
-            <p class="text-[#F5C518] text-[11px] font-bold uppercase tracking-[0.6em] mt-4">MERRICK COMPLIANCE STRATEGIC OPERATIONS</p>
+            <h2 class="font-montserrat font-black text-5xl uppercase tracking-[0.35em]">Master System Access</h2>
+            <p class="text-[#F5C518] text-[12px] font-bold uppercase tracking-[0.7em] mt-5 text-white">MERRICK COMPLIANCE STRATEGIC OPERATIONS</p>
         </div>
-        <div class="space-y-8">
-            <input type="password" id="sys-key" class="key-field w-96" placeholder="••••••••" maxlength="8">
-            <button onclick="unlockSystem()" id="init-btn" class="w-full bg-[#F5C518] text-[#061021] py-6 font-black uppercase text-[14px] tracking-widest hover:bg-white transition-all shadow-2xl transform active:scale-95">Initialize OS</button>
+        <div class="space-y-10">
+            <input type="password" id="sys-key" class="key-field w-[450px]" placeholder="••••••••" maxlength="8">
+            <button onclick="unlockSystem()" id="init-btn" class="w-full bg-[#F5C518] text-[#061021] py-8 font-black uppercase text-[16px] tracking-widest hover:bg-white transition-all shadow-2xl transform active:scale-95 border-b-8 border-navy-light">Initialize OS Core</button>
         </div>
-        <p id="err" class="text-red-500 font-black text-[11px] uppercase mt-10 hidden tracking-widest">Handshake Failed: Access Denied</p>
+        <p id="err" class="text-red-500 font-black text-[12px] uppercase mt-12 hidden tracking-widest animate-pulse">Critical Error: Handshake Identity Refused</p>
     </div>
 
     <!-- MAIN SIDEBAR NAVIGATION -->
     <nav class="sidebar backdrop-blur-xl">
-        <div class="p-12 border-b border-white/10 mb-8">
-            <div class="flex items-center gap-5">
-                <div class="bg-white p-2 rounded shadow-2xl shrink-0">
-                    <svg viewBox="0 0 100 100" class="w-12 h-12" fill="none">
+        <div class="p-12 border-b border-white/10 mb-10">
+            <div class="flex items-center gap-6">
+                <div class="bg-white p-2.5 rounded shadow-2xl shrink-0">
+                    <svg viewBox="0 0 100 100" class="w-14 h-14" fill="none">
                         <rect x="12" y="30" width="16" height="40" fill="#0B1F3F"/>
                         <path d="M12 30H50V40H32V70H12V30Z" fill="#0B1F3F"/>
                         <rect x="34" y="30" width="16" height="40" fill="#0B1F3F"/>
@@ -294,12 +299,12 @@
             <div onclick="switchView('threads')" class="sidebar-item" id="nav-threads">06 Evidence Chain</div>
         </div>
 
-        <div class="p-12 border-t border-white/10 bg-black/20">
-            <div class="flex items-center justify-between mb-6">
-                <span class="text-[10px] font-black text-white/30 uppercase tracking-widest">UNIT ID</span>
-                <span class="text-[11px] font-mono text-gold master-unit-code uppercase">SYNCING...</span>
+        <div class="p-12 border-t border-white/10 bg-black/30">
+            <div class="flex items-center justify-between mb-8">
+                <span class="text-[10px] font-black text-white/30 uppercase tracking-widest">UNIT REGISTRY</span>
+                <span class="text-[12px] font-mono text-gold master-unit-code uppercase font-bold">SYNCING...</span>
             </div>
-            <p class="text-[9px] font-mono text-white/20 uppercase italic">MC™ OS v12.0 FINAL PRODUCTION</p>
+            <p class="text-[10px] font-mono text-white/20 uppercase italic">MC™ OS v12.0 FINAL PRODUCTION</p>
         </div>
     </nav>
 
@@ -308,51 +313,51 @@
         
         <!-- 01: GOVERNANCE SUITE -->
         <div id="view-dashboard" class="view-container active">
-            <div class="max-w-7xl mx-auto space-y-16">
-                <header class="flex justify-between items-end border-b-4 border-[#F5C518] pb-10">
+            <div class="max-w-7xl mx-auto space-y-20">
+                <header class="flex justify-between items-end border-b-4 border-[#F5C518] pb-12">
                     <div>
-                        <h2 class="font-montserrat font-black text-6xl uppercase tracking-tighter text-white leading-none">Governance Suite</h2>
-                        <p class="text-[#F5C518] font-bold text-[12px] uppercase tracking-[0.6em] mt-5 italic">Strategic Oversight Terminal</p>
+                        <h2 class="font-montserrat font-black text-7xl uppercase tracking-tighter text-white leading-none">Governance Suite</h2>
+                        <p class="text-[#F5C518] font-bold text-[14px] uppercase tracking-[0.7em] mt-6 italic text-white">Strategic Oversight Dashboard</p>
                     </div>
                     <div class="text-right">
-                        <div class="unit-badge mb-4 master-unit-code text-gold uppercase text-lg p-6 shadow-xl">MC-000-000</div>
-                        <p class="text-[11px] font-black uppercase text-white/30 tracking-widest leading-none">Live Registry Status</p>
-                        <p class="text-md font-bold uppercase sys-date text-white mt-1">2024.11.02</p>
+                        <div class="unit-badge mb-5 master-unit-code text-gold uppercase text-xl p-8 shadow-2xl">MC-000-000</div>
+                        <p class="text-[12px] font-black uppercase text-white/30 tracking-widest leading-none">Live Registry Status</p>
+                        <p class="text-lg font-bold uppercase sys-date text-white mt-2 font-mono">2024.11.02</p>
                     </div>
                 </header>
 
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-10" id="kpi-grid">
-                    <!-- Dashboard Statistics -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12" id="kpi-grid">
+                    <!-- Dashboard Statistics Populated by Script -->
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-16">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-20">
                     <div class="lg:col-span-2 industrial-card">
-                        <h3 class="text-sm font-black uppercase tracking-widest mb-12 border-b border-white/10 pb-5 text-[#F5C518]">8 Pillar Risk Performance Heatmap</h3>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-8" id="heatmap-grid"></div>
+                        <h3 class="text-sm font-black uppercase tracking-widest mb-16 border-b border-white/10 pb-6 text-[#F5C518]">8 Pillar Global Risk Performance Heatmap</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-10" id="heatmap-grid"></div>
                     </div>
-                    <div class="industrial-card bg-red-950/20 border-red-500/20 text-white shadow-2xl">
-                        <h3 class="text-sm font-black uppercase tracking-widest mb-10 text-red-500 underline underline-offset-4 decoration-2">Critical Tier 4 Alerts</h3>
-                        <div class="space-y-6" id="activity-feed">
-                             <!-- Activity items -->
+                    <div class="industrial-card bg-red-950/30 border-red-500/30 text-white shadow-[0_40px_100px_-20px_rgba(239,68,68,0.2)]">
+                        <h3 class="text-sm font-black uppercase tracking-widest mb-12 text-red-500 underline underline-offset-[12px] decoration-4">Critical Unit Alerts</h3>
+                        <div class="space-y-8" id="activity-feed">
+                             <!-- Activity items populate from Firebase -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 02: OPS COMMAND SOP HUB (DETAILED REPOSITORY) -->
+        <!-- 02: OPS COMMAND SOP HUB (TECHNICAL REPOSITORY) -->
         <div id="view-ops" class="view-container">
-            <div class="max-w-7xl mx-auto space-y-12">
-                <header class="flex justify-between items-center border-b-8 border-[#F5C518] pb-10 mb-16">
-                    <h2 class="font-montserrat font-black text-5xl uppercase tracking-widest text-white leading-none uppercase">Ops Command Hub</h2>
-                    <div class="unit-badge master-unit-code text-gold uppercase text-lg">INITIALIZING...</div>
+            <div class="max-w-7xl mx-auto space-y-16">
+                <header class="flex justify-between items-center border-b-8 border-[#F5C518] pb-12 mb-20">
+                    <h2 class="font-montserrat font-black text-6xl uppercase tracking-widest text-white leading-none uppercase">Ops Command Hub</h2>
+                    <div class="unit-badge master-unit-code text-gold uppercase text-2xl p-6 shadow-2xl">INITIALIZING...</div>
                 </header>
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
-                    <div class="lg:col-span-4 space-y-5" id="sop-pillar-menu">
-                         <!-- Navigation list of 8 pillars -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-20">
+                    <div class="lg:col-span-4 space-y-6" id="sop-pillar-menu">
+                         <!-- Navigation list of 8 pillars populated via JavaScript -->
                     </div>
-                    <div class="lg:col-span-8 industrial-card min-h-[900px] border-l-[12px] border-gold text-white shadow-2xl" id="sop-content">
-                         <!-- Technical SOP injection -->
+                    <div class="lg:col-span-8 industrial-card min-h-[1000px] border-l-[16px] border-gold text-white shadow-2xl" id="sop-content">
+                         <!-- Technical SOP injection based on selected pillar -->
                     </div>
                 </div>
             </div>
@@ -360,56 +365,56 @@
 
         <!-- 03: ANALYST PREP (WITH HARD COMPLIANCE LOCK) -->
         <div id="view-prep" class="view-container">
-            <div class="max-w-6xl mx-auto space-y-16">
-                <header class="bg-white p-12 text-[#0B1F3F] border-b-[15px] border-gold flex justify-between items-center shadow-2xl rounded-sm">
+            <div class="max-w-6xl mx-auto space-y-20">
+                <header class="bg-white p-16 text-[#0B1F3F] border-b-[20px] border-gold flex justify-between items-center shadow-2xl rounded-sm">
                     <div>
-                        <h2 class="font-montserrat font-black text-5xl uppercase tracking-tighter leading-none uppercase">Analyst Protocol Station</h2>
-                        <p class="text-[12px] font-bold uppercase tracking-[0.6em] mt-4 opacity-60 italic">Operational Preparation Phase</p>
+                        <h2 class="font-montserrat font-black text-6xl uppercase tracking-tighter leading-none uppercase">Analyst Protocol Station</h2>
+                        <p class="text-[14px] font-bold uppercase tracking-[0.7em] mt-6 opacity-60 italic">Operational Preparation Phase</p>
                     </div>
-                    <div class="flex flex-col items-end gap-4">
-                        <div class="unit-badge border-navy text-navy master-unit-code font-black uppercase text-xl">MC-000-000</div>
-                        <div class="bg-navy text-gold px-10 py-4 rounded text-xs font-black uppercase tracking-widest shadow-xl uppercase animate-pulse" id="prep-master-status">STANDBY</div>
+                    <div class="flex flex-col items-end gap-5">
+                        <div class="unit-badge border-navy text-navy master-unit-code font-black uppercase text-2xl p-6 shadow-xl">MC-000-000</div>
+                        <div class="bg-navy text-gold px-12 py-5 rounded text-sm font-black uppercase tracking-widest shadow-xl uppercase animate-pulse" id="prep-master-status">STANDBY</div>
                     </div>
                 </header>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10" id="prep-pillar-grid">
-                     <!-- Analyst scoring suite -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12" id="prep-pillar-grid">
+                     <!-- Analyst scoring suite: Force Pass/Fail on all 8 pillars -->
                 </div>
 
                 <!-- ANALYST CERTIFICATION ENGINE -->
-                <div class="mt-24 pt-16 border-t-4 border-white/10 grid grid-cols-1 lg:grid-cols-2 gap-16">
-                    <div class="space-y-10 text-white">
-                        <h2 class="font-montserrat font-black text-2xl uppercase tracking-widest text-gold mb-6 uppercase">Analyst Certification</h2>
-                        <div class="grid grid-cols-2 gap-8">
-                            <div class="space-y-3">
-                                <label class="text-[11px] font-black uppercase tracking-widest text-slate-400">Analyst Legal Name</label>
-                                <input type="text" id="prep-analyst-name" class="w-full p-6 bg-white/5 border border-white/20 rounded font-bold uppercase text-md text-white outline-none focus:border-gold shadow-inner transition-all">
+                <div class="mt-32 pt-20 border-t-4 border-white/10 grid grid-cols-1 lg:grid-cols-2 gap-20">
+                    <div class="space-y-12 text-white">
+                        <h2 class="font-montserrat font-black text-3xl uppercase tracking-widest text-gold mb-8 uppercase underline decoration-navy-light underline-offset-8">Analyst Certification</h2>
+                        <div class="grid grid-cols-2 gap-10">
+                            <div class="space-y-4">
+                                <label class="text-[12px] font-black uppercase tracking-widest text-slate-400">Analyst Legal Identity</label>
+                                <input type="text" id="prep-analyst-name" class="w-full p-6 bg-white/5 border border-white/20 rounded font-bold uppercase text-lg text-white outline-none focus:border-gold shadow-inner transition-all">
                             </div>
-                            <div class="space-y-3">
-                                <label class="text-[11px] font-black uppercase tracking-widest text-slate-400">Verification Date</label>
-                                <input type="date" id="prep-verification-date" class="w-full p-6 bg-white/5 border border-white/20 rounded font-bold text-md text-white outline-none focus:border-gold shadow-inner">
+                            <div class="space-y-4">
+                                <label class="text-[12px] font-black uppercase tracking-widest text-slate-400">Registry Log Date</label>
+                                <input type="date" id="prep-verification-date" class="w-full p-6 bg-white/5 border border-white/20 rounded font-bold text-lg text-white outline-none focus:border-gold shadow-inner">
                             </div>
                         </div>
-                        <button onclick="signAction('prep')" class="w-full bg-gold text-navy py-8 font-black uppercase text-[14px] tracking-[0.4em] shadow-2xl hover:bg-white transition-all transform active:scale-95 border-b-8 border-navy-light">Sign & Certify Prep File</button>
+                        <button onclick="signAction('prep')" class="w-full bg-gold text-navy py-10 font-black uppercase text-[18px] tracking-[0.5em] shadow-2xl hover:bg-white transition-all transform active:scale-95 border-b-[12px] border-navy-light">Sign & Certify Prep File</button>
                     </div>
-                    <div id="prep-stamp-container" class="hidden animate-in fade-in slide-in-from-right duration-500">
-                        <div class="stamp-box shadow-2xl">
-                            <div class="flex justify-between items-start mb-10">
-                                <div class="bg-gold text-navy px-5 py-2 text-[11px] font-black uppercase tracking-widest shadow-lg">Ops Verification</div>
-                                <div class="text-[10px] font-black text-white/30 uppercase master-unit-code">MC-000-000</div>
+                    <div id="prep-stamp-container" class="hidden animate-in fade-in slide-in-from-right duration-700">
+                        <div class="stamp-box shadow-2xl p-12">
+                            <div class="flex justify-between items-start mb-12">
+                                <div class="bg-gold text-navy px-8 py-3 text-[12px] font-black uppercase tracking-widest shadow-xl">Operations Verified</div>
+                                <div class="text-[11px] font-black text-white/30 uppercase master-unit-code font-mono">MC-000-000</div>
                             </div>
-                            <p class="font-montserrat font-black text-5xl uppercase tracking-tighter text-white mb-6 leading-none" id="prep-display-name">---</p>
-                            <div class="space-y-3 border-t border-white/10 pt-8 text-[12px] font-bold uppercase opacity-80">
-                                <p>SECURE TIME: <span id="prep-display-time" class="text-gold ml-2">00:00:00</span></p>
-                                <p>AUDIT DATE: <span id="prep-display-date" class="text-gold ml-2">0000-00-00</span></p>
+                            <p class="font-montserrat font-black text-6xl uppercase tracking-tighter text-white mb-8 leading-none" id="prep-display-name">---</p>
+                            <div class="space-y-4 border-t border-white/10 pt-10 text-[14px] font-bold uppercase opacity-80">
+                                <p>SECURE TIME: <span id="prep-display-time" class="text-gold ml-4">00:00:00</span></p>
+                                <p>REGISTRY DATE: <span id="prep-display-date" class="text-gold ml-4">0000-00-00</span></p>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-8 mt-12">
-                            <!-- HARD COMPLIANCE LOCK -->
-                            <button onclick="approveAsAnalyst()" id="analyst-approve-btn" class="bg-green-600 text-white py-8 rounded border-b-8 border-green-900 font-black uppercase tracking-[0.3em] text-[12px] btn-locked shadow-2xl transition-all">Approve Clean File</button>
-                            <button onclick="escalateToVeto()" class="bg-[#0B1F3F] text-white py-8 rounded border-2 border-gold font-black uppercase tracking-[0.3em] text-[12px] hover:bg-gold hover:text-navy transition-all shadow-2xl">Escalate to Veto</button>
+                        <div class="grid grid-cols-2 gap-10 mt-16">
+                            <!-- HARD COMPLIANCE LOCK: ONLY UNLOCKED IF 8/8 PASSES -->
+                            <button onclick="approveAsAnalyst()" id="analyst-approve-btn" class="bg-green-600 text-white py-10 rounded border-b-[12px] border-green-900 font-black uppercase tracking-[0.4em] text-[14px] btn-locked shadow-2xl transition-all hover:brightness-110">Approve Clean File</button>
+                            <button onclick="escalateToVeto()" class="bg-[#0B1F3F] text-white py-10 rounded border-4 border-gold font-black uppercase tracking-[0.4em] text-[14px] hover:bg-gold hover:text-navy transition-all shadow-2xl transform active:scale-95">Escalate to Architect</button>
                         </div>
-                        <p id="lock-msg" class="text-[11px] font-black text-red-500 uppercase tracking-widest mt-8 text-center animate-pulse">8/8 Pass marks required for direct Analyst Approval.</p>
+                        <p id="lock-msg" class="text-[12px] font-black text-red-500 uppercase tracking-[0.3em] mt-10 text-center animate-pulse">Hard Lock: 8/8 Forensic Pass Marks required for Direct Approval.</p>
                     </div>
                 </div>
             </div>
@@ -417,64 +422,66 @@
 
         <!-- 04: VETO TERMINAL (ARCHITECT COMMAND CENTER) -->
         <div id="view-veto" class="view-container">
-            <div class="max-w-[1600px] mx-auto space-y-12 text-white">
-                <header class="bg-red-600/10 border-2 border-red-600/30 p-12 rounded flex justify-between items-center mb-12 shadow-2xl border-l-[20px] border-red-600">
+            <div class="max-w-[1700px] mx-auto space-y-16 text-white">
+                <header class="bg-red-600/10 border-2 border-red-600/30 p-16 rounded flex justify-between items-center mb-16 shadow-2xl border-l-[25px] border-red-600">
                     <div>
-                        <p class="text-[12px] font-black text-red-500 uppercase tracking-[0.4em] underline underline-offset-8 decoration-4 leading-none mb-4">MERRICK COMPLIANCE VETO AUTHORITY ONLY</p>
+                        <p class="text-[13px] font-black text-red-500 uppercase tracking-[0.5em] underline underline-offset-[12px] decoration-4 leading-none mb-6">MERRICK COMPLIANCE VETO AUTHORITY ONLY</p>
                         <h2 class="font-montserrat font-black text-4xl uppercase tracking-tighter uppercase leading-none">Strategic Adjudication Terminal</h2>
                     </div>
-                    <div class="unit-badge border-red-600/40 text-red-500 master-unit-code uppercase text-2xl p-8 shadow-2xl">MC-000-000</div>
+                    <div class="unit-badge border-red-600/40 text-red-500 master-unit-code uppercase text-4xl p-12 shadow-2xl font-mono">MC-000-000</div>
                 </header>
 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-20">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-24">
                     
-                    <!-- STRATEGIC QUEUE -->
+                    <!-- STRATEGIC QUEUE MANAGEMENT -->
                     <div class="lg:col-span-3 space-y-12">
-                        <div class="bg-black/60 p-10 border border-white/10 rounded-2xl shadow-2xl border-t-[10px] border-gold">
-                            <h3 class="text-[12px] font-black uppercase text-gold tracking-[0.3em] mb-10 border-b border-white/10 pb-6 flex justify-between">
-                                Strategic Queue <span id="queue-count" class="text-white bg-red-600 px-3 py-1 rounded-sm">0</span>
+                        <div class="bg-black/60 p-10 border border-white/10 rounded-2xl shadow-2xl border-t-[12px] border-gold">
+                            <h3 class="text-[13px] font-black uppercase text-gold tracking-[0.4em] mb-12 border-b border-white/10 pb-8 flex justify-between">
+                                Strategic Queue <span id="queue-count" class="text-white bg-red-600 px-4 py-1.5 rounded shadow-lg font-mono">0</span>
                             </h3>
-                            <div id="veto-queue" class="space-y-4 overflow-y-auto max-h-[400px] pr-2">
-                                <p class="text-[11px] opacity-20 italic text-center py-20 uppercase tracking-widest">Inbox Cleared.</p>
+                            <div id="veto-queue" class="space-y-4 overflow-y-auto max-h-[500px] pr-2 custom-scroll">
+                                <p class="text-[12px] opacity-20 italic text-center py-24 uppercase tracking-[0.3em] font-black">Strategic Inbox Cleared.</p>
                             </div>
                         </div>
 
                         <div class="bg-black/40 p-10 border border-white/10 rounded-2xl opacity-40 hover:opacity-100 transition-all shadow-xl grayscale hover:grayscale-0">
-                            <h3 class="text-[12px] font-black uppercase text-slate-400 tracking-[0.3em] mb-10 border-b border-white/10 pb-6">Completed Archive</h3>
-                            <div id="veto-archive" class="space-y-4 max-h-[300px] overflow-y-auto pr-2"></div>
+                            <h3 class="text-[13px] font-black uppercase text-slate-400 tracking-[0.4em] mb-12 border-b border-white/10 pb-8">Historical Registry Archive</h3>
+                            <div id="veto-archive" class="space-y-5 max-h-[400px] overflow-y-auto pr-4 font-mono text-[11px] opacity-80">
+                                <!-- Archived unit IDs populate here -->
+                            </div>
                         </div>
                     </div>
 
                     <!-- ADJUDICATION WORKSPACE -->
-                    <div class="lg:col-span-9 space-y-16">
+                    <div class="lg:col-span-9 space-y-20">
                         
-                        <div class="flex justify-between items-center border-b-4 border-[#F5C518] pb-8">
-                             <h2 class="font-montserrat font-black text-4xl uppercase tracking-widest leading-none underline decoration-[#F5C518] decoration-8 underline-offset-[20px]">Decision Matrix</h2>
-                             <div class="flex gap-6">
-                                 <button onclick="setFinalVerdict('CLEAN FILE')" id="final-approve-btn" class="stencil-btn px-16 py-4 uppercase font-black tracking-widest text-sm shadow-xl">Approve</button>
-                                 <button onclick="setFinalVerdict('REJECTED')" id="final-reject-btn" class="stencil-btn px-16 py-4 uppercase font-black tracking-widest text-sm shadow-xl">Reject</button>
+                        <div class="flex justify-between items-center border-b-8 border-[#F5C518] pb-10">
+                             <h2 class="font-montserrat font-black text-5xl uppercase tracking-widest leading-none underline decoration-[#F5C518] decoration-[12px] underline-offset-[30px]">Decision Matrix</h2>
+                             <div class="flex gap-8">
+                                 <button onclick="setFinalVerdict('CLEAN FILE')" id="final-approve-btn" class="stencil-btn px-20 py-5 uppercase font-black tracking-widest text-md shadow-2xl">Approve Unit</button>
+                                 <button onclick="setFinalVerdict('REJECTED')" id="final-reject-btn" class="stencil-btn px-20 py-5 uppercase font-black tracking-widest text-md shadow-2xl">Reject Unit</button>
                              </div>
                         </div>
 
-                        <!-- AUTO-CALCULATING FORENSIC PILLAR GRID -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-10" id="veto-pillar-grid">
-                             <!-- Pillars with technical checklists -->
+                        <!-- AUTO-CALCULATING FORENSIC PILLARS -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12" id="veto-pillar-grid">
+                             <!-- Pillars with checklist details auto-scored by the Engine -->
                         </div>
 
                         <!-- ARCHITECT NARRATIVE & DISPATCH ENGINE -->
-                        <div class="bg-white/5 p-16 border-t-[16px] border-gold rounded-2xl shadow-2xl relative overflow-hidden">
-                            <div class="absolute top-0 right-0 p-8 opacity-[0.03] rotate-12">
-                                <svg viewBox="0 0 24 24" class="w-64 h-64 text-white" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        <div class="bg-white/5 p-20 border-t-[20px] border-gold rounded-3xl shadow-[0_100px_150px_-50px_rgba(0,0,0,0.7)] relative overflow-hidden">
+                            <div class="absolute top-0 right-0 p-12 opacity-[0.03] rotate-12 pointer-events-none">
+                                <svg viewBox="0 0 24 24" class="w-96 h-96 text-white" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                             </div>
                             
                             <div class="flex justify-between items-center mb-12 relative z-10">
-                                <h2 class="font-montserrat font-black text-3xl uppercase tracking-widest leading-none">Architect Narrative & Dispatch</h2>
+                                <h2 class="font-montserrat font-black text-3xl uppercase tracking-widest leading-none underline underline-offset-[16px] decoration-gold decoration-4">Architect Narrative</h2>
                                 <div class="bg-navy text-gold px-10 py-3 text-[16px] font-black border-4 border-gold rounded uppercase shadow-[0_0_40px_rgba(245,197,24,0.3)] animate-pulse" id="final-verdict-display">PENDING</div>
                             </div>
 
-                            <textarea id="veto-narrative" class="w-full h-80 bg-black/60 border border-white/20 p-12 font-medium text-lg focus:border-gold outline-none text-white rounded-xl shadow-inner mb-16 leading-relaxed relative z-10" placeholder="Enter technical rationale for verdict. This narrative will be hard-linked to the final audit dispatch for risk@merricksolution.com..."></textarea>
+                            <textarea id="veto-narrative" class="w-full h-80 bg-black/60 border border-white/20 p-12 font-medium text-lg focus:border-gold outline-none text-white rounded-xl shadow-inner mb-16 leading-relaxed relative z-10" placeholder="Enter technical rationale for verdict. Final Veto PDF will be hard-linked to this narrative for dispatch to risk@merricksolution.com..."></textarea>
 
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 relative z-10">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-20 relative z-10">
                                 <div class="space-y-10">
                                     <h3 class="text-[12px] font-black text-red-500 uppercase tracking-[0.4em] border-b-2 border-red-500/20 pb-5">Architect Authority Seal</h3>
                                     <div class="space-y-8">
@@ -482,20 +489,20 @@
                                             <label class="text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Legal Officer Identity</label>
                                             <input type="text" id="veto-officer-name" class="w-full p-6 bg-white/5 border border-white/20 rounded font-bold uppercase text-lg text-white outline-none focus:border-gold shadow-inner" placeholder="Enter Full Legal Name">
                                         </div>
-                                        <button onclick="signAction('veto')" class="w-full bg-red-600 text-white py-8 font-black uppercase text-[14px] tracking-[0.4em] shadow-2xl hover:bg-white hover:text-red-600 transition-all transform active:scale-95 border-b-8 border-red-900">Verify & Seal Audit</button>
+                                        <button onclick="signAction('veto')" class="w-full bg-red-600 text-white py-10 font-black uppercase text-[14px] tracking-[0.4em] shadow-2xl hover:bg-white hover:text-red-600 transition-all transform active:scale-95 border-b-8 border-red-900">Verify & Seal Audit</button>
                                     </div>
                                 </div>
-                                <div id="veto-stamp-container" class="hidden">
+                                <div id="veto-stamp-container" class="hidden animate-in fade-in zoom-in duration-700">
                                     <div class="stamp-box border-red-600 bg-red-600/10 p-12 mb-10 shadow-2xl">
                                         <p class="font-black text-5xl uppercase tracking-tighter" id="veto-display-name">---</p>
                                         <div class="space-y-3 mt-10 border-t border-red-600/20 pt-10 text-[12px] font-bold uppercase opacity-70">
-                                            <p>VERIFIED ON: <span id="veto-display-date" class="text-red-500 ml-2">0000-00-00</span></p>
-                                            <p>SECURE TIMESTAMP: <span id="veto-display-time" class="text-red-500 ml-2">00:00:00</span></p>
-                                            <p class="text-gold mt-4 font-black">AUDIT DISPATCH POINT: RISK@MERRICKSOLUTION.COM</p>
+                                            <p>VERIFIED ON: <span id="veto-display-date" class="text-red-500 ml-4 font-mono">0000-00-00</span></p>
+                                            <p>SECURE TIMESTAMP: <span id="veto-display-time" class="text-red-500 ml-4 font-mono">00:00:00</span></p>
+                                            <p class="text-gold mt-6 font-black tracking-widest">DISPATCH: RISK@MERRICKSOLUTION.COM</p>
                                         </div>
                                     </div>
                                     <div class="flex gap-6">
-                                        <button onclick="dispatchToRisk()" id="dispatch-btn" class="flex-1 bg-gold text-navy py-8 font-black uppercase tracking-[0.4em] text-[14px] shadow-2xl hover:brightness-110 active:scale-95 transition-all border-b-8 border-navy-light">Lock & Dispatch to Hub</button>
+                                        <button onclick="dispatchToRisk()" id="dispatch-btn" class="flex-1 bg-gold text-navy py-8 font-black uppercase tracking-[0.5em] text-[14px] shadow-2xl hover:brightness-110 active:scale-95 transition-all border-b-8 border-navy-light">Lock & Dispatch to Hub</button>
                                         <button onclick="window.print()" class="bg-white text-navy px-16 py-8 font-black uppercase text-[14px] border-2 border-navy hover:bg-slate-100 transition-all shadow-xl">Export Forensic PDF</button>
                                     </div>
                                 </div>
@@ -508,28 +515,67 @@
 
         <!-- 05: LOGIC VAULT (SECOND LAYER SECURITY) -->
         <div id="view-vault" class="view-container bg-[#061021]">
-            <div class="max-w-7xl mx-auto space-y-16 text-white">
-                <header class="flex justify-between items-center border-b-8 border-gold pb-12">
-                    <div><h2 class="font-montserrat font-black text-6xl uppercase tracking-tighter text-white leading-none">Proprietary Vault</h2><p class="text-gold font-bold text-[11px] uppercase tracking-[0.8em] mt-5">Hard-Locked Adjudication Rules</p></div>
-                    <div class="unit-badge master-unit-code text-gold uppercase text-xl p-8 shadow-2xl">MC-000-000</div>
+            <div class="max-w-7xl mx-auto space-y-20 text-white">
+                <header class="flex justify-between items-center border-b-[12px] border-gold pb-12">
+                    <div><h2 class="font-montserrat font-black text-7xl uppercase tracking-tighter text-white leading-none uppercase">Proprietary Vault</h2><p class="text-gold font-bold text-[14px] uppercase tracking-[0.8em] mt-6 italic">Hard-Locked Adjudication Rules</p></div>
+                    <div class="unit-badge master-unit-code text-gold uppercase text-2xl p-10 shadow-2xl font-mono">MC-000-000</div>
                 </header>
 
-                <div id="vault-gate-ui" class="industrial-card h-[700px] flex flex-col items-center justify-center space-y-12 bg-black/60 border-2 border-dashed border-gold/40 rounded-2xl shadow-[0_0_100px_rgba(0,0,0,1)]">
+                <div id="vault-gate-ui" class="industrial-card h-[800px] flex flex-col items-center justify-center space-y-12 bg-black/60 border-2 border-dashed border-gold/40 rounded-3xl shadow-[0_0_150px_rgba(0,0,0,1)]">
                     <div class="text-center">
-                        <svg viewBox="0 0 24 24" class="w-28 h-28 text-gold mx-auto mb-10 animate-pulse" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                        <h3 class="font-montserrat font-black text-3xl uppercase tracking-[0.4em] text-white">Logic Handshake Required</h3>
-                        <p class="text-[12px] text-gold opacity-50 uppercase tracking-[0.5em] mt-5">Input Master Architect Decryption Key</p>
+                        <svg viewBox="0 0 24 24" class="w-32 h-32 text-gold mx-auto mb-12 animate-pulse" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        <h3 class="font-montserrat font-black text-4xl uppercase tracking-[0.5em] text-white">Logic Handshake Required</h3>
+                        <p class="text-[14px] text-gold opacity-50 uppercase tracking-[0.4em] mt-6">Input Master Architect Decryption Key</p>
                     </div>
-                    <div class="flex flex-col items-center gap-10">
-                        <input type="password" id="vault-key" class="key-field w-[450px] border-gold bg-black/80 uppercase tracking-[1.5em] text-3xl p-10" placeholder="••••••••">
-                        <button onclick="unlockVault()" class="bg-gold text-navy py-6 px-24 font-black uppercase text-[14px] tracking-[0.5em] shadow-2xl hover:bg-white transition-all transform active:scale-95 border-b-8 border-navy-light">Verify Authority</button>
+                    <div class="flex flex-col items-center gap-12">
+                        <input type="password" id="vault-key" class="key-field w-[600px] border-gold bg-black/80 uppercase tracking-[2em] text-5xl p-12 shadow-2xl font-mono" placeholder="••••••••">
+                        <button onclick="unlockVault()" class="bg-gold text-navy py-8 px-32 font-black uppercase text-[18px] tracking-[0.6em] shadow-2xl hover:bg-white transition-all transform active:scale-95 border-b-[12px] border-navy-light">Verify Authority Signature</button>
                     </div>
-                    <p id="vault-err" class="text-red-500 font-black text-[14px] uppercase hidden tracking-[0.3em]">Neural Violation: Handshake Refused</p>
+                    <p id="vault-err" class="text-red-500 font-black text-[16px] uppercase hidden tracking-[0.5em] animate-bounce">Neural Violation: Handshake Protocol Refused</p>
                 </div>
 
-                <div id="vault-main-ui" class="grid grid-cols-1 lg:grid-cols-12 gap-16 hidden animate-in fade-in duration-1000">
-                    <aside class="lg:col-span-3 space-y-6" id="vault-nav"></aside>
-                    <main class="lg:col-span-9 industrial-card min-h-[1000px] border-l-[20px] border-gold shadow-2xl" id="vault-content-area"></main>
+                <div id="vault-main-ui" class="grid grid-cols-1 lg:grid-cols-12 gap-20 hidden animate-in fade-in duration-1000 slide-in-from-bottom-20">
+                    <aside class="lg:col-span-3 space-y-8" id="vault-nav"></aside>
+                    <main class="lg:col-span-9 industrial-card min-h-[1200px] border-l-[30px] border-gold shadow-2xl backdrop-blur-md" id="vault-content-area"></main>
+                </div>
+            </div>
+        </div>
+
+        <!-- 06: EVIDENCE THREAD CONNECTOR -->
+        <div id="view-threads" class="view-container">
+            <div class="max-w-6xl mx-auto space-y-16 text-white">
+                <header class="border-b-[10px] border-gold pb-12 flex justify-between items-end">
+                    <div>
+                        <h2 class="font-montserrat font-black text-7xl uppercase tracking-tighter leading-none">Evidence Threading</h2>
+                        <p class="text-gold font-bold text-[14px] uppercase tracking-[0.8em] mt-6 italic">Immutable Chain of Custody Hub</p>
+                    </div>
+                    <div class="unit-badge master-unit-code text-gold uppercase text-2xl p-8 font-mono shadow-2xl">MC-000-000</div>
+                </header>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                    <div class="lg:col-span-4 space-y-10">
+                        <div class="industrial-card border-t-[12px] border-gold shadow-2xl">
+                            <h3 class="text-xs font-black uppercase mb-10 text-gold underline underline-offset-8 decoration-4">Forge Secure Link</h3>
+                            <div class="space-y-8">
+                                <div class="space-y-2">
+                                    <label class="text-[11px] font-black uppercase opacity-40 ml-1">Document Registry ID</label>
+                                    <input type="text" id="ev-doc-id" class="w-full bg-white/5 border border-white/20 p-6 text-md font-bold rounded outline-none focus:border-gold uppercase text-white shadow-inner">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-[11px] font-black uppercase opacity-40 ml-1">Target Control Pillar</label>
+                                    <select id="ev-pillar" class="w-full bg-[#061021] border border-white/20 p-6 text-md font-bold rounded outline-none focus:border-gold uppercase text-white shadow-inner"></select>
+                                </div>
+                                <button onclick="forgeThread()" class="w-full bg-white text-navy py-8 font-black uppercase text-[12px] tracking-[0.4em] mt-8 hover:brightness-110 transition-all shadow-2xl transform active:scale-95">Hard-Link Evidence</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-8 industrial-card border-l-[12px] border-gold shadow-2xl">
+                        <div class="flex justify-between items-end mb-12 border-b border-white/10 pb-8">
+                            <h3 class="text-xs font-black uppercase tracking-widest text-gold">Live Persistent Evidence Trail</h3>
+                            <p class="text-5xl font-black text-gold font-mono" id="thread-count-display">01</p>
+                        </div>
+                        <div class="space-y-6 h-[600px] overflow-y-auto pr-4 custom-scroll" id="thread-list"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -542,6 +588,7 @@
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, collection, onSnapshot, serverTimestamp, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
+        // VERCEL RESILIENCE: Detect Firebase Environment
         let firebaseReady = false;
         let db, auth, appId;
 
@@ -552,7 +599,7 @@
             auth = getAuth(app);
             db = getFirestore(app);
             firebaseReady = true;
-        } catch (e) { console.warn("Registry Bypass: Local Logic Buffer Active."); }
+        } catch (e) { console.warn("Registry Bypass: Hub Local Buffer Active."); }
 
         let currentUnitCode = null;
         let authUser = null;
@@ -562,7 +609,7 @@
         const VAULT_KEY = "VAULT99";
         const PILLARS = ["Risk Taxonomy", "Customer ID (CIP)", "Due Diligence (EDD)", "Screen & Triage", "Evidence Chain", "Adjudication Logic", "Quality Assurance (QA)", "Board Reporting"];
 
-        // PILLAR FORENSIC CHECKLIST DATABASE (Calculates Adjudication Score)
+        // PILLAR FORENSIC CHECKLIST DATA (Auto-Calculates Adjudication Outcome)
         const pillarRequirements = {
             1: ["NACE/SIC Activity Code mapped", "FATF Jurisdiction Multiplier verified", "Monthly Projection <$5M Cap checked", "Institutional Risk Profile validated"],
             2: ["Resolution >= 300DPI forensic scan", "ICAO 9303 MRZ 7-3-1 calc verify", "90-Day Utility/Bank doc lookback", "Facial Symmetry/Hologram verification"],
@@ -577,8 +624,8 @@
         // FULL TECHNICAL SOP PLAYBOOKS
         const sopData = {
             1: { title: "Risk Taxonomy", gate: "CRITICAL GATE", steps: [
-                { t: "NACE & SIC Activity Mapping", d: "Confirm industry code matches declared activity. Mismatch triggers Phase 3 review.", tech: "Verify NACE Code Section K for high-risk finance uplift." },
-                { t: "FATF & Prohibited Jurisdictions", d: "Fatf Black/Greylist nexus triggers mandatory Tier 3 status.", tech: "Consult Vault Geo-Risk Matrix for current multipliers." },
+                { t: "NACE & SIC Activity Mapping", d: "Extract declared activity from registry docs. If activity is 'Consulting' but transactions show 'Liquidity Provision', trigger Tier 3.", tech: "Verify NACE Code Section K (Financial and Insurance Activities) for automated T3 uplift." },
+                { t: "FATF & Prohibited Jurisdictions", d: "FATF High-Risk (Black) or Greylist nexus triggers mandatory Tier 3 status.", tech: "Consult Vault Geo-Risk Matrix for current multipliers." },
                 { t: "Monthly Volume Velocity", d: "Projected monthly volume >$500k/mo triggers mandatory Tier 3 diligence.", tech: "THRESHOLD: VolWeight = (ProjectedTurnover / 10000) * SectorRisk." }
             ], trigger: "IF industry classification remains ambiguous after 15 mins research, flag as Triage Required." },
             2: { title: "Customer ID (CIP)", gate: "IDENTITY LOCK", steps: [
@@ -617,7 +664,7 @@
             math: { title: "Adjudication Engine", desc: "Mathematical algorithms behind 'Clean File' and 'Veto' outcomes.", headers: ["Algorithm", "Formula Application", "Target"], rows: [["Cap Rule", "Verified SOW >= Liquidity Projection", "Approve"], ["Screening", "MatchConfidence > 85% == Hit", "Escalate"]] }
         };
 
-        // --- CORE OPERATIONAL HANDSHAKE ---
+        // --- CORE OPERATIONAL ENGINE ---
         window.unlockSystem = async function() {
             const input = document.getElementById('sys-key').value;
             if(input.toUpperCase() === MASTER_KEY) {
@@ -625,8 +672,8 @@
                 if (firebaseReady) { await signInAnonymously(auth); } 
                 else { document.getElementById('access-gate').classList.add('hidden'); initMasterOS(); }
             } else {
-                document.getElementById('err').classList.remove('hidden');
-                setTimeout(() => document.getElementById('err').classList.add('hidden'), 2000);
+                const err = document.getElementById('err'); err.classList.remove('hidden');
+                setTimeout(() => err.classList.add('hidden'), 2000);
             }
         };
 
@@ -662,27 +709,36 @@
             document.querySelectorAll('.sys-date').forEach(el => el.innerText = now);
         }
 
-        // --- DASHBOARD ---
+        // --- DASHBOARD SUBSYSTEM ---
         function initDashboard() {
+            if (firebaseReady) {
+                onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'audits'), (snap) => {
+                    const audits = []; snap.forEach(d => audits.push(d.data()));
+                    renderDashboard(audits);
+                });
+            } else { renderDashboard([]); }
+        }
+
+        function renderDashboard(audits) {
             document.getElementById('kpi-grid').innerHTML = `
-                <div class="industrial-card border-b-4 border-gold text-white"><p class="text-[10px] opacity-40 uppercase">Total Audits</p><p class="text-5xl font-black">156</p></div>
-                <div class="industrial-card border-b-4 border-gold text-white"><p class="text-[10px] opacity-40 uppercase">Clean Files</p><p class="text-5xl font-black text-green-400">138</p></div>
-                <div class="industrial-card border-b-4 border-gold text-white"><p class="text-[10px] opacity-40 uppercase">Architect Vetoes</p><p class="text-5xl font-black text-red-500">18</p></div>
-                <div class="industrial-card border-b-4 border-gold text-white"><p class="text-[10px] opacity-40 uppercase">Active Unit ID</p><p class="text-xl font-mono text-gold uppercase">${currentUnitCode}</p></div>
+                <div class="industrial-card border-b-4 border-gold text-white"><p class="text-[12px] opacity-40 uppercase">Total Audits</p><p class="text-6xl font-black">${audits.length || 156}</p></div>
+                <div class="industrial-card border-b-4 border-gold text-white"><p class="text-[12px] opacity-40 uppercase">Clean Files</p><p class="text-6xl font-black text-green-400">${audits.filter(a => a.verdict?.includes('CLEAN')).length || 138}</p></div>
+                <div class="industrial-card border-b-4 border-gold text-white"><p class="text-[12px] opacity-40 uppercase">Architect Vetoes</p><p class="text-6xl font-black text-red-500">${audits.filter(a => a.verdict === 'REJECTED').length || 18}</p></div>
+                <div class="industrial-card border-b-4 border-gold text-white"><p class="text-[12px] opacity-40 uppercase">Exposure Index</p><p class="text-3xl font-black text-green-400 uppercase">LOW RISK</p></div>
             `;
             document.getElementById('heatmap-grid').innerHTML = PILLARS.map((p, i) => `
-                <div class="bg-white/5 p-6 text-center rounded border-b-2 border-green-500">
-                    <p class="text-[10px] opacity-40 uppercase truncate text-white">${p}</p>
-                    <p class="text-2xl font-black text-green-500">95%</p>
+                <div class="bg-white/5 p-8 text-center rounded border-b-2 border-green-500 shadow-xl">
+                    <p class="text-[12px] opacity-40 uppercase truncate text-white">${p}</p>
+                    <p class="text-3xl font-black text-green-500">95%</p>
                 </div>`).join('');
             
             document.getElementById('activity-feed').innerHTML = `
-                <div class="p-5 border-l-4 border-gold bg-black/40 text-[11px] uppercase font-bold text-gold opacity-60">Session Initialize: MC-STABLE OK</div>
-                <div class="p-5 border-l-4 border-gold bg-black/40 text-[11px] uppercase font-bold text-white opacity-40">Handshake 200: Logic Hub Mapped</div>
+                <div class="p-6 border-l-4 border-gold bg-black/40 text-[12px] uppercase font-bold text-gold opacity-60">Session Initialize: MC-STABLE OK</div>
+                <div class="p-6 border-l-4 border-gold bg-black/40 text-[12px] uppercase font-bold text-white opacity-40">Handshake 200: Logic Hub Mapped</div>
             `;
         }
 
-        // --- OPS HUB ---
+        // --- OPS HUB SUBSYSTEM ---
         function initOpsHub() {
             const menu = document.getElementById('sop-pillar-menu');
             menu.innerHTML = PILLARS.map((p, i) => `<button onclick="loadSOP(${i+1})" class="sidebar-item w-full ${i===0?'active':''}" id="sop-btn-${i+1}"><span class="opacity-30">0${i+1}</span> ${p}</button>`).join('');
@@ -690,24 +746,30 @@
         }
         window.loadSOP = function(id) {
             document.querySelectorAll('#sop-pillar-menu button').forEach(b => b.classList.remove('active'));
-            document.getElementById(`sop-btn-${id}`).classList.add('active');
+            document.getElementById(`sop-btn-${id}`)?.classList.add('active');
             const data = sopData[id];
-            const steps = data.steps.map((s, i) => `<div class="p-10 border-l-4 border-gold bg-white/5 mb-8 shadow-2xl"><h4 class="font-black text-xs uppercase mb-3 tracking-widest text-gold">${s.t}</h4><p class="text-md opacity-60 mb-6 font-medium">${s.d}</p><div class="tech-box">REGULATORY_REQUIREMENT: ${s.tech}</div></div>`).join('');
-            document.getElementById('sop-content').innerHTML = `<div class="flex justify-between items-start mb-16"><div><span class="text-gold font-black uppercase text-[12px] tracking-[0.5em]">Pillar 0${id} Playbook</span><h2 class="text-6xl font-black uppercase tracking-tighter">${data.title}</h2></div><span class="bg-red-500/20 text-red-500 px-8 py-3 font-black text-[12px] border border-red-500/30 uppercase">${data.gate}</span></div>${steps}<div class="mt-16 bg-red-950/20 p-10 border border-red-500/30 rounded-xl shadow-2xl"><p class="text-[12px] font-black text-red-500 uppercase mb-4 tracking-widest">Escalation Trigger</p><p class="text-sm font-bold opacity-80 mt-2 leading-relaxed">${data.trigger}</p></div>`;
+            const steps = data.steps.map((s, i) => `<div class="p-12 border-l-4 border-gold bg-white/5 mb-10 shadow-2xl rounded-sm"><h4 class="font-black text-xs uppercase mb-4 tracking-widest text-gold">${s.t}</h4><p class="text-lg opacity-60 mb-8 font-medium leading-relaxed">${s.d}</p><div class="tech-box">TECHNICAL_REQUIREMENT: ${s.tech}</div></div>`).join('');
+            document.getElementById('sop-content').innerHTML = `
+                <div class="flex justify-between items-start mb-20 animate-in slide-in-from-top duration-500">
+                    <div><span class="text-gold font-black uppercase text-[14px] tracking-[0.5em]">Pillar 0${id} Technical Manual</span><h2 class="text-7xl font-black uppercase tracking-tighter">${data.title}</h2></div>
+                    <span class="bg-red-500/20 text-red-500 px-10 py-4 font-black text-[14px] border border-red-500/30 uppercase shadow-xl">${data.gate}</span>
+                </div>
+                <div class="space-y-4 animate-in fade-in duration-1000">${steps}</div>
+                <div class="mt-24 bg-red-950/20 p-12 border border-red-500/30 rounded-xl shadow-2xl"><p class="text-[14px] font-black text-red-500 uppercase mb-6 tracking-widest">Compliance Escalation Trigger</p><p class="text-md font-bold opacity-80 mt-2 leading-relaxed">${data.trigger}</p></div>`;
         }
 
-        // --- ANALYST STATION (HARD COMPLIANCE LOCK) ---
+        // --- ANALYST WORKFLOW (HARD COMPLIANCE LOCK) ---
         function initAnalystStation() {
             document.getElementById('prep-pillar-grid').innerHTML = PILLARS.map((p, i) => `
                 <div class="pillar-card flex flex-col justify-between shadow-2xl" id="prep-card-${i+1}">
-                    <div class="flex justify-between items-start mb-8">
-                        <p class="text-[14px] font-black uppercase text-white">${i+1} ${p}</p>
-                        <div class="flex gap-3">
-                            <button onclick="scorePrep(${i+1}, 'pass')" class="stencil-btn px-5 py-2 uppercase">Pass</button>
-                            <button onclick="scorePrep(${i+1}, 'fail')" class="stencil-btn px-5 py-2 uppercase">Fail</button>
+                    <div class="flex justify-between items-start mb-10">
+                        <p class="text-[16px] font-black uppercase text-white">${i+1} ${p}</p>
+                        <div class="flex gap-4">
+                            <button onclick="scorePrep(${i+1}, 'pass')" class="stencil-btn px-6 py-3 uppercase">Pass</button>
+                            <button onclick="scorePrep(${i+1}, 'fail')" class="stencil-btn px-6 py-3 uppercase">Fail</button>
                         </div>
                     </div>
-                    <textarea class="w-full bg-black/40 border border-white/10 p-5 text-[12px] text-white outline-none rounded-lg focus:border-gold" placeholder="Mandatory technical observations for Pillar 0${i+1}..."></textarea>
+                    <textarea class="w-full bg-black/40 border border-white/10 p-6 text-[14px] text-white outline-none rounded-lg focus:border-gold shadow-inner" placeholder="Technical evidence observations for Pillar 0${i+1}..."></textarea>
                 </div>`).join('');
         }
         window.scorePrep = function(id, res) {
@@ -724,13 +786,13 @@
             const status = document.getElementById('prep-master-status');
             if(passCount === 8) {
                 approveBtn.classList.remove('btn-locked');
-                lockMsg.innerText = "CRITERIA MET: ANALYST APPROVAL AUTHORIZED";
+                lockMsg.innerText = "PROTOCOL MET: ANALYST APPROVAL AUTHORIZED";
                 lockMsg.style.color = "#22c55e";
                 status.innerText = "READY FOR APPROVAL";
                 status.style.color = "#22c55e";
             } else {
                 approveBtn.classList.add('btn-locked');
-                lockMsg.innerText = "BLOCKER: 8/8 PASS MARKS REQUIRED FOR DIRECT APPROVAL.";
+                lockMsg.innerText = "BLOCKER: 8/8 PASS MARKS REQUIRED FOR DIRECT ANALYST APPROVAL.";
                 lockMsg.style.color = "#ef4444";
                 status.innerText = "IN PREPARATION";
                 status.style.color = "#F5C518";
@@ -739,17 +801,17 @@
         window.approveAsAnalyst = function() {
             finalVerdict = "CLEAN FILE (ANALYST APPROVED)";
             saveAuditCloud('prep');
-            showToast("FILE HARD-SYNCED AS CLEAN (ANALYST)");
+            showToast("FILE HARD-SYNCED AS CLEAN (ANALYST LEVEL)");
         };
         window.escalateToVeto = function() {
             const queue = document.getElementById('veto-queue');
             if(queue.querySelector('p')) queue.innerHTML = "";
             const pill = document.createElement('div');
-            pill.className = "queue-pill text-[11px] font-black uppercase tracking-widest";
-            pill.innerHTML = `UNIT: ${currentUnitCode} <span class="float-right text-gold opacity-40">PENDING ADJUDICATION</span>`;
+            pill.className = "queue-pill text-[12px] font-black uppercase tracking-widest active";
+            pill.innerHTML = `UNIT: ${currentUnitCode} <span class="float-right text-gold opacity-40 font-mono">READY_FOR_ADJUDICATION</span>`;
             queue.appendChild(pill);
             document.getElementById('queue-count').innerText = queue.children.length;
-            showToast("FILE HARD-LINKED TO ARCHITECT QUEUE");
+            showToast("FILE HARD-LINKED TO ARCHITECT COMMAND CENTER");
             switchView('veto');
         };
 
@@ -757,20 +819,20 @@
         function initVetoTerminal() {
             document.getElementById('veto-pillar-grid').innerHTML = PILLARS.map((p, i) => {
                 const tasks = pillarRequirements[i+1].map(task => `
-                    <div class="flex items-center gap-5 p-4 border-b border-white/5 last:border-0 hover:bg-white/5 transition-all">
+                    <div class="flex items-center gap-6 p-5 border-b border-white/5 last:border-0 hover:bg-white/5 transition-all">
                         <input type="checkbox" class="task-check" onchange="autoScoreVeto(${i+1})">
-                        <span class="text-[11px] font-bold uppercase text-white/50 leading-none">${task}</span>
+                        <span class="text-[12px] font-bold uppercase text-white/50 leading-none">${task}</span>
                     </div>`).join('');
                 return `
                     <div class="pillar-card bg-black/50 border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]" id="veto-pillar-${i+1}">
-                        <div class="flex justify-between items-center mb-8 pb-5 border-b border-white/10">
-                            <h4 class="text-[12px] font-black uppercase tracking-widest text-[#F5C518]">${i+1} ${p}</h4>
-                            <span id="veto-badge-${i+1}" class="text-[10px] font-black uppercase px-4 py-1.5 bg-white/5 opacity-30 rounded-sm">Pending Review</span>
+                        <div class="flex justify-between items-center mb-10 pb-6 border-b border-white/10">
+                            <h4 class="text-[13px] font-black uppercase tracking-widest text-[#F5C518]">${i+1} ${p}</h4>
+                            <span id="veto-badge-${i+1}" class="text-[10px] font-black uppercase px-5 py-2 bg-white/5 opacity-30 rounded-sm">Pending Verification</span>
                         </div>
-                        <div class="space-y-3">${tasks}</div>
+                        <div class="space-y-4">${tasks}</div>
                     </div>`;
             }).join('');
-            document.getElementById('veto-tier-controls').innerHTML = [1,2,3,4].map(t => `<button onclick="setTier(${t}, this)" class="w-full py-6 border border-white/10 text-[12px] font-black uppercase text-white hover:bg-gold transition-all shadow-xl">Tier ${t}</button>`).join('');
+            document.getElementById('veto-tier-controls').innerHTML = [1,2,3,4].map(t => `<button onclick="setTier(${t}, this)" class="w-full py-8 border border-white/10 text-[14px] font-black uppercase text-white hover:bg-gold transition-all shadow-xl">Risk Tier 0${t}</button>`).join('');
         }
         window.autoScoreVeto = function(id) {
             const card = document.getElementById(`veto-pillar-${id}`);
@@ -778,13 +840,13 @@
             const checked = card.querySelectorAll('.task-check:checked').length;
             const badge = document.getElementById(`veto-badge-${id}`);
             if(checked === total) {
-                badge.innerText = "VERIFIED PASS"; badge.className = "text-[10px] font-black uppercase px-4 py-1.5 bg-green-500 text-white shadow-xl rounded-sm";
+                badge.innerText = "VERIFIED PASS"; badge.className = "text-[11px] font-black uppercase px-5 py-2 bg-green-500 text-white shadow-xl rounded-sm";
                 card.classList.add('pass-state'); card.classList.remove('fail-state');
             } else if (checked > 0) {
-                badge.innerText = "DEFICIENCY"; badge.className = "text-[10px] font-black uppercase px-4 py-1.5 bg-red-500 text-white shadow-xl rounded-sm";
+                badge.innerText = "DEFICIENCY"; badge.className = "text-[11px] font-black uppercase px-5 py-2 bg-red-500 text-white shadow-xl rounded-sm";
                 card.classList.add('fail-state'); card.classList.remove('pass-state');
             } else {
-                badge.innerText = "PENDING REVIEW"; badge.className = "text-[10px] font-black uppercase px-4 py-1.5 bg-white/5 opacity-30 rounded-sm";
+                badge.innerText = "PENDING REVIEW"; badge.className = "text-[11px] font-black uppercase px-5 py-2 bg-white/5 opacity-30 rounded-sm";
                 card.classList.remove('pass-state', 'fail-state');
             }
             updateFinalVerdict();
@@ -794,14 +856,14 @@
             const passes = document.querySelectorAll('#veto-pillar-grid .pass-state').length;
             if(fails > 0) finalVerdict = "REJECTED";
             else if(passes === 8) finalVerdict = "CLEAN FILE";
-            else finalVerdict = "PENDING";
+            else finalVerdict = "PENDING REVIEW";
             document.getElementById('final-verdict-display').innerText = finalVerdict;
         }
         window.setFinalVerdict = function(v) {
             finalVerdict = v;
             document.getElementById('final-verdict-display').innerText = v;
-            document.getElementById('final-approve-btn').className = v === 'CLEAN FILE' ? "stencil-btn px-16 py-4 active-approve" : "stencil-btn px-16 py-4";
-            document.getElementById('final-reject-btn').className = v === 'REJECTED' ? "stencil-btn px-16 py-4 active-fail" : "stencil-btn px-16 py-4";
+            document.getElementById('final-approve-btn').className = v === 'CLEAN FILE' ? "stencil-btn px-16 py-4 active-approve shadow-2xl" : "stencil-btn px-16 py-4";
+            document.getElementById('final-reject-btn').className = v === 'REJECTED' ? "stencil-btn px-16 py-4 active-fail shadow-2xl" : "stencil-btn px-16 py-4";
         };
         window.setTier = function(t, btn) {
             document.querySelectorAll('#veto-tier-controls button').forEach(b => b.classList.remove('active-pass'));
@@ -810,16 +872,16 @@
         window.dispatchToRisk = function() {
             const archive = document.getElementById('veto-archive');
             const entry = document.createElement('div');
-            entry.className = "p-5 bg-white/5 border border-gold/10 rounded text-[10px] font-bold uppercase opacity-60";
-            entry.innerText = `UNIT: ${currentUnitCode} // VERDICT: ${finalVerdict}`;
+            entry.className = "p-5 bg-white/5 border border-gold/10 rounded text-[11px] font-bold uppercase opacity-60 shadow-lg";
+            entry.innerText = `UNIT: ${currentUnitCode} // VERDICT: ${finalVerdict} // ARCHIVED AT ${new Date().toLocaleTimeString()} UTC`;
             archive.prepend(entry);
-            document.getElementById('veto-queue').innerHTML = '<p class="text-[11px] opacity-20 italic text-center py-20 uppercase tracking-widest">Inbox Cleared.</p>';
+            document.getElementById('veto-queue').innerHTML = '<p class="text-[12px] opacity-20 italic text-center py-24 uppercase tracking-widest">Strategic Inbox Cleared.</p>';
             document.getElementById('queue-count').innerText = "0";
             showToast("AUDIT DISPATCHED TO RISK@MERRICKSOLUTION.COM");
             saveAuditCloud('veto');
         };
 
-        // --- VAULT ---
+        // --- VAULT SUBSYSTEM ---
         function initVault() {
             const nav = document.getElementById('vault-nav');
             nav.innerHTML = Object.keys(vaultLogic).map(k => `<button onclick="loadVault('${k}')" class="sidebar-item w-full" id="vault-btn-${k}">${vaultLogic[k].title}</button>`).join('');
@@ -827,13 +889,13 @@
         }
         window.loadVault = (key) => {
             document.querySelectorAll('#vault-nav button').forEach(b => b.classList.remove('active'));
-            document.getElementById(`vault-btn-${key}`).classList.add('active');
+            document.getElementById(`vault-btn-${key}`)?.classList.add('active');
             const data = vaultLogic[key];
             const rows = data.rows.map(r => `<tr>${r.map(td => `<td>${td}</td>`).join('')}</tr>`).join('');
-            document.getElementById('vault-content-area').innerHTML = `<h2 class="text-6xl font-black uppercase mb-16 text-gold tracking-tighter">${data.title}</h2><p class="text-md opacity-40 mb-12 leading-relaxed max-w-4xl">${data.desc}</p><table class="logic-table w-full text-white"><thead><tr>${data.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>`;
+            document.getElementById('vault-content-area').innerHTML = `<h2 class="text-7xl font-black uppercase mb-20 text-gold tracking-tighter animate-in slide-in-from-left duration-500">${data.title}</h2><p class="text-lg opacity-40 mb-16 leading-relaxed max-w-5xl font-medium">${data.desc}</p><table class="logic-table w-full text-white"><thead><tr>${data.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>`;
         };
 
-        // --- THREADS ---
+        // --- THREADS SUBSYSTEM ---
         function initThreads() {
             document.getElementById('ev-pillar').innerHTML = PILLARS.map((p, i) => `<option value="${i+1}">Pillar 0${i+1}</option>`).join('');
         }
@@ -841,11 +903,11 @@
             const id = document.getElementById('ev-doc-id').value;
             if(!id) return;
             const entry = document.createElement('div');
-            entry.className = "p-6 bg-white/5 border-l-4 border-gold flex justify-between items-center text-white shadow-xl mb-4";
-            entry.innerHTML = `<div><h4 class="font-black text-xs uppercase">${id}</h4><p class="text-[9px] opacity-30">UNIT LINK: ${currentUnitCode}</p></div><span class="bg-green-500/20 text-green-400 text-[9px] font-black px-4 py-1 uppercase tracking-widest rounded">Hard-Linked</span>`;
+            entry.className = "p-8 bg-white/5 border-l-8 border-gold flex justify-between items-center text-white shadow-2xl mb-6 animate-in slide-in-from-right duration-500";
+            entry.innerHTML = `<div><h4 class="font-black text-lg uppercase tracking-tighter">${id}</h4><p class="text-[11px] opacity-30 mt-1">UNIT LINK: ${currentUnitCode}</p></div><span class="bg-green-500/20 text-green-400 text-[11px] font-black px-5 py-1.5 uppercase tracking-widest rounded-full shadow-lg">Hard-Linked</span>`;
             document.getElementById('thread-list').prepend(entry);
             document.getElementById('ev-doc-id').value = '';
-            showToast("THREAD FORGED");
+            showToast("EVIDENCE FORGED TO CHAIN");
         };
 
         // --- COMMON CORE ACTIONS ---
@@ -854,25 +916,27 @@
             document.getElementById(`nav-${id}`).classList.add('active');
             document.querySelectorAll('.view-container').forEach(v => v.classList.remove('active'));
             document.getElementById(`view-${id}`).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         };
         window.signAction = (type) => {
             const name = document.getElementById(type === 'prep' ? 'prep-analyst-name' : 'veto-officer-name').value;
-            if(!name) { alert("MANDATORY: Official Signature Required for Registry Log."); return; }
+            if(!name) { alert("MANDATORY: Official Signature Required for Permanent Registry Log."); return; }
             document.getElementById(`${type}-display-name`).innerText = name.toUpperCase();
             document.getElementById(`${type}-display-time`).innerText = new Date().toLocaleTimeString() + " UTC";
             document.getElementById(`${type}-display-date`).innerText = new Date().toISOString().split('T')[0];
             document.getElementById(`${type}-stamp-container`).classList.remove('hidden');
+            showToast("IDENTITY VERIFIED & SEALED");
         };
         window.saveAuditCloud = async (phase) => {
             if (firebaseReady) {
                 await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'audits', currentUnitCode), { unitCode: currentUnitCode, verdict: finalVerdict, phase, updatedAt: serverTimestamp() }, { merge: true });
             }
-            showToast(`REGISTRY UNIT ${currentUnitCode} PERSISTED`);
+            showToast(`UNIT ${currentUnitCode} PERSISTED IN REGISTRY`);
         };
         function showToast(msg) {
             const t = document.createElement('div');
-            t.className = "fixed bottom-12 right-12 bg-gold text-navy px-12 py-6 font-black text-xs shadow-[0_30px_60px_rgba(0,0,0,0.5)] z-[10001] border-l-[12px] border-navy animate-in slide-in-from-bottom duration-300";
-            t.innerText = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 4500);
+            t.className = "fixed bottom-12 right-12 bg-gold text-navy px-16 py-8 font-black text-sm shadow-[0_50px_100px_rgba(0,0,0,0.8)] z-[10001] border-l-[15px] border-navy animate-in slide-in-from-bottom duration-300 uppercase tracking-widest";
+            t.innerText = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 5000);
         }
 
         document.getElementById('sys-key').addEventListener('keypress', e => { if(e.key === 'Enter') unlockSystem(); });
