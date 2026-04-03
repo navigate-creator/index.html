@@ -27,8 +27,12 @@
         .mc-table th { background: var(--navy); color: white; padding: 12px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; text-align: left; }
         .mc-table td { padding: 16px 12px; border-bottom: 1px solid #e2e8f0; font-size: 12px; font-weight: 600; }
         .mc-table tr:hover { background: var(--gold-light); }
+        
+        /* Terminal Inputs & Modals */
         #auth-modal { position: fixed; inset: 0; background: rgba(11, 31, 63, 0.95); z-index: 9999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
+        #initial-auth-gate { position: fixed; inset: 0; background: #061021; z-index: 10000; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .terminal-input { background: #061021; border: 2px solid var(--gold); padding: 18px; color: var(--gold); font-family: 'JetBrains Mono'; font-weight: 700; letter-spacing: 6px; text-align: center; outline: none; width: 100%; }
+        
         .hidden { display: none !important; }
         
         /* Loading Overlay */
@@ -38,6 +42,25 @@
     </style>
 </head>
 <body class="dot-grid min-h-screen flex flex-col">
+
+    <div id="initial-auth-gate" class="hidden">
+        <div class="mb-8 text-center">
+            <svg viewBox="0 0 100 100" class="w-20 h-20 mx-auto mb-6" fill="none">
+                <rect x="12" y="30" width="16" height="40" fill="#F5C518"/>
+                <path d="M12 30H50V40H32V70H12V30Z" fill="#F5C518"/>
+                <rect x="34" y="30" width="16" height="40" fill="#F5C518"/>
+                <path d="M56 42H88V50H72V58H88V66H56V42Z" fill="#F5C518"/>
+                <rect x="56" y="42" width="12" height="24" fill="#F5C518"/>
+            </svg>
+            <h1 class="font-montserrat font-black text-3xl uppercase tracking-[0.3em] text-white">Merrick Compliance OS</h1>
+            <p class="text-[#F5C518] text-[10px] font-bold uppercase tracking-[0.5em] mt-3">System Locked • Enterprise Access</p>
+        </div>
+        <div class="w-full max-w-sm px-6">
+            <input type="password" id="initial-auth-input" class="terminal-input w-full mb-4" placeholder="ENTER SYSTEM KEY">
+            <button onclick="unlockSystem()" class="w-full bg-[#F5C518] text-[#0B1F3F] py-4 font-black uppercase text-xs tracking-widest hover:bg-white transition-all shadow-[0_0_20px_rgba(245,197,24,0.2)]">Initialize Terminal</button>
+            <p id="initial-auth-error" class="text-red-500 text-[10px] font-black uppercase tracking-widest mt-4 text-center hidden">Access Denied. Invalid Passkey.</p>
+        </div>
+    </div>
 
     <header class="bg-[#0B1F3F] text-white p-6 border-b-8 border-[#F5C518] flex justify-between items-center z-20 shadow-xl">
         <div class="flex items-center gap-4">
@@ -77,6 +100,7 @@
         </aside>
 
         <main class="flex-1 overflow-y-auto p-8 relative">
+            
             <div id="auth-modal" class="hidden">
                 <div class="bg-[#0B1F3F] p-10 border-4 border-[#F5C518] shadow-2xl max-w-md w-full text-center">
                     <h2 class="font-montserrat font-black text-2xl uppercase tracking-widest text-white mb-2">Security Gate</h2>
@@ -180,9 +204,9 @@
 
     <script>
         // =========================================================================
-        // YOUR LIVE GOOGLE APPS SCRIPT URL HAS BEEN ADDED HERE
+        // ZAPIER WEBHOOK CONNECTION
         // =========================================================================
-        const API_URL = "https://script.google.com/a/macros/nsrclaim.com/s/AKfycbwcFRRkg6oBzGL6nX7wdXPt8GcgvwZtulQ45ih9pGrC2wvdWqWZD_KIQWLnEkuZNWID/exec";
+        const API_URL = "https://hooks.zapier.com/hooks/catch/27086469/unv0i53/";
         
         let db = { queue: [], archive: [] };
         
@@ -197,16 +221,35 @@
         let requiredKey = '';
 
         document.addEventListener("DOMContentLoaded", () => {
+            // INITIAL SYSTEM GATE LOGIC
+            if(sessionStorage.getItem('mc_os_unlocked') !== 'true') {
+                document.getElementById('initial-auth-gate').classList.remove('hidden');
+            }
+
             document.getElementById('audit-date').valueAsDate = new Date();
             generateNewID();
             renderScorecard();
-            syncDatabase(); // Load from Google Sheets on start
+            syncDatabase(); 
             startClock();
             
             renderMathInElement(document.body, {
                 delimiters: [ {left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false} ],
                 throwOnError: false
             });
+        });
+
+        // GLOBAL SECURITY UNLOCK
+        function unlockSystem() {
+            const key = document.getElementById('initial-auth-input').value;
+            if (key === 'MC8SECURE') {
+                sessionStorage.setItem('mc_os_unlocked', 'true');
+                document.getElementById('initial-auth-gate').classList.add('hidden');
+            } else {
+                document.getElementById('initial-auth-error').classList.remove('hidden');
+            }
+        }
+        document.getElementById('initial-auth-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') unlockSystem();
         });
 
         function startClock() {
@@ -217,36 +260,47 @@
             document.getElementById('loader').classList.toggle('hidden', !show);
         }
 
-        // --- GOOGLE SHEETS API CALLS ---
+        // --- ZAPIER API CALLS ---
         async function syncDatabase() {
-            if(!API_URL || API_URL === "") {
-                showToast("API URL missing. Running in UI-only mode.");
-                return;
-            }
-            showLoader(true);
-            try {
-                const response = await fetch(API_URL);
-                const data = await response.json();
-                db.queue = data.queue || [];
-                db.archive = data.archive || [];
-                updateDashboard();
-                showToast("Database Synchronized.");
-            } catch (error) {
-                console.error(error);
-                showToast("Sync Error. Check console.");
-            }
-            showLoader(false);
+            // Webhooks are one-way (POST only). To read data back from Google Sheets, 
+            // you rely on local storage for the frontend display, while Zapier pushes the master log to the Sheet.
+            db.queue = JSON.parse(localStorage.getItem('mc_queue')) || [];
+            db.archive = JSON.parse(localStorage.getItem('mc_archive')) || [];
+            updateDashboard();
+            showToast("System State Synchronized.");
         }
 
         async function apiPost(payload) {
             if(!API_URL || API_URL === "") return;
             showLoader(true);
             try {
+                // Send to Zapier
                 await fetch(API_URL, {
                     method: 'POST',
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify(payload),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' } // Bypasses CORS blocks
                 });
-                await syncDatabase(); // Refresh data after posting
+
+                // Since Zapier doesn't send the database back, we update local storage to keep the UI running
+                if (payload.action === 'create_escalation') { db.queue.push(payload); }
+                else if (payload.action === 'create_approval') { payload.verdict = 'CLEAN FILE APPROVED'; db.archive.push(payload); }
+                else if (payload.action === 'process_veto') {
+                    const idx = db.queue.findIndex(f => f.id === payload.id);
+                    if(idx > -1) {
+                        const file = db.queue[idx];
+                        file.verdict = "VETO REVIEWED & CLOSED"; file.architectAudit = true;
+                        db.queue.splice(idx, 1); db.archive.push(file);
+                    }
+                }
+                else if (payload.action === 'audit_file') {
+                    const file = db.archive.find(f => f.id === payload.id);
+                    if(file) file.architectAudit = true;
+                }
+                
+                localStorage.setItem('mc_queue', JSON.stringify(db.queue));
+                localStorage.setItem('mc_archive', JSON.stringify(db.archive));
+                
+                await syncDatabase(); 
             } catch(e) {
                 console.error(e);
                 showToast("Action Failed to Save to Cloud.");
@@ -254,6 +308,7 @@
             showLoader(false);
         }
 
+        // --- ANALYST WORKFLOW ---
         function generateNewID() {
             const id = `MC-${Math.floor(Math.random()*900+100)}-${Math.floor(Math.random()*900+100)}`;
             document.getElementById('current-file-id').innerText = id;
@@ -318,20 +373,16 @@
             const payload = {
                 action: action === 'escalate' ? 'create_escalation' : 'create_approval',
                 id, entity, analyst, date,
-                timestamp: new Date().toLocaleString()
+                timestamp: new Date().toLocaleString(),
+                architectAudit: false
             };
 
             apiPost(payload);
             generateNewID();
         }
 
-        function architectVeto(id) {
-            apiPost({ action: 'process_veto', id: id, timestamp: new Date().toLocaleString() });
-        }
-
-        function architectAudit(id) {
-            apiPost({ action: 'audit_file', id: id });
-        }
+        function architectVeto(id) { apiPost({ action: 'process_veto', id: id, timestamp: new Date().toLocaleString() }); }
+        function architectAudit(id) { apiPost({ action: 'audit_file', id: id }); }
 
         function updateDashboard() {
             document.getElementById('queue-badge').innerText = db.queue.length;
@@ -367,6 +418,7 @@
                 `).join('').split('').reverse().join('').split('</tr>').reverse().join('</tr>');
         }
 
+        // --- NAVIGATION & MODULE SECURITY ---
         function navigate(viewId) {
             document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.sidebar-btn').forEach(el => el.classList.remove('active'));
