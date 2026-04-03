@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VETO TERMINAL | MC™ 8-Pillar Framework</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@400;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root { --navy: #0B1F3F; --gold: #F5C518; --audit-red: #ef4444; }
+        body { font-family: 'Inter', sans-serif; background-color: #061021; color: white; }
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .border-gold { border-color: var(--gold); }
+        .bg-navy { background-color: var(--navy); }
+        
+        /* Queue Item Styling */
+        .queue-item {
+            background: rgba(255,255,255,0.03);
+            border-left: 4px solid var(--gold);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .queue-item:hover { background: rgba(245, 197, 24, 0.1); }
+        .queue-item.active { background: rgba(245, 197, 24, 0.15); border-left-width: 8px; }
+
+        .btn-pass { background: var(--gold); color: var(--navy); font-weight: 900; }
+        .btn-fail { background: var(--audit-red); color: white; font-weight: 900; }
+        
+        .disabled-overlay {
+            position: absolute; inset: 0; background: rgba(6, 16, 33, 0.8);
+            display: flex; align-items: center; justify-content: center; z-index: 50;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <div id="auth-gate" class="fixed inset-0 bg-[#061021] z-[100] flex flex-col items-center justify-center">
+        <div class="text-center mb-8">
+            <h2 class="font-montserrat font-black text-2xl uppercase tracking-[0.3em] text-white">Veto Access Required</h2>
+            <p class="text-[#F5C518] text-[10px] font-bold uppercase tracking-[0.5em] mt-2">MERRICK COMPLIANCE ARCHITECT ONLY</p>
+        </div>
+        <input type="password" id="veto-key" class="bg-[#0B1F3F] border border-gold p-4 w-64 text-center text-gold font-mono tracking-widest outline-none mb-4" placeholder="ENTER KEY">
+        <button onclick="unlockVeto()" class="bg-gold text-navy px-10 py-3 font-black uppercase text-xs tracking-widest">Verify Authority</button>
+    </div>
+
+    <header class="p-6 border-b-4 border-gold bg-[#0B1F3F] flex justify-between items-center">
+        <div class="flex items-center gap-4">
+            <div class="bg-white p-1 rounded">
+                <svg viewBox="0 0 100 100" class="w-8 h-8" fill="#0B1F3F"><rect x="12" y="30" width="16" height="40"/><path d="M12 30H50V40H32V70H12V30Z"/><rect x="34" y="30" width="16" height="40"/><path d="M56 42H88V50H72V58H88V66H56V42Z"/><rect x="56" y="42" width="12" height="24"/></svg>
+            </div>
+            <div>
+                <h1 class="font-montserrat font-black text-xl uppercase tracking-tighter">Veto Terminal</h1>
+                <p class="text-gold font-bold text-[8px] uppercase tracking-[0.3em]">Parent: Merrick Solution</p>
+            </div>
+        </div>
+        <div class="text-right font-mono text-[10px]">
+            <p id="current-time">00:00:00</p>
+            <p id="current-date">2026.04.03</p>
+        </div>
+    </header>
+
+    <div class="flex flex-1 overflow-hidden">
+        <aside class="w-1/3 border-r border-white/10 bg-black/20 flex flex-col">
+            <div class="p-4 bg-white/5 border-b border-white/10">
+                <h3 class="text-[10px] font-black uppercase tracking-widest text-gold">Escalation Queue</h3>
+            </div>
+            <div id="queue-list" class="flex-1 overflow-y-auto p-4 space-y-3">
+                <p class="text-white/30 text-[10px] italic text-center mt-10">Scanning Google Workspace for escalations...</p>
+            </div>
+        </aside>
+
+        <main class="flex-1 p-10 relative overflow-y-auto">
+            <div id="empty-state" class="flex flex-col items-center justify-center h-full opacity-20">
+                <svg class="w-20 h-20 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                <p class="font-black uppercase tracking-widest text-xs">Select File for Veto Adjudication</p>
+            </div>
+
+            <div id="active-workspace" class="hidden space-y-8 animate-in fade-in duration-500">
+                <div class="flex justify-between items-start border-b border-white/10 pb-6">
+                    <div>
+                        <span class="bg-gold text-navy text-[10px] font-black px-3 py-1 rounded" id="view-id">MC-000-000</span>
+                        <h2 class="text-3xl font-black uppercase mt-4" id="view-name">Entity Name</h2>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-[9px] font-black uppercase text-white/40">Analyst Origin</p>
+                        <p class="font-bold" id="view-analyst">Analyst Name</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="p-6 bg-white/5 border border-white/10 rounded">
+                        <h3 class="text-xs font-black uppercase text-gold mb-4">Architect Verdict</h3>
+                        <textarea id="architect-note" class="w-full bg-black/40 border border-white/10 p-4 text-sm font-medium outline-none focus:border-gold h-32" placeholder="Input technical rationale..."></textarea>
+                    </div>
+                    <div class="flex flex-col justify-center gap-4">
+                        <button onclick="adjudicate('PASS')" class="btn-pass w-full py-6 text-sm uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all">Issue Pass Audit</button>
+                        <button onclick="adjudicate('FAIL')" class="btn-fail w-full py-6 text-sm uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all">Issue Fail Audit & Lock</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const CONFIG = {
+            KEY: "MC8VETO",
+            ZAPIER_PASS: "YOUR_ZAPIER_WEBHOOK_FOR_PASS",
+            ZAPIER_FAIL: "YOUR_ZAPIER_WEBHOOK_FOR_FAIL_AND_LOCK"
+        };
+
+        let activeFile = null;
+
+        function unlockVeto() {
+            if(document.getElementById('veto-key').value === CONFIG.KEY) {
+                document.getElementById('auth-gate').style.display = 'none';
+                loadQueue();
+            }
+        }
+
+        // Simulating Fetch from Google Sheets Queue
+        function loadQueue() {
+            const mockQueue = [
+                { id: "MC-104-882", name: "Alpha Global Holdings", analyst: "John Doe", time: "14:22" },
+                { id: "MC-992-105", name: "BitFlow Solutions", analyst: "Sarah Smith", time: "15:40" }
+            ];
+            
+            const list = document.getElementById('queue-list');
+            list.innerHTML = mockQueue.map(item => `
+                <div onclick="selectFile('${item.id}', '${item.name}', '${item.analyst}')" class="queue-item p-4 rounded" id="item-${item.id}">
+                    <div class="flex justify-between items-start">
+                        <span class="text-[9px] font-mono text-gold">${item.id}</span>
+                        <span class="text-[8px] opacity-40">${item.time}</span>
+                    </div>
+                    <p class="text-xs font-black uppercase mt-1">${item.name}</p>
+                </div>
+            `).join('');
+        }
+
+        function selectFile(id, name, analyst) {
+            activeFile = { id, name, analyst };
+            document.getElementById('empty-state').classList.add('hidden');
+            document.getElementById('active-workspace').classList.remove('hidden');
+            document.getElementById('view-id').innerText = id;
+            document.getElementById('view-name').innerText = name;
+            document.getElementById('view-analyst').innerText = analyst;
+            
+            document.querySelectorAll('.queue-item').forEach(el => el.classList.remove('active'));
+            document.getElementById(`item-${id}`).classList.add('active');
+        }
+
+        async function adjudicate(verdict) {
+            const note = document.getElementById('architect-note').value;
+            if(!note) return alert("MANDATORY: Technical rationale required for Veto.");
+
+            const payload = {
+                id: activeFile.id,
+                name: activeFile.name,
+                verdict: verdict,
+                rationale: note,
+                architect: "ARCHITECT MASTER",
+                timestamp: new Date().toISOString()
+            };
+
+            console.log(`MC-LOG: Sending ${verdict} result to Registry...`, payload);
+            
+            // Logic to send to Zapier would go here:
+            // await fetch(verdict === 'PASS' ? CONFIG.ZAPIER_PASS : CONFIG.ZAPIER_FAIL, { method: 'POST', body: JSON.stringify(payload) });
+
+            alert(`AUDIT COMPLETE: File ${activeFile.id} ${verdict === 'PASS' ? 'PASSED' : 'FAILED & LOCKED'}.`);
+            location.reload(); 
+        }
+
+        setInterval(() => {
+            document.getElementById('current-time').innerText = new Date().toLocaleTimeString();
+        }, 1000);
+    </script>
+</body>
+</html>
