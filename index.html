@@ -4,271 +4,249 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merrick Compliance | MC™ 8-Pillar Framework</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* INDUSTRIAL BRAND SPECIFICATIONS */
         :root {
             --navy: #0B1F3F;
             --gold: #F5C518;
-            --white: #F8FAFC;
+            --white: #FFFFFF;
+            --bg-light: #F8FAFC;
+            --text-grey: #94A3B8;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        html { scroll-behavior: smooth; }
+
         body { 
-            font-family: 'Inter', sans-serif; 
-            -webkit-font-smoothing: antialiased; 
-            background-color: var(--white); 
-            color: var(--navy); 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--navy);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            text-align: left;
         }
-        .font-montserrat { font-family: 'Montserrat', sans-serif; }
-        
-        /* Navigation Ribbon */
-        .nav-scrolled { background-color: var(--navy) !important; padding: 0.75rem 0; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4); }
-        .nav-transparent { background-color: transparent; padding: 1.5rem 0; }
-        .nav-link-text { transition: color 0.3s; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--navy); border: none; background: none; cursor: pointer; }
-        .nav-scrolled .nav-link-text { color: white; }
 
-        /* Interactive Pillar Orbit */
-        .orbit-container { position: relative; width: 100%; max-width: 800px; aspect-ratio: 1/1; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+        /* SUBTLE GRID BACKGROUND */
+        .dot-grid {
+            background-image: radial-gradient(#cbd5e1 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* NAVIGATION RIBBON */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 12px 40px; display: flex; justify-content: space-between;
+            align-items: center; transition: var(--transition);
+            background: white; border-bottom: 1px solid #f1f5f9;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo-container { display: flex; align-items: center; gap: 14px; text-decoration: none; cursor: pointer; }
+        .logo-box { 
+            background: white; width: 44px; height: 44px; border-radius: 4px; 
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08); border: 1px solid #f1f5f9;
+        }
+        .logo-text-group { display: flex; flex-direction: column; line-height: 1; }
+        .logo-m { color: var(--navy); font-weight: 900; font-size: 22px; letter-spacing: -1px; text-transform: uppercase; }
+        .logo-c { color: var(--text-grey); font-size: 10px; font-weight: 700; letter-spacing: 4px; margin-top: 2px; text-transform: uppercase; }
+
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-link { text-decoration: none; color: var(--navy); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; background: none; border: none; }
+        .nav-link:hover { color: var(--gold); }
         
+        .btn-demo { 
+            background: var(--navy); color: white; padding: 12px 24px; border-radius: 4px;
+            font-weight: 800; text-decoration: none; font-size: 11px; text-transform: uppercase;
+            letter-spacing: 1px; transition: var(--transition); display: inline-flex; align-items: center;
+        }
+        .btn-demo:hover { transform: translateY(-1px); background: #162e55; }
+
+        /* HERO SECTION */
+        .hero { padding: 160px 40px 100px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .hero h1 { font-size: 72px; font-weight: 900; line-height: 0.9; text-transform: uppercase; margin-bottom: 24px; letter-spacing: -3px; }
+        .hero h1 span { color: var(--gold); font-style: italic; }
+        .hero p { font-size: 19px; color: #64748b; max-width: 500px; margin-bottom: 40px; font-weight: 500; }
+
+        /* ORBIT DIAGRAM */
+        .orbit-container {
+            position: relative; width: 100%; max-width: 750px; aspect-ratio: 1/1;
+            margin: 60px auto; display: flex; align-items: center; justify-content: center;
+        }
+
         .center-core { 
-            width: 220px; height: 220px; background: var(--navy); border: 4px solid var(--gold); border-radius: 50%; z-index: 20; 
-            display: flex; flex-direction: column; align-items: center; justify-content: center; 
-            box-shadow: 0 0 80px rgba(245, 197, 24, 0.2);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 20px;
-            text-align: center;
+            width: 240px; height: 240px; background: white; border: 1px solid #f1f5f9; border-radius: 12px;
+            z-index: 20; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06); padding: 30px; text-align: center;
+            transition: var(--transition); cursor: pointer;
         }
 
-        .pillar-node { 
-            position: absolute; transform: translate(-50%, -50%); width: 160px; 
-            display: flex; flex-direction: column; align-items: center; gap: 8px; 
-            text-align: center; z-index: 30; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-        }
-        .pillar-node:hover { transform: translate(-50%, -50%) scale(1.1); z-index: 40; }
-        .pillar-node.active .pillar-icon { background: var(--gold); color: var(--navy); border-color: var(--gold); box-shadow: 0 0 30px var(--gold); }
+        .pillar-node { position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 8px; width: 150px; cursor: pointer; z-index: 30; transition: var(--transition); }
+        .pillar-node:hover { transform: translate(-50%, -50%) scale(1.08); }
         
-        .pillar-icon { 
-            width: 50px; height: 50px; background: var(--navy); border: 1px solid rgba(245, 197, 24, 0.4); 
-            border-radius: 12px; display: flex; align-items: center; justify-content: center; 
-            color: var(--gold); font-weight: 900; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
+        .p-icon { 
+            width: 46px; height: 46px; background: var(--navy); color: white; border-radius: 4px; 
+            display: flex; align-items: center; justify-content: center; font-weight: 900; 
+            box-shadow: 0 8px 16px rgba(11,31,63,0.15); transition: 0.3s;
         }
-        .pillar-label { 
-            background: rgba(11, 31, 63, 0.95); color: white; font-size: 9px; font-weight: 800; 
-            padding: 6px 12px; border-radius: 6px; text-transform: uppercase; white-space: nowrap; 
-            border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
-        }
+        .pillar-node:hover .p-icon, .pillar-node.active .p-icon { background: var(--gold); color: var(--navy); transform: translateY(-3px); }
+        
+        .p-label { background: white; color: var(--navy); font-size: 9px; font-weight: 800; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; white-space: nowrap; border: 1px solid #f1f5f9; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
 
-        /* Buttons */
-        .cta-button { transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; }
-        .cta-button:hover { transform: translateY(-2px); filter: brightness(1.1); }
-        .cta-button:active { transform: scale(0.95); }
+        /* PROBLEM SECTION */
+        .problem-section { background: var(--navy); color: white; padding: 100px 40px; border-radius: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1300px; margin: 20px auto; }
+        .problem-section h2 { font-size: 50px; font-weight: 900; line-height: 1; text-transform: uppercase; margin-bottom: 24px; }
+        .pain-point { display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 12px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.05); }
+        .pain-point span { color: #ef4444; font-weight: 900; }
 
-        .view-transition { transition: opacity 0.4s ease, transform 0.4s ease; }
+        /* VIEW SWITCHING UTILITIES */
         .hidden { display: none !important; }
+        .view-transition { animation: fadeIn 0.5s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        @media (max-width: 768px) {
-            .center-core { width: 180px; height: 180px; padding: 15px; }
-            .pillar-node { width: 110px; }
-            .pillar-label { font-size: 7px; padding: 4px 8px; }
-            h1 { font-size: 3.5rem !important; line-height: 0.95 !important; }
+        /* MOBILE FIXES */
+        @media (max-width: 900px) {
+            .hero, .problem-section { grid-template-columns: 1fr; text-align: center; }
+            .hero h1 { font-size: 48px; }
+            .nav-links { display: none; }
+            .orbit-container { max-width: 420px; margin: 40px auto; }
+            .center-core { width: 160px; height: 160px; padding: 15px; }
+            .pillar-node { width: 100px; }
+            .p-label { font-size: 7px; padding: 2px 6px; }
+            
+            /* Extreme mobile spacing adjustment */
+            .p1 { top: 2% !important; }
+            .p3 { left: 98% !important; }
+            .p5 { top: 98% !important; }
+            .p7 { left: 2% !important; }
         }
     </style>
 </head>
-<body class="overflow-x-hidden text-left">
+<body>
 
-    <!-- GLOBAL NAVIGATION -->
-    <nav id="navbar" class="fixed w-full z-[100] transition-all duration-300 nav-transparent px-6 sm:px-10">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="bg-white p-1 rounded-sm shadow-lg" onclick="toggleView('main')" style="cursor:pointer">
-                    <svg viewBox="0 0 100 100" class="w-8 h-8 text-[#0B1F3F]" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="12" y="28" width="14" height="44" rx="1" fill="currentColor" /> 
-                        <path d="M12 28H48C48 28 48 32 48 34C48 36 44 42 36 42C28 42 24 36 24 34C24 32 24 28 24 28H12Z" fill="currentColor" />
-                        <rect x="34" y="28" width="14" height="44" rx="1" fill="currentColor" />
-                        <path d="M52 40H86V50H66V58H86V68H52V40Z" fill="currentColor" />
-                        <rect x="52" y="40" width="10" height="28" rx="0.5" fill="currentColor" />
-                    </svg>
-                </div>
-                <div class="flex flex-col">
-                    <span class="font-black text-xl tracking-tighter uppercase leading-none text-[#0B1F3F]">MERRICK</span>
-                    <span class="text-[10px] tracking-[0.3em] font-bold uppercase text-[#0B1F3F]/50">COMPLIANCE</span>
-                </div>
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo-container" onclick="toggleView('main')">
+            <div class="logo-box">
+                <svg viewBox="0 0 100 100" style="width:28px; height:28px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="12" y="30" width="16" height="40" fill="#0B1F3F"/>
+                    <path d="M12 30H50V40H35V70H12V30Z" fill="#0B1F3F"/>
+                    <rect x="34" y="30" width="16" height="40" fill="#0B1F3F"/>
+                    <path d="M56 42H88V50H70V58H88V66H56V42Z" fill="#0B1F3F"/>
+                    <rect x="56" y="42" width="10" height="24" fill="#0B1F3F"/>
+                </svg>
             </div>
-            
-            <div class="hidden lg:flex items-center gap-10">
-                <a href="#problem" class="nav-link-text hover:text-[#F5C518]">Problem</a>
-                <a href="#solution" class="nav-link-text hover:text-[#F5C518]">8-Pillar System</a>
-                <button onclick="toggleView('asset')" class="nav-link-text hover:text-[#F5C518] text-left">Strategic Asset</button>
-                <a href="mailto:risk@merricksolution.com" class="cta-button bg-[#F5C518] text-[#0B1F3F] px-6 py-3 rounded font-black shadow-lg uppercase text-[11px] tracking-widest">Request a Demo</a>
+            <div class="logo-text-group">
+                <span class="logo-m">MERRICK</span>
+                <span class="logo-c">COMPLIANCE</span>
             </div>
-
-            <button onclick="toggleMenu()" class="lg:hidden p-2 text-[#0B1F3F]" id="menu-btn">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-            </button>
+        </div>
+        <div class="nav-links">
+            <a href="#problem" class="nav-link">Problem</a>
+            <button onclick="toggleView('asset')" class="nav-link">Interactive Asset</button>
+            <a href="mailto:risk@merricksolution.com" class="btn-demo">Request a Demo</a>
         </div>
     </nav>
 
-    <!-- MAIN LANDING VIEW -->
+    <!-- MAIN WEBSITE VIEW -->
     <main id="main-view" class="view-transition">
-        <!-- HERO SECTION -->
-        <section class="relative min-h-screen flex items-center pt-20 px-6 bg-white overflow-hidden">
-            <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#0B1F3F 2px, transparent 2px); background-size: 40px 40px;"></div>
-            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10 w-full">
-                <div class="space-y-8">
-                    <div class="inline-flex items-center gap-2 bg-[#F5C518]/10 px-4 py-2 rounded-full border border-[#F5C518]/20 text-[#0B1F3F]">
-                        <span class="text-[10px] font-black uppercase tracking-[0.2em]">Audit-Ready Compliance Systems</span>
-                    </div>
-                    <h1 class="text-6xl md:text-9xl font-black uppercase leading-[0.85] tracking-tighter text-[#0B1F3F] font-montserrat">Eliminate Risk. <br /> <span class="text-[#F5C518] italic">Enforce Control.</span></h1>
-                    <p class="text-lg md:text-xl text-slate-500 font-medium max-w-lg leading-relaxed">We install structured compliance workflows that eliminate risk, enforce governance, and prepare your business for audit.</p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="mailto:risk@merricksolution.com" class="cta-button bg-[#0B1F3F] text-white px-12 py-5 rounded-xl font-black text-xs uppercase tracking-widest shadow-2xl">Request a Demo →</a>
-                        <button onclick="toggleView('asset')" class="cta-button border-2 border-slate-200 bg-white text-[#0B1F3F] px-12 py-5 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-slate-50">Interactive Framework</button>
-                    </div>
+        <!-- Hero Section -->
+        <section class="hero dot-grid">
+            <div class="hero-content">
+                <div style="font-size: 11px; font-weight: 900; color: var(--navy); letter-spacing: 3px; margin-bottom: 20px; text-transform: uppercase; opacity: 0.4;">Audit-Ready Infrastructure</div>
+                <h1>Eliminate Risk.<br><span>Enforce Control.</span></h1>
+                <p>We install structured compliance workflows that eliminate risk, enforce governance, and prepare your business for audit.</p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="mailto:risk@merricksolution.com" class="btn-demo" style="padding: 18px 36px; font-size: 12px;">Get Started</a>
+                    <button onclick="toggleView('asset')" class="btn-demo" style="background: white; border: 1px solid #e2e8f0; color: var(--navy); padding: 18px 36px; font-size: 12px; box-shadow: none;">Launch Asset Mode</button>
                 </div>
-                <!-- Hero Visual -->
-                <div class="relative hidden lg:block">
-                    <div class="bg-white rounded-[3rem] p-12 shadow-[0_50px_100px_-20px_rgba(11,31,63,0.15)] border border-slate-100">
-                        <div class="bg-[#0B1F3F] text-white p-8 rounded-2xl mb-8 flex items-center justify-between text-left">
-                            <div><p class="text-[10px] font-bold uppercase opacity-50 tracking-widest mb-1 font-montserrat">Status Report</p><h3 class="text-2xl font-black uppercase tracking-tighter font-montserrat">System Locked</h3></div>
-                            <svg class="w-10 h-10 text-[#F5C518]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                        </div>
-                        <div class="space-y-6 opacity-20 text-left">
-                            <div class="h-2 w-3/4 bg-[#0B1F3F] rounded-full"></div>
-                            <div class="h-2 w-1/2 bg-[#0B1F3F] rounded-full"></div>
-                            <div class="h-2 w-5/6 bg-[#0B1F3F] rounded-full"></div>
-                        </div>
-                    </div>
-                    <div class="absolute -bottom-6 -right-6 bg-[#F5C518] p-6 rounded-2xl shadow-xl text-left font-montserrat font-black uppercase text-[#0B1F3F]"><p class="text-[10px] tracking-widest mb-1">Audit Defense</p><p class="text-2xl">100% Verified</p></div>
+            </div>
+            <div style="background: white; border-radius: 24px; padding: 50px; border: 1px solid #f1f5f9; box-shadow: 0 40px 80px -20px rgba(0,0,0,0.05); position: relative;">
+                <div style="background: var(--navy); border-radius: 8px; padding: 25px; color: white; margin-bottom: 25px;">
+                    <div style="font-size: 10px; opacity: 0.5; font-weight: 700; letter-spacing: 2px;">FILE STATUS</div>
+                    <div style="font-size: 26px; font-weight: 900;">100% VERIFIED</div>
                 </div>
+                <div style="height: 10px; background: #f8fafc; border-radius: 5px; margin-bottom: 12px; width: 85%;"></div>
+                <div style="height: 10px; background: #f8fafc; border-radius: 5px; margin-bottom: 12px; width: 65%;"></div>
+                <div style="height: 10px; background: #f8fafc; border-radius: 5px; width: 92%;"></div>
+                <div style="position: absolute; right: -20px; bottom: -20px; background: var(--gold); padding: 20px; border-radius: 12px; font-weight: 900; font-size: 18px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">Audit Defensible</div>
             </div>
         </section>
 
-        <!-- PROBLEM SECTION -->
-        <section id="problem" class="bg-[#0B1F3F] py-32 text-white relative px-6 text-left border-t border-white/5">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+        <!-- Problem Section -->
+        <section id="problem" style="padding: 60px 20px;">
+            <div class="problem-section">
                 <div>
-                    <h2 class="text-5xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9] mb-8 font-montserrat">Most firms are operating with <br/><span class="text-[#F5C518] italic">hidden exposure.</span></h2>
-                    <p class="text-white/60 text-lg font-medium mb-12 leading-relaxed">When regulators or carriers review your files, these gaps become liabilities. If you can't prove your process, you don't have one.</p>
-                    <div class="space-y-5">
-                        <div class="flex items-center gap-5 p-6 bg-white/5 rounded-2xl border border-white/10"><span class="text-red-500 font-black text-2xl uppercase">!</span><span class="text-sm font-bold uppercase tracking-widest">Incomplete client files</span></div>
-                        <div class="flex items-center gap-5 p-6 bg-white/5 rounded-2xl border border-white/10"><span class="text-red-500 font-black text-2xl uppercase">!</span><span class="text-sm font-bold uppercase tracking-widest">No consistent identification</span></div>
-                        <div class="flex items-center gap-5 p-6 bg-white/5 rounded-2xl border border-white/10"><span class="text-red-500 font-black text-2xl uppercase">!</span><span class="text-sm font-bold uppercase tracking-widest">Missing audit trails</span></div>
-                    </div>
+                    <h2>Hidden<br><span style="color: var(--gold); font-style: italic;">Exposure.</span></h2>
+                    <p>When regulators or carriers review your files, these gaps become liabilities. If you can't prove your process, you don't have one.</p>
+                    <div class="pain-point"><span>!</span><div style="font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">Incomplete client files</div></div>
+                    <div class="pain-point"><span>!</span><div style="font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">Missing identity verification</div></div>
+                    <div class="pain-point"><span>!</span><div style="font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">Weak audit trails</div></div>
                 </div>
-                <div class="bg-red-600/10 border-4 border-red-600/20 rounded-[4rem] p-16 text-center">
-                    <div class="w-24 h-24 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-10 shadow-[0_0_60px_rgba(220,38,38,0.5)]">
-                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                <div style="text-align: center; background: rgba(255,255,255,0.03); padding: 40px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.05);">
+                    <div style="width: 80px; height: 80px; background: #dc2626; border-radius: 50%; margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(220,38,38,0.3);">
+                        <svg style="width: 40px; height: 40px; color: white;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                     </div>
-                    <h3 class="text-4xl font-black uppercase tracking-tighter mb-4 italic font-montserrat">High Risk Detected</h3>
-                    <p class="text-red-200 text-sm font-medium leading-relaxed">Without a structured system, your file quality is at the mercy of luck. That ends today.</p>
+                    <h3 style="font-size: 28px; font-weight: 900; text-transform: uppercase;">High Risk Detected</h3>
+                    <p style="font-size: 14px; opacity: 0.6; margin-top: 10px;">Without a structured system, file quality is at the mercy of luck. That ends today.</p>
                 </div>
-            </div>
-        </section>
-
-        <!-- AUTHORITY QUOTE -->
-        <section class="bg-white py-40 px-6 border-t border-slate-100">
-            <div class="max-w-5xl mx-auto text-center">
-                <p class="text-4xl md:text-6xl font-black text-[#0B1F3F] uppercase tracking-tighter leading-[0.9] mb-16 font-montserrat">
-                    "We don't give advice. We implement <span class="text-[#F5C518]">operational control</span> based on real-world regulatory standards."
-                </p>
-                <div class="h-2 w-32 bg-[#F5C518] mx-auto"></div>
-            </div>
-        </section>
-
-        <!-- FINAL CTA -->
-        <section class="py-40 bg-white text-center border-t border-slate-200 px-6">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-6xl md:text-9xl font-black uppercase tracking-tighter text-[#0B1F3F] mb-12 leading-[0.8] font-montserrat uppercase text-center">Ready to eliminate <br /> <span class="text-[#F5C518] italic underline decoration-[12px] underline-offset-[16px]">exposure.</span></h2>
-                <p class="text-xl md:text-2xl text-slate-400 font-medium mb-16 leading-relaxed text-center px-6">Point of failure is usually human. We remove that variable.</p>
-                <a href="mailto:risk@merricksolution.com" class="cta-button bg-[#0B1F3F] text-white px-16 py-8 rounded-3xl font-black text-sm uppercase tracking-[0.3em] shadow-2xl font-montserrat w-full sm:w-auto">
-                    Book a 20-Minute Call <span class="text-3xl ml-4">→</span>
-                </a>
             </div>
         </section>
     </main>
 
-    <!-- STRATEGIC ASSET VIEW (INTERACTIVE DIAGRAM) -->
-    <div id="asset-view" class="hidden view-transition min-h-screen bg-slate-100 p-6 md:p-12 flex flex-col items-center">
-        <div class="max-w-5xl w-full bg-[#0B1F3F] rounded-[4rem] p-10 md:p-24 shadow-[0_80px_100px_-30px_rgba(0,0,0,0.5)] relative overflow-hidden border-b-[16px] border-[#F5C518]">
-            <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 40px 40px;"></div>
-            
-            <div class="relative z-10 text-center mb-16">
-                <h1 class="text-white text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 font-montserrat">MC™ 8-Pillar Framework</h1>
-                <p class="text-[#F5C518] font-bold uppercase tracking-[0.5em] text-sm italic opacity-80">Click a pillar to inspect operational logic</p>
-            </div>
+    <!-- STRATEGIC ASSET VIEW (INTERACTIVE) -->
+    <div id="asset-view" class="hidden view-transition min-h-screen bg-white">
+        <section class="solution dot-grid" style="min-h-screen flex flex-col justify-center">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <h2 style="font-weight: 900; letter-spacing: 6px;">The Framework</h2>
+                <h3 style="margin-bottom: 10px;">MC™ 8-Pillar Compliance OS</h3>
+                <p style="color: #64748b; font-weight: 500; margin-bottom: 40px;">Click any pillar to reveal operational logic.</p>
 
-            <div class="orbit-container" id="orbit-area">
-                <!-- Center Core (Logo or Detail) -->
-                <div class="center-core" id="core-display" onclick="resetCore()">
-                    <div id="core-logo" class="flex flex-col items-center">
-                        <svg viewBox="0 0 100 100" class="w-20 h-20 md:w-28 md:h-28 mb-2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="12" y="28" width="14" height="44" rx="1" fill="#F5C518" /> 
-                            <path d="M12 28H48C48 28 48 32 48 34C48 36 44 42 36 42C28 42 24 36 24 34C24 32 24 28 24 28H12Z" fill="#F5C518" />
-                            <rect x="34" y="28" width="14" height="44" rx="1" fill="#F5C518" />
-                            <path d="M52 40H86V50H66V58H86V68H52V40Z" fill="#F5C518" />
-                            <rect x="52" y="40" width="10" height="28" rx="0.5" fill="#F5C518" />
-                        </svg>
-                        <p class="text-white font-black text-[9px] uppercase tracking-widest opacity-60">System Core</p>
+                <div class="orbit-container">
+                    <!-- Center Core -->
+                    <div class="center-core" id="core" onclick="resetCore()">
+                        <div id="core-logo">
+                            <svg viewBox="0 0 100 100" style="width:70px; height:70px; margin-bottom: 12px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="12" y="30" width="16" height="40" fill="#0B1F3F"/>
+                                <path d="M12 30H50V40H35V70H12V30Z" fill="#0B1F3F"/>
+                                <rect x="34" y="30" width="16" height="40" fill="#0B1F3F"/>
+                                <path d="M56 42H88V50H70V58H88V66H56V42Z" fill="#0B1F3F"/>
+                                <rect x="56" y="42" width="10" height="24" fill="#0B1F3F"/>
+                            </svg>
+                            <div style="font-size: 10px; font-weight: 900; letter-spacing: 2px; color: var(--text-grey);">CORE ENGINE</div>
+                        </div>
+                        <div id="core-info" class="hidden fade-in">
+                            <div id="info-num" style="color: var(--gold); font-weight: 900; font-size: 28px; margin-bottom: 4px;">01</div>
+                            <div id="info-title" style="font-weight: 900; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; color: var(--navy); border-bottom: 1px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">TITLE</div>
+                            <div id="info-desc" style="font-size: 11px; font-weight: 500; color: #64748b; line-height: 1.4;">Description goes here.</div>
+                        </div>
                     </div>
-                    <div id="core-detail" class="hidden flex flex-col items-center">
-                        <p id="detail-num" class="text-[#F5C518] font-black text-2xl mb-1"></p>
-                        <h4 id="detail-title" class="text-white font-black text-xs uppercase tracking-widest mb-3 border-b border-white/10 pb-2"></h4>
-                        <p id="detail-desc" class="text-white/80 text-[10px] leading-relaxed px-2 font-medium"></p>
-                        <button class="mt-4 text-[8px] font-black text-[#F5C518] uppercase tracking-widest bg-white/5 px-3 py-1 rounded">Reset View</button>
-                    </div>
-                </div>
 
-                <!-- Interactive Orbit Pillars -->
-                <div class="pillar-node" style="left: 50%; top: 5%;" onclick="showPillar(1)">
-                    <div class="pillar-icon">01</div><div class="pillar-label">Risk Taxonomy</div>
+                    <!-- Pillars -->
+                    <div class="pillar-node p1" style="left: 50%; top: 4%;" onclick="showPillar(1)"><div class="p-icon">01</div><div class="p-label">Risk Taxonomy</div></div>
+                    <div class="pillar-node p2" style="left: 84%; top: 18%;" onclick="showPillar(2)"><div class="p-icon">02</div><div class="p-label">Identity (CIP)</div></div>
+                    <div class="pillar-node p3" style="left: 96%; top: 50%;" onclick="showPillar(3)"><div class="p-icon">03</div><div class="p-label">Diligence (EDD)</div></div>
+                    <div class="pillar-node p4" style="left: 84%; top: 82%;" onclick="showPillar(4)"><div class="p-icon">04</div><div class="p-label">Screen & Triage</div></div>
+                    <div class="pillar-node p5" style="left: 50%; top: 96%;" onclick="showPillar(5)"><div class="p-icon">05</div><div class="p-label">Evidence Chain</div></div>
+                    <div class="pillar-node p6" style="left: 16%; top: 82%;" onclick="showPillar(6)"><div class="p-icon">06</div><div class="p-label">Adjudication</div></div>
+                    <div class="pillar-node p7" style="left: 4%; top: 50%;" onclick="showPillar(7)"><div class="p-icon">07</div><div class="p-label">QA / Review</div></div>
+                    <div class="pillar-node p8" style="left: 16%; top: 18%;" onclick="showPillar(8)"><div class="p-icon">08</div><div class="p-label">Governance</div></div>
                 </div>
-                <div class="pillar-node" style="left: 85%; top: 22%;" onclick="showPillar(2)">
-                    <div class="pillar-icon">02</div><div class="pillar-label">Identity (CIP)</div>
-                </div>
-                <div class="pillar-node" style="left: 95%; top: 50%;" onclick="showPillar(3)">
-                    <div class="pillar-icon">03</div><div class="pillar-label">Diligence (EDD)</div>
-                </div>
-                <div class="pillar-node" style="left: 85%; top: 78%;" onclick="showPillar(4)">
-                    <div class="pillar-icon">04</div><div class="pillar-label">Screen & Triage</div>
-                </div>
-                <div class="pillar-node" style="left: 50%; top: 95%;" onclick="showPillar(5)">
-                    <div class="pillar-icon">05</div><div class="pillar-label">Evidence Chain</div>
-                </div>
-                <div class="pillar-node" style="left: 15%; top: 78%;" onclick="showPillar(6)">
-                    <div class="pillar-icon">06</div><div class="pillar-label">Adjudication</div>
-                </div>
-                <div class="pillar-node" style="left: 5%; top: 50%;" onclick="showPillar(7)">
-                    <div class="pillar-icon">07</div><div class="pillar-label">QA / Review</div>
-                </div>
-                <div class="pillar-node" style="left: 15%; top: 22%;" onclick="showPillar(8)">
-                    <div class="pillar-icon">08</div><div class="pillar-label">Governance</div>
-                </div>
+                
+                <button onclick="toggleView('main')" class="btn-demo" style="margin-top: 40px; background: #f1f5f9; color: var(--navy); border: 1px solid #e2e8f0; box-shadow: none;">Exit Asset Mode</button>
             </div>
-
-            <div class="mt-32 text-center border-t border-white/5 pt-12">
-                <p class="text-white font-bold text-sm md:text-lg italic max-w-4xl mx-auto tracking-widest uppercase px-6">"Audit readiness is not a project. It is a locked operational state."</p>
-                <button onclick="toggleView('main')" class="mt-10 cta-button border-2 border-white/20 text-white px-8 py-3 rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-white/5">Exit Presentation Mode</button>
-            </div>
-        </div>
+        </section>
     </div>
 
     <!-- FOOTER -->
-    <footer class="bg-[#0B1F3F] py-32 text-center text-white/20 border-t border-white/5 px-6">
-        <p class="text-xs font-black uppercase tracking-[0.6em] mb-6 text-white/40 font-montserrat text-center">Merrick Compliance Strategic Systems</p>
-        <p class="text-[10px] uppercase tracking-[0.5em] leading-loose px-8 font-sans uppercase">
-            &copy; 2024 Merrick Compliance &bull; Audit-Ready Identity Systems <br />
-            All rights reserved &bull; WWW.MERRICKSOLUTION.COM
-        </p>
+    <footer style="background: white; border-top: 1px solid #f1f5f9; padding: 80px 20px; text-align: center;">
+        <p style="font-size: 10px; font-weight: 900; letter-spacing: 4px; color: var(--navy); opacity: 0.5; margin-bottom: 10px;">&copy; 2024 MERRICK COMPLIANCE STRATEGIC SYSTEMS</p>
+        <p style="font-size: 9px; color: var(--text-grey);">WWW.MERRICKSOLUTION.COM</p>
     </footer>
 
     <script>
-        const navbar = document.getElementById('navbar');
-        const logoText = document.getElementById('logo-text');
-        const logoSub = document.getElementById('logo-subtext');
-        const navLinks = document.querySelectorAll('.nav-link-text');
-
-        // Pillar Content Database
         const pillarData = {
             1: { title: "Risk Taxonomy", desc: "Clear classification of high-risk clients based on your specific business model and carrier expectations." },
             2: { title: "Identity (CIP)", desc: "Mandatory collection and digital validation of ID and proof of address for 100% of your client base." },
@@ -280,47 +258,9 @@
             8: { title: "Governance", desc: "High-level risk summaries and oversight data prepared for leadership and regulatory bodies." }
         };
 
-        // Scroll Performance
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('nav-scrolled');
-                navbar.classList.remove('nav-transparent');
-            } else {
-                navbar.classList.add('nav-transparent');
-                navbar.classList.remove('nav-scrolled');
-            }
-        });
-
-        // Interactivity Logic
-        function showPillar(id) {
-            const logo = document.getElementById('core-logo');
-            const detail = document.getElementById('core-detail');
-            const nodes = document.querySelectorAll('.pillar-node');
-            
-            // Toggle active states
-            nodes.forEach(n => n.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-
-            // Update Core
-            document.getElementById('detail-num').innerText = id < 10 ? '0' + id : id;
-            document.getElementById('detail-title').innerText = pillarData[id].title;
-            document.getElementById('detail-desc').innerText = pillarData[id].desc;
-            
-            logo.classList.add('hidden');
-            detail.classList.remove('hidden');
-        }
-
-        function resetCore() {
-            document.getElementById('core-logo').classList.remove('hidden');
-            document.getElementById('core-detail').classList.add('hidden');
-            document.querySelectorAll('.pillar-node').forEach(n => n.classList.remove('active'));
-        }
-
-        // View Switching Logic
         function toggleView(view) {
             const main = document.getElementById('main-view');
             const asset = document.getElementById('asset-view');
-            
             if (view === 'asset') {
                 main.classList.add('hidden');
                 asset.classList.remove('hidden');
@@ -332,8 +272,24 @@
             }
         }
 
-        function toggleMenu() {
-            document.getElementById('mobile-menu')?.classList.toggle('hidden');
+        function showPillar(id) {
+            document.getElementById('core-logo').classList.add('hidden');
+            document.getElementById('core-info').classList.remove('hidden');
+            document.getElementById('info-num').innerText = '0' + id;
+            document.getElementById('info-title').innerText = pillarData[id].title;
+            document.getElementById('info-desc').innerText = pillarData[id].desc;
+            document.querySelectorAll('.pillar-node').forEach(p => p.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+
+        function resetCore() {
+            document.getElementById('core-logo').classList.remove('hidden');
+            document.getElementById('core-info').classList.add('hidden');
+            document.querySelectorAll('.pillar-node').forEach(n => n.classList.remove('active'));
+        }
+    </script>
+</body>
+</html>
         }
     </script>
 </body>
