@@ -101,7 +101,6 @@
         </aside>
 
         <main class="flex-1 overflow-y-auto p-8 relative">
-            
             <div id="auth-modal" class="hidden">
                 <div class="bg-[#0B1F3F] p-10 border-4 border-[#F5C518] shadow-2xl max-w-md w-full text-center">
                     <h2 class="font-montserrat font-black text-2xl uppercase tracking-widest text-white mb-2">Security Gate</h2>
@@ -202,7 +201,6 @@
                     </div>
                 </div>
             </div>
-
             <div id="view-queue" class="view-section hidden space-y-8 animate-in fade-in duration-500">
                 <div class="border-b-4 border-red-500 pb-4">
                     <h2 class="font-montserrat font-black text-2xl uppercase tracking-widest text-red-600">Architect Veto Queue</h2>
@@ -252,7 +250,6 @@
             </div>
         </main>
     </div>
-
     <script>
         // =========================================================================
         // ZAPIER WEBHOOK CONNECTION
@@ -316,7 +313,6 @@
             db.queue = JSON.parse(localStorage.getItem('mc_queue')) || [];
             db.archive = JSON.parse(localStorage.getItem('mc_archive')) || [];
             updateDashboard();
-            showToast("System State Synchronized.");
         }
 
         async function apiPost(payload) {
@@ -330,7 +326,7 @@
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' } // Bypasses CORS blocks
                 });
 
-                // Update local storage to keep UI running
+                // Update local storage to keep UI running seamlessly
                 if (payload.action === 'create_escalation') { db.queue.push(payload); }
                 else if (payload.action === 'create_approval') { payload.verdict = 'CLEAN FILE APPROVED'; db.archive.push(payload); }
                 else if (payload.action === 'process_veto') {
@@ -350,6 +346,7 @@
                 localStorage.setItem('mc_archive', JSON.stringify(db.archive));
                 
                 await syncDatabase(); 
+                showToast("Action Saved & Synced.");
             } catch(e) {
                 console.error(e);
                 showToast("Action Failed to Save to Cloud.");
@@ -437,8 +434,9 @@
             document.getElementById('queue-badge').innerText = db.queue.length;
 
             const qTable = document.querySelector('#queue-table tbody');
+            // PERMANENT FIX: Array reversed correctly so new files append at top without reversing HTML text!
             qTable.innerHTML = db.queue.length === 0 ? `<tr><td colspan="5" class="text-center text-slate-400">No pending escalations.</td></tr>` : 
-                db.queue.map(f => `
+                [...db.queue].reverse().map(f => `
                     <tr>
                         <td class="font-mono text-[#0B1F3F]">${f.id}</td>
                         <td>${f.entity}</td>
@@ -450,7 +448,7 @@
 
             const aTable = document.querySelector('#archive-table tbody');
             aTable.innerHTML = db.archive.length === 0 ? `<tr><td colspan="6" class="text-center text-slate-400">Archive is empty.</td></tr>` : 
-                db.archive.map(f => `
+                [...db.archive].reverse().map(f => `
                     <tr>
                         <td class="font-mono text-[#0B1F3F]">${f.id}</td>
                         <td>${f.entity}</td>
@@ -464,7 +462,7 @@
                             }
                         </td>
                     </tr>
-                `).join('').split('').reverse().join('').split('</tr>').reverse().join('</tr>');
+                `).join('');
         }
 
         // --- NAVIGATION & MODULE SECURITY ---
