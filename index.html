@@ -3,65 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merrick Compliance | Audit-Ready Systems</title>
+    <title>Merrick Compliance | MC™ 8-Pillar Framework</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+        :root {
+            --navy: #0B1F3F;
+            --gold: #F5C518;
+            --white: #F8FAFC;
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            -webkit-font-smoothing: antialiased; 
+            background-color: var(--white); 
+            color: var(--navy); 
+        }
         .font-montserrat { font-family: 'Montserrat', sans-serif; }
         
-        /* Navigation Styles */
-        .nav-scrolled { 
-            background-color: #0B1F3F !important; 
-            padding-top: 0.75rem; 
-            padding-bottom: 0.75rem; 
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4); 
-        }
-        .nav-transparent { 
-            background-color: transparent; 
-            padding-top: 1.5rem; 
-            padding-bottom: 1.5rem; 
+        /* Navigation Ribbon */
+        .nav-scrolled { background-color: var(--navy) !important; padding: 0.75rem 0; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4); }
+        .nav-transparent { background-color: transparent; padding: 1.5rem 0; }
+        .nav-link-text { transition: color 0.3s; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--navy); border: none; background: none; cursor: pointer; }
+        .nav-scrolled .nav-link-text { color: white; }
+
+        /* Interactive Pillar Orbit */
+        .orbit-container { position: relative; width: 100%; max-width: 800px; aspect-ratio: 1/1; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+        
+        .center-core { 
+            width: 220px; height: 220px; background: var(--navy); border: 4px solid var(--gold); border-radius: 50%; z-index: 20; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            box-shadow: 0 0 80px rgba(245, 197, 24, 0.2);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 20px;
+            text-align: center;
         }
 
-        /* Ensure Clicks Always Register */
-        .clickable-action {
-            cursor: pointer !important;
-            pointer-events: auto !important;
-            transition: all 0.2s ease-in-out;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+        .pillar-node { 
+            position: absolute; transform: translate(-50%, -50%); width: 160px; 
+            display: flex; flex-direction: column; align-items: center; gap: 8px; 
+            text-align: center; z-index: 30; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
         }
-        .clickable-action:active {
-            transform: scale(0.96);
+        .pillar-node:hover { transform: translate(-50%, -50%) scale(1.1); z-index: 40; }
+        .pillar-node.active .pillar-icon { background: var(--gold); color: var(--navy); border-color: var(--gold); box-shadow: 0 0 30px var(--gold); }
+        
+        .pillar-icon { 
+            width: 50px; height: 50px; background: var(--navy); border: 1px solid rgba(245, 197, 24, 0.4); 
+            border-radius: 12px; display: flex; align-items: center; justify-content: center; 
+            color: var(--gold); font-weight: 900; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
         }
-
-        /* Pillar Card Hover */
-        .pillar-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .pillar-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px -10px rgba(11, 31, 63, 0.15);
-        }
-
-        /* Prevent invisible mobile menu from blocking desktop clicks */
-        #mobile-menu.hidden {
-            display: none !important;
+        .pillar-label { 
+            background: rgba(11, 31, 63, 0.95); color: white; font-size: 9px; font-weight: 800; 
+            padding: 6px 12px; border-radius: 6px; text-transform: uppercase; white-space: nowrap; 
+            border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
         }
 
-        @media (max-width: 640px) {
-            h1 { font-size: 3rem !important; line-height: 1 !important; }
+        /* Buttons */
+        .cta-button { transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; }
+        .cta-button:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .cta-button:active { transform: scale(0.95); }
+
+        .view-transition { transition: opacity 0.4s ease, transform 0.4s ease; }
+        .hidden { display: none !important; }
+
+        @media (max-width: 768px) {
+            .center-core { width: 180px; height: 180px; padding: 15px; }
+            .pillar-node { width: 110px; }
+            .pillar-label { font-size: 7px; padding: 4px 8px; }
+            h1 { font-size: 3.5rem !important; line-height: 0.95 !important; }
         }
     </style>
 </head>
-<body class="bg-[#F8FAFC] text-[#0B1F3F] selection:bg-[#F5C518]/30 overflow-x-hidden text-left">
+<body class="overflow-x-hidden text-left">
 
-    <!-- Navigation -->
-    <nav id="navbar" class="fixed w-full z-[100] transition-all duration-300 nav-transparent px-4 sm:px-8">
+    <!-- GLOBAL NAVIGATION -->
+    <nav id="navbar" class="fixed w-full z-[100] transition-all duration-300 nav-transparent px-6 sm:px-10">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="bg-white p-1 rounded-sm shadow-lg">
+                <div class="bg-white p-1 rounded-sm shadow-lg" onclick="toggleView('main')" style="cursor:pointer">
                     <svg viewBox="0 0 100 100" class="w-8 h-8 text-[#0B1F3F]" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="12" y="28" width="14" height="44" rx="1" fill="currentColor" /> 
                         <path d="M12 28H48C48 28 48 32 48 34C48 36 44 42 36 42C28 42 24 36 24 34C24 32 24 28 24 28H12Z" fill="currentColor" />
@@ -70,261 +90,173 @@
                         <rect x="52" y="40" width="10" height="28" rx="0.5" fill="currentColor" />
                     </svg>
                 </div>
-                <div>
-                    <span id="logo-text-top" class="font-black text-xl tracking-tighter uppercase block leading-none transition-colors">MERRICK</span>
-                    <span id="logo-text-bottom" class="text-[10px] tracking-[0.3em] font-bold uppercase transition-colors text-[#0B1F3F]/50">COMPLIANCE</span>
+                <div class="flex flex-col">
+                    <span class="font-black text-xl tracking-tighter uppercase leading-none text-[#0B1F3F]">MERRICK</span>
+                    <span class="text-[10px] tracking-[0.3em] font-bold uppercase text-[#0B1F3F]/50">COMPLIANCE</span>
                 </div>
             </div>
             
-            <!-- Desktop Nav -->
-            <div class="hidden lg:flex items-center gap-8 font-bold text-[11px] uppercase tracking-widest">
-                <a href="#problem" class="nav-link hover:text-[#F5C518] transition-colors">Problem</a>
-                <a href="#solution" class="nav-link hover:text-[#F5C518] transition-colors">8-Pillar System</a>
-                <a href="#pricing" class="nav-link hover:text-[#F5C518] transition-colors">Pricing</a>
-                <a href="mailto:risk@merricksolution.com" class="clickable-action bg-[#F5C518] text-[#0B1F3F] px-6 py-3 rounded font-black hover:brightness-110 shadow-lg">
-                    Request a Demo
-                </a>
+            <div class="hidden lg:flex items-center gap-10">
+                <a href="#problem" class="nav-link-text hover:text-[#F5C518]">Problem</a>
+                <a href="#solution" class="nav-link-text hover:text-[#F5C518]">8-Pillar System</a>
+                <button onclick="toggleView('asset')" class="nav-link-text hover:text-[#F5C518] text-left">Strategic Asset</button>
+                <a href="mailto:risk@merricksolution.com" class="cta-button bg-[#F5C518] text-[#0B1F3F] px-6 py-3 rounded font-black shadow-lg uppercase text-[11px] tracking-widest">Request a Demo</a>
             </div>
 
-            <!-- Mobile Toggle -->
-            <button id="menu-toggle" class="lg:hidden p-2 relative z-[110]">
-                <svg id="menu-icon" class="w-8 h-8 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            <button onclick="toggleMenu()" class="lg:hidden p-2 text-[#0B1F3F]" id="menu-btn">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
-        </div>
-
-        <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="hidden absolute top-0 left-0 w-full min-h-screen bg-[#0B1F3F] p-12 flex flex-col justify-center space-y-8 shadow-2xl z-[105]">
-            <a href="#problem" class="mobile-nav-link text-white font-black text-3xl uppercase tracking-tighter">01. Problem</a>
-            <a href="#solution" class="mobile-nav-link text-white font-black text-3xl uppercase tracking-tighter">02. The Pillars</a>
-            <a href="#pricing" class="mobile-nav-link text-white font-black text-3xl uppercase tracking-tighter">03. Pricing</a>
-            <a href="mailto:risk@merricksolution.com" class="clickable-action w-full bg-[#F5C518] text-[#0B1F3F] py-6 rounded-2xl font-black uppercase text-center text-lg shadow-xl mt-8">Request a Demo</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center pt-20 overflow-hidden px-6">
-        <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#0B1F3F 2px, transparent 2px); background-size: 40px 40px;"></div>
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10 w-full">
-            <div class="space-y-8 text-left animate-in fade-in slide-in-from-left duration-700">
-                <div class="inline-flex items-center gap-2 bg-[#F5C518]/10 px-4 py-2 rounded-full border border-[#F5C518]/20">
-                    <span class="text-[10px] font-black uppercase tracking-[0.2em] text-[#0B1F3F]">Audit-Ready Compliance Systems</span>
+    <!-- MAIN LANDING VIEW -->
+    <main id="main-view" class="view-transition">
+        <!-- HERO SECTION -->
+        <section class="relative min-h-screen flex items-center pt-20 px-6 bg-white overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#0B1F3F 2px, transparent 2px); background-size: 40px 40px;"></div>
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10 w-full">
+                <div class="space-y-8">
+                    <div class="inline-flex items-center gap-2 bg-[#F5C518]/10 px-4 py-2 rounded-full border border-[#F5C518]/20 text-[#0B1F3F]">
+                        <span class="text-[10px] font-black uppercase tracking-[0.2em]">Audit-Ready Compliance Systems</span>
+                    </div>
+                    <h1 class="text-6xl md:text-9xl font-black uppercase leading-[0.85] tracking-tighter text-[#0B1F3F] font-montserrat">Eliminate Risk. <br /> <span class="text-[#F5C518] italic">Enforce Control.</span></h1>
+                    <p class="text-lg md:text-xl text-slate-500 font-medium max-w-lg leading-relaxed">We install structured compliance workflows that eliminate risk, enforce governance, and prepare your business for audit.</p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="mailto:risk@merricksolution.com" class="cta-button bg-[#0B1F3F] text-white px-12 py-5 rounded-xl font-black text-xs uppercase tracking-widest shadow-2xl">Request a Demo →</a>
+                        <button onclick="toggleView('asset')" class="cta-button border-2 border-slate-200 bg-white text-[#0B1F3F] px-12 py-5 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-slate-50">Interactive Framework</button>
+                    </div>
                 </div>
-                <h1 class="text-6xl md:text-8xl font-black uppercase leading-[0.85] tracking-tighter text-[#0B1F3F] font-montserrat">
-                    Eliminate Risk. <br /> <span class="text-[#F5C518] italic">Enforce Control.</span>
-                </h1>
-                <p class="text-lg md:text-xl text-slate-500 font-medium max-w-lg leading-relaxed">
-                    We install structured compliance workflows that eliminate risk, enforce governance, and prepare your business for audit.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="mailto:risk@merricksolution.com" class="clickable-action bg-[#0B1F3F] text-white px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:shadow-2xl gap-3">
-                        Request a Demo <span class="text-xl">→</span>
-                    </a>
-                    <a href="mailto:risk@merricksolution.com" class="clickable-action border-2 border-slate-200 bg-white text-[#0B1F3F] px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-50 text-center">
-                        Contact Us
-                    </a>
-                </div>
-            </div>
-            
-            <!-- Desktop Visual -->
-            <div class="relative hidden lg:block animate-in zoom-in duration-1000">
-                <div class="bg-white rounded-[4rem] p-16 shadow-[0_50px_100px_-20px_rgba(11,31,63,0.15)] border border-slate-100">
-                    <div class="bg-[#0B1F3F] text-white p-10 rounded-[2rem] mb-10 flex items-center justify-between text-left">
-                        <div>
-                            <p class="text-[10px] font-bold uppercase opacity-50 tracking-widest mb-1 font-montserrat">Status Report</p>
-                            <h3 class="text-3xl font-black uppercase tracking-tighter font-montserrat">System Locked</h3>
+                <!-- Hero Visual -->
+                <div class="relative hidden lg:block">
+                    <div class="bg-white rounded-[3rem] p-12 shadow-[0_50px_100px_-20px_rgba(11,31,63,0.15)] border border-slate-100">
+                        <div class="bg-[#0B1F3F] text-white p-8 rounded-2xl mb-8 flex items-center justify-between text-left">
+                            <div><p class="text-[10px] font-bold uppercase opacity-50 tracking-widest mb-1 font-montserrat">Status Report</p><h3 class="text-2xl font-black uppercase tracking-tighter font-montserrat">System Locked</h3></div>
+                            <svg class="w-10 h-10 text-[#F5C518]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                         </div>
-                        <svg class="w-12 h-12 text-[#F5C518]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        <div class="space-y-6 opacity-20 text-left">
+                            <div class="h-2 w-3/4 bg-[#0B1F3F] rounded-full"></div>
+                            <div class="h-2 w-1/2 bg-[#0B1F3F] rounded-full"></div>
+                            <div class="h-2 w-5/6 bg-[#0B1F3F] rounded-full"></div>
+                        </div>
                     </div>
-                    <div class="space-y-6 opacity-10">
-                        <div class="h-3 w-3/4 bg-[#0B1F3F] rounded-full"></div>
-                        <div class="h-3 w-1/2 bg-[#0B1F3F] rounded-full"></div>
-                        <div class="h-3 w-5/6 bg-[#0B1F3F] rounded-full"></div>
-                    </div>
-                </div>
-                <div class="absolute -bottom-8 -right-8 bg-[#F5C518] p-8 rounded-[2rem] shadow-2xl">
-                    <p class="text-[10px] font-black uppercase text-[#0B1F3F] tracking-widest mb-1 font-montserrat text-left">Audit Defense</p>
-                    <p class="text-3xl font-black text-[#0B1F3F] font-montserrat uppercase">100% Verified</p>
+                    <div class="absolute -bottom-6 -right-6 bg-[#F5C518] p-6 rounded-2xl shadow-xl text-left font-montserrat font-black uppercase text-[#0B1F3F]"><p class="text-[10px] tracking-widest mb-1">Audit Defense</p><p class="text-2xl">100% Verified</p></div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Problem Section -->
-    <section id="problem" class="bg-[#0B1F3F] py-32 text-white relative overflow-hidden px-6">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10 text-left">
-            <div>
-                <h2 class="text-5xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9] mb-8 font-montserrat">
-                    Most firms are operating with <span class="text-[#F5C518] italic">hidden exposure.</span>
-                </h2>
-                <p class="text-white/60 text-lg font-medium mb-12 leading-relaxed">
-                    When regulators or carriers review your files, these gaps become liabilities. If you can't prove your process, you don't have one.
+        <!-- PROBLEM SECTION -->
+        <section id="problem" class="bg-[#0B1F3F] py-32 text-white relative px-6 text-left border-t border-white/5">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+                <div>
+                    <h2 class="text-5xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9] mb-8 font-montserrat">Most firms are operating with <br/><span class="text-[#F5C518] italic">hidden exposure.</span></h2>
+                    <p class="text-white/60 text-lg font-medium mb-12 leading-relaxed">When regulators or carriers review your files, these gaps become liabilities. If you can't prove your process, you don't have one.</p>
+                    <div class="space-y-5">
+                        <div class="flex items-center gap-5 p-6 bg-white/5 rounded-2xl border border-white/10"><span class="text-red-500 font-black text-2xl uppercase">!</span><span class="text-sm font-bold uppercase tracking-widest">Incomplete client files</span></div>
+                        <div class="flex items-center gap-5 p-6 bg-white/5 rounded-2xl border border-white/10"><span class="text-red-500 font-black text-2xl uppercase">!</span><span class="text-sm font-bold uppercase tracking-widest">No consistent identification</span></div>
+                        <div class="flex items-center gap-5 p-6 bg-white/5 rounded-2xl border border-white/10"><span class="text-red-500 font-black text-2xl uppercase">!</span><span class="text-sm font-bold uppercase tracking-widest">Missing audit trails</span></div>
+                    </div>
+                </div>
+                <div class="bg-red-600/10 border-4 border-red-600/20 rounded-[4rem] p-16 text-center">
+                    <div class="w-24 h-24 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-10 shadow-[0_0_60px_rgba(220,38,38,0.5)]">
+                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    </div>
+                    <h3 class="text-4xl font-black uppercase tracking-tighter mb-4 italic font-montserrat">High Risk Detected</h3>
+                    <p class="text-red-200 text-sm font-medium leading-relaxed">Without a structured system, your file quality is at the mercy of luck. That ends today.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AUTHORITY QUOTE -->
+        <section class="bg-white py-40 px-6 border-t border-slate-100">
+            <div class="max-w-5xl mx-auto text-center">
+                <p class="text-4xl md:text-6xl font-black text-[#0B1F3F] uppercase tracking-tighter leading-[0.9] mb-16 font-montserrat">
+                    "We don't give advice. We implement <span class="text-[#F5C518]">operational control</span> based on real-world regulatory standards."
                 </p>
-                <div class="space-y-4">
-                    <div class="flex items-center gap-5 p-6 bg-white/5 rounded-[2rem] border border-white/10 hover:bg-white/10 transition-all">
-                        <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center text-red-500 font-black text-2xl">!</div>
-                        <span class="text-sm font-bold uppercase tracking-widest">Incomplete client files</span>
-                    </div>
-                    <div class="flex items-center gap-5 p-6 bg-white/5 rounded-[2rem] border border-white/10 hover:bg-white/10 transition-all">
-                        <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center text-red-500 font-black text-2xl">!</div>
-                        <span class="text-sm font-bold uppercase tracking-widest">No consistent identity verification</span>
-                    </div>
-                    <div class="flex items-center gap-5 p-6 bg-white/5 rounded-[2rem] border border-white/10 hover:bg-white/10 transition-all">
-                        <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center text-red-500 font-black text-2xl">!</div>
-                        <span class="text-sm font-bold uppercase tracking-widest">Weak or missing audit trails</span>
-                    </div>
-                </div>
+                <div class="h-2 w-32 bg-[#F5C518] mx-auto"></div>
             </div>
-            <div class="bg-red-600/10 border-4 border-red-600/20 rounded-[4rem] p-16 text-center">
-                <div class="w-24 h-24 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-10 shadow-[0_0_60px_rgba(220,38,38,0.6)]">
-                    <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                </div>
-                <h3 class="text-4xl font-black uppercase tracking-tighter mb-4 italic font-montserrat">High Risk Detected</h3>
-                <p class="text-red-200 text-sm font-medium leading-relaxed">Without a structured system, your file quality is at the mercy of luck. That ends today.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- The Solution Grid (ALL 8 PILLARS) -->
-    <section id="solution" class="py-32 bg-white px-6">
-        <div class="max-w-7xl mx-auto text-center mb-24">
-            <h2 class="text-xs font-black uppercase tracking-[0.5em] text-[#F5C518] mb-4 font-montserrat">Operational Infrastructure</h2>
-            <h3 class="text-5xl md:text-8xl font-black uppercase tracking-tighter text-[#0B1F3F] mb-8 font-montserrat">
-                The MC 8-Pillar Framework
-            </h3>
-            <p class="text-xl text-slate-500 font-medium max-w-3xl mx-auto leading-relaxed">
-                We install the complete operational architecture required to run a high-ticket, regulated brokerage with zero exposure.
-            </p>
-        </div>
+        <!-- FINAL CTA -->
+        <section class="py-40 bg-white text-center border-t border-slate-200 px-6">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-6xl md:text-9xl font-black uppercase tracking-tighter text-[#0B1F3F] mb-12 leading-[0.8] font-montserrat uppercase text-center">Ready to eliminate <br /> <span class="text-[#F5C518] italic underline decoration-[12px] underline-offset-[16px]">exposure.</span></h2>
+                <p class="text-xl md:text-2xl text-slate-400 font-medium mb-16 leading-relaxed text-center px-6">Point of failure is usually human. We remove that variable.</p>
+                <a href="mailto:risk@merricksolution.com" class="cta-button bg-[#0B1F3F] text-white px-16 py-8 rounded-3xl font-black text-sm uppercase tracking-[0.3em] shadow-2xl font-montserrat w-full sm:w-auto">
+                    Book a 20-Minute Call <span class="text-3xl ml-4">→</span>
+                </a>
+            </div>
+        </section>
+    </main>
 
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- 01 -->
-            <div class="pillar-card p-10 bg-slate-50 border border-slate-100 rounded-[2.5rem] text-left">
-                <div class="text-[#F5C518] font-black text-3xl mb-6 font-montserrat">01</div>
-                <h4 class="text-xs font-black uppercase tracking-widest text-[#0B1F3F] mb-4 font-montserrat">Risk Definition</h4>
-                <p class="text-xs text-slate-500 font-medium leading-relaxed">Clear classification of high-risk clients based on your specific business model and carrier expectations.</p>
-            </div>
-            <!-- 02 -->
-            <div class="pillar-card p-10 bg-slate-50 border border-slate-100 rounded-[2.5rem] text-left">
-                <div class="text-[#F5C518] font-black text-3xl mb-6 font-montserrat">02</div>
-                <h4 class="text-xs font-black uppercase tracking-widest text-[#0B1F3F] mb-4 font-montserrat">Identity Verification</h4>
-                <p class="text-xs text-slate-500 font-medium leading-relaxed">Mandatory collection and digital validation of ID and proof of address for 100% of your client base.</p>
-            </div>
-            <!-- 03 -->
-            <div class="pillar-card p-10 bg-slate-50 border border-slate-100 rounded-[2.5rem] text-left">
-                <div class="text-[#F5C518] font-black text-3xl mb-6 font-montserrat">03</div>
-                <h4 class="text-xs font-black uppercase tracking-widest text-[#0B1F3F] mb-4 font-montserrat">Due Diligence (EDD)</h4>
-                <p class="text-xs text-slate-500 font-medium leading-relaxed">Rigid verification of source of wealth and professional standing for high-risk or high-value entities.</p>
-            </div>
-            <!-- 04 -->
-            <div class="pillar-card p-10 bg-slate-50 border border-slate-100 rounded-[2.5rem] text-left">
-                <div class="text-[#F5C518] font-black text-3xl mb-6 font-montserrat">04</div>
-                <h4 class="text-xs font-black uppercase tracking-widest text-[#0B1F3F] mb-4 font-montserrat">Screening & Triage</h4>
-                <p class="text-xs text-slate-500 font-medium leading-relaxed">Automated Sanctions, PEP, and adverse media checks with predefined rules for immediate triage.</p>
-            </div>
-            <!-- 05 -->
-            <div class="pillar-card p-10 bg-slate-50 border border-slate-100 rounded-[2.5rem] text-left">
-                <div class="text-[#F5C518] font-black text-3xl mb-6 font-montserrat">05</div>
-                <h4 class="text-xs font-black uppercase tracking-widest text-[#0B1F3F] mb-4 font-montserrat">Evidence Chain</h4>
-                <p class="text-xs text-slate-500 font-medium leading-relaxed">A permanent, timestamped history of all compliance actions built for defense against future carrier audits.</p>
-            </div>
-            <!-- 06 -->
-            <div class="pillar-card p-10 bg-slate-50 border border-slate-100 rounded-[2.5rem] text-left">
-                <div class="text-[#F5C518] font-black text-3xl mb-6 font-montserrat">06</div>
-                <h4 class="text-xs font-black uppercase tracking-widest text-[#0B1F3F] mb-4 font-montserrat">Decision Logic</h4>
-                <p class="text-xs text-slate-500 font-medium leading-relaxed">Non-negotiable approval vs rejection standards that remove individual bias from your operational team.</p>
-            </div>
-            <!-- 07 -->
-            <div class="pillar-card p-10 bg-slate-50 border border-slate-100 rounded-[2.5rem] text-left">
-                <div class="text-[#F5C518] font-black text-3xl mb-6 font-montserrat">07</div>
-                <h4 class="text-xs font-black uppercase tracking-widest text-[#0B1F3F] mb-4 font-montserrat">Quality Assurance</h4>
-                <p class="text-xs text-slate-500 font-medium leading-relaxed">Continuous internal file review mechanisms ensuring that the "Clean File" standard is always enforced.</p>
-            </div>
-            <!-- 08 -->
-            <div class="pillar-card p-10 bg-slate-50 border border-slate-100 rounded-[2.5rem] text-left">
-                <div class="text-[#F5C518] font-black text-3xl mb-6 font-montserrat">08</div>
-                <h4 class="text-xs font-black uppercase tracking-widest text-[#0B1F3F] mb-4 font-montserrat">Board Reporting</h4>
-                <p class="text-xs text-slate-500 font-medium leading-relaxed">High-level risk summaries and oversight data prepared for leadership and regulatory bodies.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section id="pricing" class="py-32 bg-slate-900 px-6">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 text-left">
-            <!-- Build -->
-            <div class="bg-white rounded-[4rem] p-16 shadow-2xl flex flex-col justify-between border-t-[12px] border-[#F5C518]">
-                <div>
-                    <h4 class="text-xs font-black uppercase tracking-[0.4em] text-slate-400 mb-8 font-montserrat">One-Time Installation</h4>
-                    <h3 class="text-5xl font-black uppercase tracking-tighter mb-4 text-[#0B1F3F] font-montserrat leading-none">Foundation Build</h3>
-                    <div class="text-6xl font-black mb-12 text-[#0B1F3F] font-montserrat tracking-tight">$10,000 <span class="text-[10px] opacity-40 uppercase tracking-widest font-bold">— STARTING</span></div>
-                    <ul class="space-y-6 mb-16">
-                        <li class="flex items-center gap-4 text-sm font-bold uppercase tracking-widest text-slate-600"><span class="text-[#F5C518] text-xl">✔</span> Full Workflow Design</li>
-                        <li class="flex items-center gap-4 text-sm font-bold uppercase tracking-widest text-slate-600"><span class="text-[#F5C518] text-xl">✔</span> 8-Pillar Installation</li>
-                        <li class="flex items-center gap-4 text-sm font-bold uppercase tracking-widest text-slate-600"><span class="text-[#F5C518] text-xl">✔</span> Team Field-Training</li>
-                    </ul>
-                </div>
-                <a href="mailto:risk@merricksolution.com" class="clickable-action block text-center w-full bg-[#0B1F3F] text-white py-8 rounded-3xl font-black text-sm uppercase tracking-widest hover:brightness-110 shadow-2xl font-montserrat">Install the System</a>
-            </div>
+    <!-- STRATEGIC ASSET VIEW (INTERACTIVE DIAGRAM) -->
+    <div id="asset-view" class="hidden view-transition min-h-screen bg-slate-100 p-6 md:p-12 flex flex-col items-center">
+        <div class="max-w-5xl w-full bg-[#0B1F3F] rounded-[4rem] p-10 md:p-24 shadow-[0_80px_100px_-30px_rgba(0,0,0,0.5)] relative overflow-hidden border-b-[16px] border-[#F5C518]">
+            <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 40px 40px;"></div>
             
-            <!-- Oversight -->
-            <div class="bg-[#0B1F3F] text-white rounded-[4rem] p-16 shadow-2xl flex flex-col justify-between border border-white/10 relative">
-                <div>
-                    <h4 class="text-xs font-black uppercase tracking-[0.4em] text-[#F5C518] mb-8 font-montserrat">Strategic Oversight</h4>
-                    <h3 class="text-5xl font-black uppercase tracking-tighter mb-4 font-montserrat leading-none">Ongoing Control</h3>
-                    <div class="text-6xl font-black mb-12 font-montserrat tracking-tight">$5,000 <span class="text-[10px] opacity-40 uppercase tracking-widest font-bold">/ MONTH</span></div>
-                    <ul class="space-y-6 mb-16">
-                        <li class="flex items-center gap-4 text-sm font-bold uppercase tracking-widest text-white/80"><span class="text-[#F5C518] text-xl">✔</span> External File QA</li>
-                        <li class="flex items-center gap-4 text-sm font-bold uppercase tracking-widest text-white/80"><span class="text-[#F5C518] text-xl">✔</span> Board Reporting</li>
-                        <li class="flex items-center gap-4 text-sm font-bold uppercase tracking-widest text-white/80"><span class="text-[#F5C518] text-xl">✔</span> Regulator Registry Prep</li>
-                    </ul>
+            <div class="relative z-10 text-center mb-16">
+                <h1 class="text-white text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 font-montserrat">MC™ 8-Pillar Framework</h1>
+                <p class="text-[#F5C518] font-bold uppercase tracking-[0.5em] text-sm italic opacity-80">Click a pillar to inspect operational logic</p>
+            </div>
+
+            <div class="orbit-container" id="orbit-area">
+                <!-- Center Core (Logo or Detail) -->
+                <div class="center-core" id="core-display" onclick="resetCore()">
+                    <div id="core-logo" class="flex flex-col items-center">
+                        <svg viewBox="0 0 100 100" class="w-20 h-20 md:w-28 md:h-28 mb-2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="12" y="28" width="14" height="44" rx="1" fill="#F5C518" /> 
+                            <path d="M12 28H48C48 28 48 32 48 34C48 36 44 42 36 42C28 42 24 36 24 34C24 32 24 28 24 28H12Z" fill="#F5C518" />
+                            <rect x="34" y="28" width="14" height="44" rx="1" fill="#F5C518" />
+                            <path d="M52 40H86V50H66V58H86V68H52V40Z" fill="#F5C518" />
+                            <rect x="52" y="40" width="10" height="28" rx="0.5" fill="#F5C518" />
+                        </svg>
+                        <p class="text-white font-black text-[9px] uppercase tracking-widest opacity-60">System Core</p>
+                    </div>
+                    <div id="core-detail" class="hidden flex flex-col items-center">
+                        <p id="detail-num" class="text-[#F5C518] font-black text-2xl mb-1"></p>
+                        <h4 id="detail-title" class="text-white font-black text-xs uppercase tracking-widest mb-3 border-b border-white/10 pb-2"></h4>
+                        <p id="detail-desc" class="text-white/80 text-[10px] leading-relaxed px-2 font-medium"></p>
+                        <button class="mt-4 text-[8px] font-black text-[#F5C518] uppercase tracking-widest bg-white/5 px-3 py-1 rounded">Reset View</button>
+                    </div>
                 </div>
-                <a href="mailto:risk@merricksolution.com" class="clickable-action block text-center w-full bg-[#F5C518] text-[#0B1F3F] py-8 rounded-3xl font-black text-sm uppercase tracking-widest hover:brightness-110 shadow-2xl font-montserrat">Subscribe to Oversight</a>
+
+                <!-- Interactive Orbit Pillars -->
+                <div class="pillar-node" style="left: 50%; top: 5%;" onclick="showPillar(1)">
+                    <div class="pillar-icon">01</div><div class="pillar-label">Risk Taxonomy</div>
+                </div>
+                <div class="pillar-node" style="left: 85%; top: 22%;" onclick="showPillar(2)">
+                    <div class="pillar-icon">02</div><div class="pillar-label">Identity (CIP)</div>
+                </div>
+                <div class="pillar-node" style="left: 95%; top: 50%;" onclick="showPillar(3)">
+                    <div class="pillar-icon">03</div><div class="pillar-label">Diligence (EDD)</div>
+                </div>
+                <div class="pillar-node" style="left: 85%; top: 78%;" onclick="showPillar(4)">
+                    <div class="pillar-icon">04</div><div class="pillar-label">Screen & Triage</div>
+                </div>
+                <div class="pillar-node" style="left: 50%; top: 95%;" onclick="showPillar(5)">
+                    <div class="pillar-icon">05</div><div class="pillar-label">Evidence Chain</div>
+                </div>
+                <div class="pillar-node" style="left: 15%; top: 78%;" onclick="showPillar(6)">
+                    <div class="pillar-icon">06</div><div class="pillar-label">Adjudication</div>
+                </div>
+                <div class="pillar-node" style="left: 5%; top: 50%;" onclick="showPillar(7)">
+                    <div class="pillar-icon">07</div><div class="pillar-label">QA / Review</div>
+                </div>
+                <div class="pillar-node" style="left: 15%; top: 22%;" onclick="showPillar(8)">
+                    <div class="pillar-icon">08</div><div class="pillar-label">Governance</div>
+                </div>
+            </div>
+
+            <div class="mt-32 text-center border-t border-white/5 pt-12">
+                <p class="text-white font-bold text-sm md:text-lg italic max-w-4xl mx-auto tracking-widest uppercase px-6">"Audit readiness is not a project. It is a locked operational state."</p>
+                <button onclick="toggleView('main')" class="mt-10 cta-button border-2 border-white/20 text-white px-8 py-3 rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-white/5">Exit Presentation Mode</button>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Authority Quote -->
-    <section class="bg-white py-40 px-6 border-b border-slate-100">
-        <div class="max-w-5xl mx-auto text-center">
-            <p class="text-4xl md:text-6xl font-black text-[#0B1F3F] uppercase tracking-tighter leading-[0.9] mb-16 font-montserrat">
-                "We don't give advice. We implement <span class="text-[#F5C518]">operational control</span> based on real-world regulatory standards."
-            </p>
-            <div class="h-2 w-32 bg-[#F5C518] mx-auto"></div>
-        </div>
-    </section>
-
-    <!-- Final CTA Section -->
-    <section class="py-40 bg-white text-center px-6">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-6xl md:text-9xl font-black uppercase tracking-tighter text-[#0B1F3F] mb-12 leading-[0.8] font-montserrat">
-                Eliminate <br /> <span class="text-[#F5C518] italic underline decoration-[12px] underline-offset-[16px]">exposure.</span>
-            </h2>
-            <p class="text-xl md:text-2xl text-slate-400 font-medium mb-16 leading-relaxed">
-                Point of failure is usually human. We remove that variable.
-            </p>
-            <a href="mailto:risk@merricksolution.com" class="clickable-action bg-[#0B1F3F] text-white px-16 py-8 rounded-3xl font-black text-sm uppercase tracking-[0.3em] hover:shadow-[0_40px_80px_rgba(11,31,63,0.3)] hover:scale-105 shadow-2xl font-montserrat w-full sm:w-auto">
-                Book a 20-Minute Briefing <span class="text-3xl ml-4">→</span>
-            </a>
-            <div class="mt-32 flex flex-col sm:flex-row items-center justify-center gap-12 pt-16 border-t border-slate-100 opacity-30">
-                <div class="text-[11px] font-black uppercase tracking-[0.4em]">risk@merricksolution.com</div>
-                <div class="text-[11px] font-black uppercase tracking-[0.4em]">WWW.MERRICKSOLUTION.COM</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-[#0B1F3F] py-32 text-center text-white/20 border-t border-white/5">
-        <div class="bg-white/5 p-6 rounded-3xl mb-12 inline-block">
-            <svg viewBox="0 0 100 100" class="w-16 h-16 text-white/30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="12" y="28" width="14" height="44" rx="1" fill="currentColor" /> 
-                <path d="M12 28H48C48 28 48 32 48 34C48 36 44 42 36 42C28 42 24 36 24 34C24 32 24 28 24 28H12Z" fill="currentColor" />
-                <rect x="34" y="28" width="14" height="44" rx="1" fill="currentColor" />
-                <path d="M52 40H86V50H66V58H86V68H52V40Z" fill="currentColor" />
-                <rect x="52" y="40" width="10" height="28" rx="0.5" fill="currentColor" />
-            </svg>
-        </div>
-        <p class="text-xs font-black uppercase tracking-[0.6em] mb-6 text-white/40 font-montserrat">Merrick Compliance Strategic Systems</p>
-        <p class="text-[10px] uppercase tracking-[0.5em] leading-loose px-8">
+    <!-- FOOTER -->
+    <footer class="bg-[#0B1F3F] py-32 text-center text-white/20 border-t border-white/5 px-6">
+        <p class="text-xs font-black uppercase tracking-[0.6em] mb-6 text-white/40 font-montserrat text-center">Merrick Compliance Strategic Systems</p>
+        <p class="text-[10px] uppercase tracking-[0.5em] leading-loose px-8 font-sans uppercase">
             &copy; 2024 Merrick Compliance &bull; Audit-Ready Identity Systems <br />
             All rights reserved &bull; WWW.MERRICKSOLUTION.COM
         </p>
@@ -332,61 +264,77 @@
 
     <script>
         const navbar = document.getElementById('navbar');
-        const logoTop = document.getElementById('logo-text-top');
-        const logoBottom = document.getElementById('logo-text-bottom');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
+        const logoText = document.getElementById('logo-text');
+        const logoSub = document.getElementById('logo-subtext');
+        const navLinks = document.querySelectorAll('.nav-link-text');
 
-        // Scroll Logic
+        // Pillar Content Database
+        const pillarData = {
+            1: { title: "Risk Taxonomy", desc: "Clear classification of high-risk clients based on your specific business model and carrier expectations." },
+            2: { title: "Identity (CIP)", desc: "Mandatory collection and digital validation of ID and proof of address for 100% of your client base." },
+            3: { title: "Diligence (EDD)", desc: "Rigid verification of source of wealth and professional standing for high-risk or high-value entities." },
+            4: { title: "Screen & Triage", desc: "Automated Sanctions, PEP, and adverse media checks with predefined rules for immediate triage." },
+            5: { title: "Evidence Chain", desc: "A permanent, timestamped history of all compliance actions built for defense against future audits." },
+            6: { title: "Adjudication", desc: "Non-negotiable approval vs rejection standards that remove individual bias from your operational team." },
+            7: { title: "QA / Review", desc: "Continuous internal file review mechanisms ensuring that the 'Clean File' standard is always enforced." },
+            8: { title: "Governance", desc: "High-level risk summaries and oversight data prepared for leadership and regulatory bodies." }
+        };
+
+        // Scroll Performance
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
                 navbar.classList.add('nav-scrolled');
                 navbar.classList.remove('nav-transparent');
-                logoTop.style.color = 'white';
-                logoBottom.style.color = 'rgba(255,255,255,0.5)';
-                navLinks.forEach(link => link.style.color = 'white');
-                menuIcon.style.color = 'white';
             } else {
                 navbar.classList.add('nav-transparent');
                 navbar.classList.remove('nav-scrolled');
-                logoTop.style.color = '#0B1F3F';
-                logoBottom.style.color = 'rgba(11,31,63,0.5)';
-                navLinks.forEach(link => link.style.color = '#0B1F3F');
-                menuIcon.style.color = '#0B1F3F';
             }
         });
 
-        // Toggle Logic
-        menuToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            mobileMenu.classList.toggle('hidden');
-            if (!mobileMenu.classList.contains('hidden')) {
-                menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
-                menuIcon.style.color = 'white';
+        // Interactivity Logic
+        function showPillar(id) {
+            const logo = document.getElementById('core-logo');
+            const detail = document.getElementById('core-detail');
+            const nodes = document.querySelectorAll('.pillar-node');
+            
+            // Toggle active states
+            nodes.forEach(n => n.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            // Update Core
+            document.getElementById('detail-num').innerText = id < 10 ? '0' + id : id;
+            document.getElementById('detail-title').innerText = pillarData[id].title;
+            document.getElementById('detail-desc').innerText = pillarData[id].desc;
+            
+            logo.classList.add('hidden');
+            detail.classList.remove('hidden');
+        }
+
+        function resetCore() {
+            document.getElementById('core-logo').classList.remove('hidden');
+            document.getElementById('core-detail').classList.add('hidden');
+            document.querySelectorAll('.pillar-node').forEach(n => n.classList.remove('active'));
+        }
+
+        // View Switching Logic
+        function toggleView(view) {
+            const main = document.getElementById('main-view');
+            const asset = document.getElementById('asset-view');
+            
+            if (view === 'asset') {
+                main.classList.add('hidden');
+                asset.classList.remove('hidden');
+                window.scrollTo(0, 0);
             } else {
-                menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+                main.classList.remove('hidden');
+                asset.classList.add('hidden');
+                window.scrollTo(0, 0);
             }
-        });
+        }
 
-        // Force Click Backup Logic for Desktop
-        document.querySelectorAll('.clickable-action').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                // If mailto doesn't fire naturally, this forces it
-                setTimeout(() => {
-                    window.location.href = "mailto:risk@merricksolution.com";
-                }, 100);
-            });
-        });
-
-        // Close menu on link click
-        document.querySelectorAll('.mobile-nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
-            });
-        });
+        function toggleMenu() {
+            document.getElementById('mobile-menu')?.classList.toggle('hidden');
+        }
     </script>
 </body>
 </html>
