@@ -1,57 +1,242 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merrick Compliance | Proprietary Systems</title>
+    <title>Merrick Compliance | MC™ 8 Pillar Compliance Framework</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --navy: #0B1F3F; --gold: #F5C518; --border: #E2E8F0; }
-        body { font-family: 'Inter', sans-serif; background: #FDFDFD; color: var(--navy); margin: 0; }
-        .font-montserrat { font-family: 'Montserrat', sans-serif; }
-        .dot-grid { background-image: radial-gradient(#cbd5e1 0.8px, transparent 0.8px); background-size: 30px 30px; }
-        .hero-title { font-size: 42px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; text-transform: uppercase; }
-        .meta-text { font-size: 9px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
-        .btn-launch { 
-            background: var(--navy); color: white; padding: 18px 40px; border-radius: 4px;
-            font-weight: 900; font-size: 11px; text-transform: uppercase; letter-spacing: 2px;
-            transition: 0.3s; border: none; cursor: pointer; box-shadow: 0 10px 20px rgba(11,31,63,0.2);
+        :root {
+            --navy: #0B1F3F;
+            --gold: #F5C518;
+            --gold-light: #FFFBF0;
+            --white: #FFFFFF;
+            --bg-light: #FDFDFD;
+            --text-grey: #64748B;
+            --border: #E2E8F0;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .btn-launch:hover { background: #162e55; transform: translateY(-2px); box-shadow: 0 15px 30px rgba(11,31,63,0.2); }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        html { scroll-behavior: smooth; }
+
+        body { 
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--navy);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            text-align: left;
+        }
+
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+
+        .dot-grid {
+            background-image: radial-gradient(#cbd5e1 1.2px, transparent 1.2px);
+            background-size: 40px 40px;
+        }
+
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 14px 40px; display: flex; justify-content: space-between;
+            align-items: center; transition: var(--transition);
+            background: white; border-bottom: 3px solid var(--gold);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo-container { display: flex; align-items: center; gap: 14px; text-decoration: none; cursor: pointer; }
+        .logo-box { 
+            background: white; width: 44px; height: 44px; border-radius: 4px; 
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08); border: 1px solid #f1f5f9;
+        }
+        .logo-text-group { display: flex; flex-direction: column; line-height: 1; }
+        .logo-m { color: var(--navy); font-weight: 900; font-size: 22px; letter-spacing: -1px; text-transform: uppercase; font-family: 'Montserrat'; }
+        .logo-c { color: #94A3B8; font-size: 10px; font-weight: 700; letter-spacing: 4px; margin-top: 2px; text-transform: uppercase; }
+
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-link { text-decoration: none; color: var(--navy); font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; background: none; border: none; transition: 0.2s; }
+        .nav-link:hover { color: var(--gold); }
+        
+        .btn-navy { 
+            background: var(--navy); color: white; padding: 18px 36px; border-radius: 4px;
+            font-weight: 900; text-decoration: none; font-size: 12px; text-transform: uppercase;
+            letter-spacing: 1.5px; transition: var(--transition); display: inline-flex; align-items: center;
+            border: none; cursor: pointer;
+        }
+        .btn-outline { 
+            background: white; color: var(--navy); padding: 18px 36px; border-radius: 4px;
+            font-weight: 900; text-decoration: none; font-size: 12px; text-transform: uppercase;
+            letter-spacing: 1.5px; transition: var(--transition); display: inline-flex; align-items: center;
+            border: 2px solid var(--border); cursor: pointer;
+        }
+        .btn-navy:hover { background: #162e55; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(11,31,63,0.2); }
+        .btn-outline:hover { border-color: var(--navy); background: var(--gold-light); transform: translateY(-2px); }
+
+        .hero { padding: 180px 40px 100px; max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 80px; align-items: center; }
+        .hero h1 { font-size: 78px; font-weight: 900; line-height: 0.95; text-transform: uppercase; margin-bottom: 24px; letter-spacing: -3px; font-family: 'Montserrat'; }
+        .hero h1 span { color: var(--gold); font-style: italic; }
+        .hero p { font-size: 20px; color: #64748b; max-width: 540px; margin-bottom: 40px; font-weight: 500; line-height: 1.6; }
+
+        .orbit-container {
+            position: relative; width: 100%; max-width: 750px; aspect-ratio: 1/1;
+            margin: 60px auto; display: flex; align-items: center; justify-content: center;
+        }
+
+        .center-core { 
+            width: 260px; height: 260px; background: white; border: 4px solid var(--gold); border-radius: 16px;
+            z-index: 20; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.06); padding: 30px; text-align: center;
+            transition: var(--transition); cursor: pointer;
+        }
+
+        .pillar-node { position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 8px; width: 160px; cursor: pointer; z-index: 30; transition: var(--transition); }
+        .p-icon { 
+            width: 50px; height: 50px; background: var(--navy); color: white; border-radius: 4px; 
+            display: flex; align-items: center; justify-content: center; font-weight: 900; 
+            box-shadow: 0 8px 16px rgba(11,31,63,0.15); transition: 0.3s;
+        }
+        .pillar-node.active .p-icon, .pillar-node:hover .p-icon { background: var(--gold); color: var(--navy); transform: scale(1.1); box-shadow: 0 0 30px rgba(245, 197, 24, 0.4); }
+        .p-label { background: white; color: var(--navy); font-size: 10px; font-weight: 900; padding: 5px 12px; border-radius: 4px; text-transform: uppercase; white-space: nowrap; border: 1.5px solid var(--gold); box-shadow: 0 4px 8px rgba(0,0,0,0.04); letter-spacing: 0.5px; }
+
+        .hidden { display: none !important; }
+        .view-transition { animation: fadeIn 0.6s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="dot-grid min-h-screen flex flex-col">
-    <nav class="p-8 flex justify-between items-center max-w-7xl mx-auto w-full">
-        <div class="flex items-center gap-3">
-            <div class="bg-navy p-1 rounded-sm">
-                <svg viewBox="0 0 100 100" class="w-5 h-5" fill="white"><rect x="12" y="30" width="16" height="40"/><path d="M12 30H50V40H32V70H12V30Z"/><rect x="34" y="30" width="16" height="40"/><path d="M56 42H88V50H72V58H88V66H56V42Z"/></svg>
+<body class="dot-grid">
+
+    <nav>
+        <div class="logo-container" onclick="toggleView('main')">
+            <div class="logo-box">
+                <svg viewBox="0 0 100 100" style="width:28px; height:28px;" fill="none">
+                    <rect x="12" y="30" width="16" height="40" fill="#0B1F3F"/>
+                    <path d="M12 30H50V40H32V70H12V30Z" fill="#0B1F3F"/>
+                    <rect x="34" y="30" width="16" height="40" fill="#0B1F3F"/>
+                    <path d="M56 42H88V50H72V58H88V66H56V42Z" fill="#0B1F3F"/>
+                    <rect x="56" y="42" width="12" height="24" fill="#0B1F3F"/>
+                </svg>
             </div>
-            <span class="font-montserrat font-black text-sm tracking-tighter uppercase">Merrick Compliance</span>
+            <div class="logo-text-group">
+                <span class="logo-m">MERRICK</span>
+                <span class="logo-c">COMPLIANCE</span>
+            </div>
         </div>
-        <div class="text-[9px] font-black uppercase tracking-widest opacity-40">A Division of Merrick Solution</div>
+        <div class="nav-links">
+            <a href="#about" class="nav-link">What is MC™?</a>
+            <button onclick="toggleView('asset')" class="nav-link font-bold text-gold">The Framework</button>
+            <button onclick="launchOS()" class="btn-navy" style="padding: 12px 24px; font-size: 10px;">INITIALIZE MASTER OS</button>
+        </div>
     </nav>
-    <main class="flex-1 flex flex-col items-center justify-center text-center px-6">
-        <div class="max-w-2xl space-y-8">
-            <span class="meta-text">Proprietary Framework v1.0</span>
-            <h1 class="hero-title font-montserrat">Architecting <br>Audit-Ready Compliance <br>Infrastructure.</h1>
-            <p class="text-slate-500 font-medium text-lg leading-relaxed max-w-lg mx-auto">
-                Implementing the MC™ 8-Pillar Framework to standardize onboarding and automate institutional due diligence.
-            </p>
-            <div class="pt-6">
-                <button onclick="launchOS()" class="btn-launch">Initialize Master OS Engine</button>
+
+    <main id="main-view" class="view-transition">
+        <section class="hero">
+            <div class="hero-content text-left">
+                <div style="font-size: 11px; font-weight: 900; color: var(--navy); letter-spacing: 4px; margin-bottom: 24px; text-transform: uppercase; border-left: 4px solid var(--gold); padding-left: 15px;">Proprietary System</div>
+                <h1 class="font-montserrat">Merrick Compliance<br><span style="color:var(--navy); opacity:0.6; font-size:0.65em; display:block; margin-top:10px; letter-spacing: -1px;">Fix Your Compliance & Onboarding Workflow Fast</span></h1>
+                <p>We design and implement structured, audit-ready compliance systems powered by the MC™ 8 Pillar Compliance Framework.</p>
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <button onclick="launchOS()" class="btn-navy uppercase">Initialize Master OS Engine</button>
+                    <button onclick="toggleView('asset')" class="btn-outline">LAUNCH ASSET MODE</button>
+                </div>
             </div>
-        </div>
+            <div style="background: white; border-radius: 24px; padding: 50px; border: 3px solid var(--gold); box-shadow: 0 40px 80px -20px rgba(0,0,0,0.08);">
+                <p style="font-size: 22px; color: var(--navy); font-weight: 700; line-height: 1.6;">
+                    Merrick Compliance, a division of Merrick Solution, delivers structured onboarding and due diligence systems using its proprietary MC™ 8 Pillar Compliance Framework.
+                </p>
+            </div>
+        </section>
     </main>
-    <footer class="p-12 border-t border-border bg-white text-center">
-        <p class="text-[9px] font-black uppercase tracking-[4px] opacity-30">&copy; 2026 MERRICK COMPLIANCE STRATEGIC SYSTEMS</p>
-        <p class="text-[8px] font-bold text-slate-400 mt-2 tracking-widest uppercase">Registry: risk@merricksolution.com</p>
+
+    <div id="asset-view" class="hidden view-transition min-h-screen bg-white">
+        <section class="dot-grid" style="padding: 140px 20px; text-align: center; min-height: 100vh;">
+            <div style="max-width: 1300px; margin: 0 auto;">
+                <h2 style="font-weight: 900; letter-spacing: 10px; color: var(--gold); font-size: 14px; margin-bottom: 24px; text-transform: uppercase;">PROPRIETARY ENGINE</h2>
+                <h3 style="font-size: 52px; font-weight: 900; font-family: 'Montserrat'; margin-bottom: 12px; color: var(--navy); text-transform: uppercase; letter-spacing: -2px;">MC™ 8 Pillar Compliance Framework</h3>
+                <div class="orbit-container">
+                    <div class="center-core" id="core" onclick="resetCore()">
+                        <div id="core-logo">
+                            <svg viewBox="0 0 100 100" style="width:70px; height:70px; margin-bottom: 12px;" fill="none">
+                                <rect x="12" y="30" width="16" height="40" fill="#0B1F3F"/>
+                                <path d="M12 30H50V40H32V70H12V30Z" fill="#0B1F3F"/>
+                                <rect x="34" y="30" width="16" height="40" fill="#0B1F3F"/>
+                                <path d="M56 42H88V50H72V58H88V66H56V42Z" fill="#0B1F3F"/>
+                                <rect x="56" y="42" width="12" height="24" fill="#0B1F3F"/>
+                            </svg>
+                            <div style="font-size: 10px; font-weight: 900; letter-spacing: 4px; color: var(--gold); text-transform: uppercase;">MC™ CORE</div>
+                        </div>
+                        <div id="core-info" class="hidden view-transition">
+                            <div id="info-num" style="color: var(--gold); font-weight: 900; font-size: 32px; margin-bottom: 4px; font-family: 'Montserrat';">01</div>
+                            <div id="info-title" style="font-weight: 900; text-transform: uppercase; font-size: 14px; letter-spacing: 2px; color: var(--navy); border-bottom: 3px solid var(--gold); padding-bottom: 10px; margin-bottom: 15px;">TITLE</div>
+                            <div id="info-desc" style="font-size: 12px; font-weight: 600; color: #475569; line-height: 1.6; padding: 0 15px;">Description.</div>
+                        </div>
+                    </div>
+
+                    <div class="pillar-node p1" style="left: 50%; top: 4%;" onclick="showPillar(1)"><div class="p-icon">01</div><div class="p-label">Risk Taxonomy</div></div>
+                    <div class="pillar-node p2" style="left: 84%; top: 18%;" onclick="showPillar(2)"><div class="p-icon">02</div><div class="p-label">Customer ID (CIP)</div></div>
+                    <div class="pillar-node p3" style="left: 96%; top: 50%;" onclick="showPillar(3)"><div class="p-icon">03</div><div class="p-label">Diligence (EDD)</div></div>
+                    <div class="pillar-node p4" style="left: 84%; top: 82%;" onclick="showPillar(4)"><div class="p-icon">04</div><div class="p-label">Screen & Triage</div></div>
+                    <div class="pillar-node p5" style="left: 50%; top: 96%;" onclick="showPillar(5)"><div class="p-icon">05</div><div class="p-label">Evidence Chain</div></div>
+                    <div class="pillar-node p6" style="left: 16%; top: 82%;" onclick="showPillar(6)"><div class="p-icon">06</div><div class="p-label">Adjudication Logic</div></div>
+                    <div class="pillar-node p7" style="left: 4%; top: 50%;" onclick="showPillar(7)"><div class="p-icon">07</div><div class="p-label">Quality Assurance (QA)</div></div>
+                    <div class="pillar-node p8" style="left: 16%; top: 18%;" onclick="showPillar(8)"><div class="p-icon">08</div><div class="p-label">Governance & Reporting</div></div>
+                </div>
+                <button onclick="toggleView('main')" class="btn-navy" style="margin-top: 80px;">Return to Site</button>
+            </div>
+        </section>
+    </div>
+
+    <footer style="background: white; border-top: 5px solid var(--gold); padding: 100px 40px; text-align: center;">
+        <svg viewBox="0 0 100 100" style="width:44px; height:44px; margin: 0 auto 40px;" fill="#0B1F3F">
+            <rect x="12" y="30" width="16" height="40"/><path d="M12 30H50V40H32V70H12V30Z"/><rect x="34" y="30" width="16" height="40"/><path d="M56 42H88V50H72V58H88V66H56V42Z"/><rect x="56" y="42" width="12" height="24"/>
+        </svg>
+        <p style="font-size: 11px; font-weight: 900; letter-spacing: 6px; color: var(--navy); opacity: 0.5; margin-bottom: 20px; text-transform: uppercase;">&copy; 2026 MERRICK COMPLIANCE STRATEGIC SYSTEMS</p>
     </footer>
+
     <script>
+        const pillarData = {
+            1: { title: "Risk Taxonomy", desc: "Clear classification of high-risk clients based on your specific business model." },
+            2: { title: "Customer ID (CIP)", desc: "Mandatory collection and digital validation of ID for 100% of your client base." },
+            3: { title: "Diligence (EDD)", desc: "Rigid verification of source of wealth for high-risk or high-value entities." },
+            4: { title: "Screen & Triage", desc: "Automated Sanctions and PEP checks with predefined rules for immediate triage." },
+            5: { title: "Evidence Chain", desc: "A permanent, timestamped history of all compliance actions built for audit defense." },
+            6: { title: "Adjudication Logic", desc: "Non-negotiable approval standards that remove individual bias." },
+            7: { title: "Quality Assurance (QA)", desc: "Internal file review mechanisms ensuring the 'Clean File' standard is enforced." },
+            8: { title: "Governance & Reporting", desc: "High-level risk summaries and oversight data prepared for leadership." }
+        };
+
+        function toggleView(view) {
+            const main = document.getElementById('main-view');
+            const asset = document.getElementById('asset-view');
+            if (view === 'asset') {
+                main.classList.add('hidden');
+                asset.classList.remove('hidden');
+            } else {
+                main.classList.remove('hidden');
+                asset.classList.add('hidden');
+            }
+            window.scrollTo(0, 0);
+        }
+
         function launchOS() {
             if(prompt("ENTER ACCESS CODE:") === "MC8ADMIN") {
                 window.location.href='os.html';
             } else { alert("ACCESS DENIED."); }
+        }
+
+        function showPillar(id) {
+            document.getElementById('core-logo').classList.add('hidden');
+            document.getElementById('core-info').classList.remove('hidden');
+            document.getElementById('info-num').innerText = id < 10 ? '0' + id : id;
+            document.getElementById('info-title').innerText = pillarData[id].title;
+            document.getElementById('info-desc').innerText = pillarData[id].desc;
+        }
+
+        function resetCore() {
+            document.getElementById('core-logo').classList.remove('hidden');
+            document.getElementById('core-info').classList.add('hidden');
         }
     </script>
 </body>
