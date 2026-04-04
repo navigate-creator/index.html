@@ -10,23 +10,38 @@
         :root { --navy: #0B1F3F; --gold: #F5C518; --audit-red: #ef4444; --border: rgba(255,255,255,0.1); }
         body { font-family: 'Inter', sans-serif; background-color: #061021; color: white; margin: 0; overflow: hidden; display: flex; }
         
+        /* THE LOCK SCREEN */
+        #lock-screen { position: fixed; inset: 0; background: #061021; z-index: 10000; display: none; flex-direction: column; align-items: center; justify-content: center; }
+        .lock-msg { color: var(--audit-red); font-family: 'Montserrat'; font-weight: 900; font-size: 42px; text-transform: uppercase; }
+
+        /* SIDEBAR */
         .sidebar { width: 260px; height: 100vh; background: #081426; border-right: 1px solid var(--border); display: flex; flex-direction: column; shrink-0; z-index: 50; }
         .nav-item { padding: 16px 24px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: rgba(255, 255, 255, 0.4); cursor: pointer; border-left: 4px solid transparent; transition: 0.3s; }
         .nav-item.active { color: var(--gold); background: rgba(245, 197, 24, 0.05); border-left-color: var(--gold); }
 
+        /* VIEWPORT */
         .viewport { flex: 1; height: 100vh; overflow-y: auto; background: #FDFDFD; color: var(--navy); position: relative; }
         .view-content { display: none; padding: 60px; animation: fadeIn 0.4s ease forwards; }
         .view-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* LINEAR DIAGRAM DESIGN */
-        .linear-container { display: flex; align-items: center; justify-content: center; margin: 80px auto; }
-        .core-block { width: 160px; height: 300px; background: white; border: 3px solid var(--gold); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-right: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .p-unit { display: flex; flex-direction: column; align-items: center; width: 100px; }
-        .p-box { width: 42px; height: 42px; background: var(--navy); color: white; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 11px; margin-bottom: 10px; }
-        .p-tag { width: 100%; padding: 6px 2px; background: white; border: 1px solid var(--gold); font-size: 7px; font-weight: 900; text-transform: uppercase; text-align: center; white-space: nowrap; }
+        /* HORIZONTAL LINEAR DIAGRAM (IMAGE MATCHED) */
+        .linear-container { display: flex; align-items: center; justify-content: center; margin: 100px auto; position: relative; }
+        .core-block { 
+            width: 180px; height: 320px; background: white; border: 3px solid var(--gold); border-radius: 16px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05); margin-right: 50px;
+        }
+        .pillar-sequence { display: flex; align-items: center; gap: 15px; position: relative; }
+        .p-unit { display: flex; flex-direction: column; align-items: center; width: 110px; z-index: 5; }
+        .p-box { width: 45px; height: 45px; background: var(--navy); color: white; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 12px; margin-bottom: 12px; }
+        .p-tag { width: 100%; padding: 8px 4px; background: white; border: 1.5px solid var(--gold); font-size: 8px; font-weight: 900; text-transform: uppercase; text-align: center; white-space: nowrap; }
 
-        #lock-screen { position: fixed; inset: 0; background: #061021; z-index: 10000; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        /* SVG CONNECTION LINES */
+        .orbit-lines { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        line { stroke: var(--gold); stroke-width: 1.5; opacity: 0.3; }
+
+        /* ANALYST & VETO COMPONENTS */
         .btn-action { background: var(--navy); color: white; padding: 14px 28px; font-weight: 900; font-size: 10px; text-transform: uppercase; border: none; cursor: pointer; border-radius: 4px; }
         .active-p { background: var(--gold) !important; color: var(--navy) !important; }
         .active-f { background: var(--audit-red) !important; color: white !important; }
@@ -35,16 +50,18 @@
 <body>
 
     <div id="lock-screen">
-        <h1 class="font-montserrat font-black text-4xl text-red-600 uppercase">System Locked</h1>
-        <p class="text-white font-bold mt-4 uppercase text-xs">Architect Resolution Handshake Required</p>
-        <button onclick="unlockSystem()" class="mt-10 btn-action" style="background:var(--gold); color:var(--navy);">Resolution Handshake</button>
+        <div class="p-20 border-4 border-red-600">
+            <h1 class="lock-msg">System Locked</h1>
+            <p class="text-white font-bold tracking-widest mt-4 uppercase">Architect Resolution Required</p>
+            <button onclick="unlock()" class="mt-10 btn-action" style="background:var(--gold); color:var(--navy);">Handshake Resolution</button>
+        </div>
     </div>
 
     <nav class="sidebar">
         <div class="p-8 border-b border-white/10 mb-6">
             <span class="text-white font-black text-sm tracking-tighter uppercase font-montserrat">Merrick Compliance</span>
         </div>
-        <div onclick="switchView('framework', this)" class="nav-item active">01 System Logic</div>
+        <div onclick="switchView('framework', this)" class="nav-item active">01 Framework</div>
         <div onclick="switchView('prep', this)" class="nav-item">02 Analyst Prep</div>
         <div onclick="switchView('veto', this)" class="nav-item">03 Veto Terminal</div>
         <div onclick="switchView('vault', this)" class="nav-item">04 Logic Vault</div>
@@ -56,62 +73,81 @@
     </nav>
 
     <main class="viewport">
+        
         <div id="view-framework" class="view-content active">
             <h2 class="font-montserrat font-black text-2xl uppercase border-b-2 border-navy pb-4 mb-10">Strategic Framework</h2>
             <div class="linear-container">
+                <svg class="orbit-lines" id="svg-lines"></svg>
                 <div class="core-block">
-                    <svg viewBox="0 0 100 100" class="w-10 h-10 mb-4" fill="var(--navy)"><rect x="12" y="30" width="16" height="40"/><path d="M12 30H50V40H32V70H12V30Z"/><rect x="34" y="30" width="16" height="40"/><path d="M56 42H88V50H72V58H88V66H56V42Z"/></svg>
-                    <span class="text-[9px] font-black text-navy uppercase">MC™ CORE</span>
+                    <svg viewBox="0 0 100 100" class="w-12 h-12 mb-4" fill="var(--navy)"><rect x="12" y="30" width="16" height="40"/><path d="M12 30H50V40H32V70H12V30Z"/><rect x="34" y="30" width="16" height="40"/><path d="M56 42H88V50H72V58H88V66H56V42Z"/></svg>
+                    <span class="text-[10px] font-black tracking-widest text-navy uppercase">MC™ CORE</span>
                 </div>
-                <div class="flex items-center gap-4" id="linear-seq"></div>
+                <div class="pillar-sequence" id="linear-seq"></div>
             </div>
         </div>
 
         <div id="view-prep" class="view-content">
             <h2 class="font-montserrat font-black text-2xl uppercase border-b-2 border-navy pb-6 mb-10">Analyst Prep</h2>
-            <input type="text" id="a-name" placeholder="ANALYST NAME" class="border-b border-navy outline-none bg-transparent font-bold text-xs uppercase w-64 mb-10">
+            <input type="text" id="a-name" placeholder="ANALYST NAME ENTRY" class="border-b-2 border-navy outline-none bg-transparent font-bold text-xs uppercase w-64 mb-10">
             <div id="a-list" class="space-y-2 max-w-xl"></div>
             <div class="mt-10 flex gap-4 max-w-xl"><button onclick="log('APPROVE')" class="btn-action flex-1">Approve</button><button onclick="log('ESCALATE')" class="btn-action flex-1" style="background:white; color:var(--navy); border:2px solid var(--navy);">Escalate</button></div>
         </div>
 
         <div id="view-veto" class="view-content">
             <h2 class="font-montserrat font-black text-2xl uppercase text-red-600 mb-10">Veto Terminal</h2>
-            <div class="bg-white p-8 border border-gray-200 max-w-xl">
-                <p class="font-mono text-[10px] text-gold mb-6 uppercase">Active: <span id="v-id">MC-000-000</span></p>
-                <textarea class="w-full h-32 border p-4 text-xs font-medium mb-6" placeholder="RATIONALE..."></textarea>
-                <div class="flex gap-4"><button onclick="log('PASS')" class="btn-action flex-1" style="background:var(--gold); color:var(--navy);">Pass</button><button onclick="triggerFail()" class="btn-action flex-1" style="background:var(--audit-red);">Fail & Lock</button></div>
+            <div class="bg-white p-8 border border-gray-200 max-w-xl shadow-sm">
+                <p class="font-mono text-[10px] text-gold mb-6 uppercase">ID: <span id="v-id">MC-000-000</span></p>
+                <textarea class="w-full h-32 border p-4 text-xs font-medium mb-6 outline-none" placeholder="RATIONALE..."></textarea>
+                <div class="flex gap-4"><button onclick="log('PASS')" class="btn-action flex-1" style="background:var(--gold); color:var(--navy);">Pass</button><button onclick="lockSystem()" class="btn-action flex-1" style="background:var(--audit-red);">Fail & Lock</button></div>
             </div>
         </div>
 
         <div id="view-vault" class="view-content">
-            <h2 class="font-montserrat font-black text-2xl uppercase border-b-2 border-navy pb-6 mb-10">Proprietary Vault</h2>
-            <div class="max-w-2xl bg-white p-10 border border-gray-200 shadow-sm">
-                <p class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Locked Operating logic</p>
+            <h2 class="font-montserrat font-black text-2xl uppercase border-b-2 border-navy pb-6 mb-10">Logic Vault</h2>
+            <div class="max-w-xl bg-white p-10 border border-gray-200">
+                <p class="text-xs font-black text-gold uppercase tracking-widest mb-6">Locked Operating logic</p>
                 <div class="space-y-4 text-sm font-medium leading-relaxed">
-                    <p>01 Risk Taxonomy: Defined business model thresholds.</p>
-                    <p>02 CIP: Mandatory ID/Address digital validation.</p>
-                    <p>03 EDD: Deep-source wealth corroboration logic.</p>
+                    <p>01 Risk Taxonomy: Standardized classification logic.</p>
+                    <p>02 Customer ID: digital validation of identity assets.</p>
+                    <p>03 Diligence: source of wealth verification rules.</p>
                 </div>
             </div>
         </div>
+
     </main>
 
     <script>
         const P = ["Risk Taxonomy", "Customer ID", "Diligence", "Screening", "Evidence", "Adjudication", "Quality", "Governance"];
+        
         window.onload = () => {
-            if(localStorage.getItem('MC_STATUS') === 'LOCKED') document.getElementById('lock-screen').style.display = 'flex';
+            if(localStorage.getItem('MC_LOCKED') === 'true') document.getElementById('lock-screen').style.display = 'flex';
             const id = `MC-${Math.floor(Math.random()*900+100)}-${Math.floor(Math.random()*900+100)}`;
             document.getElementById('m-id').innerText = id; document.getElementById('v-id').innerText = id;
-            document.getElementById('linear-seq').innerHTML = P.map((p, i) => `<div class="p-unit"><div class="p-box">0${i+1}</div><div class="p-tag">${p}</div></div>`).join('');
-            document.getElementById('a-list').innerHTML = P.map((p, i) => `<div class="p-4 bg-white border flex justify-between items-center"><span class="text-[10px] font-black uppercase">0${i+1} ${p}</span><div class="flex gap-2"><button onclick="scr(this,'p')" class="px-3 py-1 border text-[8px] font-black uppercase">Pass</button><button onclick="scr(this,'f')" class="px-3 py-1 border text-[8px] font-black uppercase">Fail</button></div></div>`).join('');
+            
+            // Build Linear Diagram with SVG Lines
+            const seq = document.getElementById('linear-seq');
+            const svg = document.getElementById('svg-lines');
+            P.forEach((p, i) => {
+                seq.innerHTML += `<div class="p-unit"><div class="p-box">0${i+1}</div><div class="p-tag">${p}</div></div>`;
+            });
+
+            document.getElementById('a-list').innerHTML = P.map((p, i) => `
+                <div class="p-4 bg-white border flex justify-between items-center"><span class="text-[10px] font-black uppercase">0${i+1} ${p}</span>
+                <div class="flex gap-2"><button onclick="scr(this,'p')" class="px-3 py-1 border text-[8px] font-black uppercase">Pass</button>
+                <button onclick="scr(this,'f')" class="px-3 py-1 border text-[8px] font-black uppercase">Fail</button></div></div>
+            `).join('');
         };
+
         function scr(b, t) { b.parentElement.querySelectorAll('button').forEach(x => x.classList.remove('active-p', 'active-f')); b.classList.add(t === 'p' ? 'active-p' : 'active-f'); }
-        function triggerFail() { localStorage.setItem('MC_STATUS', 'LOCKED'); window.location.reload(); }
-        function unlockSystem() { if(prompt("ENTER ARCHITECT KEY:") === "MC8VETO") { localStorage.removeItem('MC_STATUS'); window.location.reload(); } }
+        function lockSystem() { localStorage.setItem('MC_LOCKED', 'true'); window.location.reload(); }
+        function unlock() { if(prompt("ARCHITECT KEY:") === "MC8VETO") { localStorage.removeItem('MC_LOCKED'); window.location.reload(); } }
         function log(type) { alert(`${type} Logged.`); }
+        
         function switchView(v, el) {
+            // SECURITY HANDSHAKE RULES
             if(v === 'veto' && prompt("VETO ACCESS CODE:") !== "MC8VETO") return;
             if(v === 'vault' && prompt("VAULT ACCESS CODE:") !== "VAULT99") return;
+            
             document.querySelectorAll('.view-content').forEach(c => c.classList.remove('active'));
             document.getElementById('view-'+v).classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
