@@ -1,5 +1,5 @@
 // pages/os.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import 'tailwindcss/tailwind.css';
 
@@ -7,18 +7,6 @@ import 'tailwindcss/tailwind.css';
 const supabaseUrl = 'https://YOUR_SUPABASE_PROJECT.supabase.co';
 const supabaseKey = 'YOUR_SUPABASE_ANON_KEY';
 const supabase = createClient(supabaseUrl, supabaseKey);
-
-// ====== Blueprint: 8 Pillars ======
-const PILLARS = [
-  { id: 1, name: 'Risk Taxonomy', how: 'Define “High Risk” for this fintech.', why: 'Ensures targeted monitoring and audit-readiness.', outcome: 'Analyst can flag cases accurately.', guidance: 'Ask: What makes this client high-risk? Consider geography, industry, and transaction volume.' },
-  { id: 2, name: 'Customer Identity Profile (CIP)', how: 'Collect IDs and corporate documents.', why: 'Baseline verification required by regulators.', outcome: 'Verified client identity stored.', guidance: 'Check all documents for authenticity; cross-verify with official registries.' },
-  { id: 3, name: 'Enhanced Due Diligence (EDD)', how: 'Deep-dive into Source of Wealth (SoW) for high-value clients.', why: 'High-risk cases require additional validation.', outcome: 'Analyst reports validated SoW.', guidance: 'Document all sources of income, assets, and recent transactions.' },
-  { id: 4, name: 'Screening & Triage', how: 'Check Sanctions, PEP, and Adverse Media in real-time.', why: 'Automated detection reduces regulatory risk.', outcome: 'High-risk clients flagged automatically.', guidance: 'Use multiple sources for screening; flag any hits for escalation.' },
-  { id: 5, name: 'The Evidence Chain', how: 'Generate PDF + timestamp for each step.', why: 'Golden thread ensures audit compliance.', outcome: 'Traceable records for regulator review.', guidance: 'Ensure all actions are time-stamped and saved; do not skip steps.' },
-  { id: 6, name: 'Adjudication Logic', how: 'Apply binary rules: Approve / Reject.', why: 'Consistency in decision-making.', outcome: 'Analyst guided to a clear decision.', guidance: 'Use scores and risk flags to make unbiased decisions.' },
-  { id: 7, name: 'Quality Assurance (QA)', how: 'Architect reviews Analyst work.', why: 'Maintain quality and compliance.', outcome: 'Errors caught before final submission.', guidance: 'Check completeness, logic, and documentation.' },
-  { id: 8, name: 'Board Reporting', how: 'Summarize outcomes for CEO & regulators.', why: 'High-level insight drives accountability.', outcome: 'Management sees real-time compliance status.', guidance: 'Highlight key risks and remediation plans.' }
-];
 
 // ====== Scoring Engine ======
 const calculateScore = (pillarScores) => {
@@ -61,10 +49,31 @@ const PillarCard = ({ pillar, score, setScore }) => {
 };
 
 // ====== Main Component ======
-export default function Home() {
-  const [pillarScores, setPillarScores] = useState(PILLARS.map(() => 0));
+export default function OS() {
+  const [pillars, setPillars] = useState([]);
+  const [pillarScores, setPillarScores] = useState([]);
   const [decision, setDecision] = useState('');
   const [tenant, setTenant] = useState('default');
+  const [loading, setLoading] = useState(true);
+
+  // Fetch pillars from Supabase for the selected tenant
+  const fetchPillars = async () => {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from('pillars')
+      .select('*')
+      .order('id', { ascending: true });
+    if (error) console.error('Error fetching pillars:', error);
+    else {
+      setPillars(data);
+      setPillarScores(data.map(() => 0));
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchPillars();
+  }, [tenant]);
 
   const handleScoreChange = (index, value) => {
     const newScores = [...pillarScores];
@@ -73,7 +82,7 @@ export default function Home() {
   };
 
   const handleSubmit = async () => {
-    const finalDecision = calculateScore(pillarScores.map((s, i) => ({ score: s })));
+    const finalDecision = calculateScore(pillarScores.map((s) => ({ score: s })));
     setDecision(finalDecision);
 
     const { data, error } = await supabase.from('cases').insert([
@@ -85,17 +94,17 @@ export default function Home() {
         status: finalDecision
       }
     ]);
-    console.log(data, error);
+    if (error) console.error('Supabase Insert Error:', error);
+    else console.log('Case Saved:', data);
   };
 
   return (
     <div className="min-h-screen bg-[#FFFBF0] p-10 font-sans">
-      
-      {/* ===== HEADER WITH LOGO ===== */}
-      <div className="flex items-center mb-8">
-        <div className="w-16 h-16 bg-white p-2 rounded shadow-xl flex items-center justify-center">
-          {/* MC Monogram SVG from your brand identity */}
-          <svg viewBox="0 0 100 100" className="w-12 h-12" fill="none">
+      {/* HEADER WITH LOGO */}
+      <header className="flex items-center gap-6 mb-8">
+        <div className="bg-white p-2 rounded shadow-xl">
+          {/* SVG Logo from Brand Identity */}
+          <svg viewBox="0 0 100 100" className="w-16 h-16" fill="none">
             <rect x="12" y="30" width="16" height="40" fill="#0B1F3F"/>
             <path d="M12 30H50V40H32V70H12V30Z" fill="#0B1F3F"/>
             <rect x="34" y="30" width="16" height="40" fill="#0B1F3F"/>
@@ -103,8 +112,11 @@ export default function Home() {
             <rect x="56" y="42" width="12" height="24" fill="#0B1F3F"/>
           </svg>
         </div>
-        <h1 className="ml-4 font-montserrat font-black text-3xl text-[#0B1F3F]">MC™ Compliance Blueprint</h1>
-      </div>
+        <div>
+          <h1 className="font-montserrat font-black text-3xl text-[#0B1F3F]">MC™ Compliance Blueprint</h1>
+          <p className="text-[#F5C518] font-bold text-xs uppercase tracking-[0.4em] mt-1">Brand Identity Integrated</p>
+        </div>
+      </header>
 
       {/* Tenant Selector */}
       <div className="mb-6">
@@ -116,8 +128,11 @@ export default function Home() {
         </select>
       </div>
 
+      {/* Loading Pillars */}
+      {loading && <p className="text-[#0B1F3F] font-bold">Loading pillars...</p>}
+
       {/* Pillars */}
-      {PILLARS.map((pillar, i) => (
+      {!loading && pillars.map((pillar, i) => (
         <PillarCard
           key={pillar.id}
           pillar={pillar}
