@@ -12,11 +12,13 @@
         .font-montserrat { font-family: 'Montserrat', sans-serif; }
         .dot-grid { background-image: radial-gradient(#cbd5e1 0.8px, transparent 0.8px); background-size: 30px 30px; }
         .hero-title { font-size: 42px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; text-transform: uppercase; }
+        .meta-text { font-size: 9px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
         .btn-launch { 
             background: var(--navy); color: white; padding: 18px 40px; border-radius: 4px;
             font-weight: 900; font-size: 11px; text-transform: uppercase; letter-spacing: 2px;
             transition: 0.3s; border: none; cursor: pointer; box-shadow: 0 10px 20px rgba(11,31,63,0.2);
         }
+        .btn-launch:hover { background: #162e55; transform: translateY(-2px); box-shadow: 0 15px 30px rgba(11,31,63,0.2); }
     </style>
 </head>
 <body class="dot-grid min-h-screen flex flex-col">
@@ -27,18 +29,27 @@
             </div>
             <span class="font-montserrat font-black text-sm tracking-tighter uppercase">Merrick Compliance</span>
         </div>
+        <div class="text-[9px] font-black uppercase tracking-widest opacity-40">A Division of Merrick Solution</div>
     </nav>
     <main class="flex-1 flex flex-col items-center justify-center text-center px-6">
         <div class="max-w-2xl space-y-8">
+            <span class="meta-text">Proprietary Framework v1.0</span>
             <h1 class="hero-title font-montserrat">Architecting <br>Audit-Ready Compliance <br>Infrastructure.</h1>
+            <p class="text-slate-500 font-medium text-lg leading-relaxed max-w-lg mx-auto">
+                Implementing the MC™ 8-Pillar Framework to standardize onboarding and automate institutional due diligence.
+            </p>
             <div class="pt-6">
                 <button onclick="launchOS()" class="btn-launch">Initialize Master OS Engine</button>
             </div>
         </div>
     </main>
+    <footer class="p-12 border-t border-border bg-white text-center">
+        <p class="text-[9px] font-black uppercase tracking-[4px] opacity-30">&copy; 2026 MERRICK COMPLIANCE STRATEGIC SYSTEMS</p>
+        <p class="text-[8px] font-bold text-slate-400 mt-2 tracking-widest uppercase">Registry: risk@merricksolution.com</p>
+    </footer>
     <script>
         function launchOS() {
-            if(prompt("ENTER SYSTEM ACCESS CODE:") === "MC8ADMIN") {
+            if(prompt("ENTER ACCESS CODE:") === "MC8ADMIN") {
                 window.location.href='os.html';
             } else { alert("ACCESS DENIED."); }
         }
