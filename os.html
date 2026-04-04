@@ -1,65 +1,62 @@
-   <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MC™ MASTER OS | Merrick Compliance</title>
+    <title>MC™ MASTER OS | MERRICK COMPLIANCE ™</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     <style>
-        :root { --navy: #0B1F3F; --gold: #F5C518; --audit-red: #ef4444; --border: rgba(255,255,255,0.1); }
-        body { font-family: 'Inter', sans-serif; background-color: #061021; color: white; margin: 0; overflow: hidden; display: flex; }
+        :root { --navy: #0B1F3F; --gold: #F5C518; --audit-red: #ef4444; --border: rgba(255,255,255,0.1); --bg-dark: #061021; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: white; margin: 0; overflow: hidden; display: flex; }
         
-        /* THE LOCK SCREEN */
-        #lock-screen { position: fixed; inset: 0; background: #061021; z-index: 10000; display: none; flex-direction: column; align-items: center; justify-content: center; }
-        .lock-msg { color: var(--audit-red); font-family: 'Montserrat'; font-weight: 900; font-size: 42px; text-transform: uppercase; }
-
+        /* HARD LOCK */
+        #lock-screen { position: fixed; inset: 0; background: var(--bg-dark); z-index: 10000; display: none; flex-direction: column; align-items: center; justify-content: center; }
+        
         /* SIDEBAR */
-        .sidebar { width: 260px; height: 100vh; background: #081426; border-right: 1px solid var(--border); display: flex; flex-direction: column; shrink-0; z-index: 50; }
-        .nav-item { padding: 16px 24px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: rgba(255, 255, 255, 0.4); cursor: pointer; border-left: 4px solid transparent; transition: 0.3s; }
+        .sidebar { width: 280px; height: 100vh; background: #081426; border-right: 1px solid var(--border); display: flex; flex-direction: column; shrink-0; z-index: 50; }
+        .nav-item { padding: 18px 30px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: rgba(255, 255, 255, 0.4); cursor: pointer; transition: 0.3s; border-left: 4px solid transparent; }
         .nav-item.active { color: var(--gold); background: rgba(245, 197, 24, 0.05); border-left-color: var(--gold); }
 
         /* VIEWPORT */
-        .viewport { flex: 1; height: 100vh; overflow-y: auto; background: #FDFDFD; color: var(--navy); position: relative; }
+        .viewport { flex: 1; height: 100vh; overflow-y: auto; background: #F8FAFC; color: var(--navy); position: relative; }
         .view-content { display: none; padding: 60px; animation: fadeIn 0.4s ease forwards; }
         .view-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* HORIZONTAL LINEAR DIAGRAM (IMAGE MATCHED) */
-        .linear-container { display: flex; align-items: center; justify-content: center; margin: 100px auto; position: relative; }
-        .core-block { 
-            width: 180px; height: 320px; background: white; border: 3px solid var(--gold); border-radius: 16px;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05); margin-right: 50px;
-        }
-        .pillar-sequence { display: flex; align-items: center; gap: 15px; position: relative; }
-        .p-unit { display: flex; flex-direction: column; align-items: center; width: 110px; z-index: 5; }
-        .p-box { width: 45px; height: 45px; background: var(--navy); color: white; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 12px; margin-bottom: 12px; }
-        .p-tag { width: 100%; padding: 8px 4px; background: white; border: 1.5px solid var(--gold); font-size: 8px; font-weight: 900; text-transform: uppercase; text-align: center; white-space: nowrap; }
+        /* LOGIC DRAWER */
+        #drawer { position: fixed; right: -450px; top: 0; width: 450px; height: 100vh; background: white; border-left: 2px solid var(--gold); box-shadow: -20px 0 50px rgba(0,0,0,0.1); z-index: 1000; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); padding: 40px; overflow-y: auto; color: var(--navy); }
+        #drawer.open { right: 0; }
+        .drawer-overlay { position: fixed; inset: 0; background: rgba(6, 16, 33, 0.6); z-index: 900; display: none; }
 
-        /* SVG CONNECTION LINES */
-        .orbit-lines { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
-        line { stroke: var(--gold); stroke-width: 1.5; opacity: 0.3; }
+        /* PILLAR CARDS */
+        .pillar-card { background: white; border: 1px solid #E2E8F0; padding: 20px; transition: 0.2s; cursor: pointer; }
+        .pillar-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+        .pillar-card.scored { border-left: 6px solid var(--gold); }
+        
+        .btn-action { background: var(--navy); color: white; padding: 14px 28px; font-weight: 900; font-size: 10px; text-transform: uppercase; border: none; cursor: pointer; border-radius: 4px; transition: 0.3s; }
+        .btn-action:disabled { opacity: 0.2; cursor: not-allowed; }
+        
+        .sub-pill { padding: 12px; background: #F1F5F9; border-radius: 4px; font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 12px; margin-bottom: 8px; cursor: pointer; }
+        .sub-pill.checked { background: #DCFCE7; color: #166534; }
 
-        /* ANALYST & VETO COMPONENTS */
-        .btn-action { background: var(--navy); color: white; padding: 14px 28px; font-weight: 900; font-size: 10px; text-transform: uppercase; border: none; cursor: pointer; border-radius: 4px; }
-        .active-p { background: var(--gold) !important; color: var(--navy) !important; }
-        .active-f { background: var(--audit-red) !important; color: white !important; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
     <div id="lock-screen">
-        <div class="p-20 border-4 border-red-600">
-            <h1 class="lock-msg">System Locked</h1>
-            <p class="text-white font-bold tracking-widest mt-4 uppercase">Architect Resolution Required</p>
-            <button onclick="unlock()" class="mt-10 btn-action" style="background:var(--gold); color:var(--navy);">Handshake Resolution</button>
-        </div>
+        <h1 class="text-red-500 font-black text-4xl uppercase font-montserrat">System Locked</h1>
+        <button onclick="unlockSystem()" class="mt-8 btn-action" style="background:var(--gold); color:var(--navy);">Resolution Handshake</button>
+    </div>
+
+    <div class="drawer-overlay" id="overlay" onclick="closeDrawer()"></div>
+    <div id="drawer">
+        <div id="drawer-content"></div>
     </div>
 
     <nav class="sidebar">
         <div class="p-8 border-b border-white/10 mb-6">
-            <span class="text-white font-black text-sm tracking-tighter uppercase font-montserrat">Merrick Compliance</span>
+            <span class="text-white font-black text-sm tracking-tighter uppercase font-montserrat">MC™ | MERRICK COMPLIANCE ™</span>
         </div>
         <div onclick="switchView('framework', this)" class="nav-item active">01 Framework</div>
         <div onclick="switchView('prep', this)" class="nav-item">02 Analyst Prep</div>
@@ -67,91 +64,165 @@
         <div onclick="switchView('vault', this)" class="nav-item">04 Logic Vault</div>
         
         <div class="mt-auto p-8 border-t border-white/10 opacity-30 font-mono text-[8px] uppercase">
-            UNIT_ID: <span id="m-id">MC-000-000</span><br>
-            STAMP: <span id="m-date">2026.04.03</span>
+            UNIT: <span id="m-id">MC-000-000</span><br>
+            SLA: <span id="sla-timer" class="text-gold">--:--:--</span>
         </div>
     </nav>
 
     <main class="viewport">
-        
-        <div id="view-framework" class="view-content active">
-            <h2 class="font-montserrat font-black text-2xl uppercase border-b-2 border-navy pb-4 mb-10">Strategic Framework</h2>
-            <div class="linear-container">
-                <svg class="orbit-lines" id="svg-lines"></svg>
-                <div class="core-block">
-                    <svg viewBox="0 0 100 100" class="w-12 h-12 mb-4" fill="var(--navy)"><rect x="12" y="30" width="16" height="40"/><path d="M12 30H50V40H32V70H12V30Z"/><rect x="34" y="30" width="16" height="40"/><path d="M56 42H88V50H72V58H88V66H56V42Z"/></svg>
-                    <span class="text-[10px] font-black tracking-widest text-navy uppercase">MC™ CORE</span>
+        <div id="view-prep" class="view-content active">
+            <div class="bg-white p-8 border border-gray-200 mb-10 rounded-lg shadow-sm">
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <label class="text-[9px] font-black uppercase text-gray-400 mb-2 block">Client / Entity Name</label>
+                        <input type="text" id="client-name" placeholder="LEGAL ENTITY NAME" class="w-full border-b-2 border-gray-200 p-2 text-xs font-bold uppercase outline-none focus:border-navy">
+                    </div>
+                    <div>
+                        <label class="text-[9px] font-black uppercase text-gray-400 mb-2 block">Jurisdiction Risk</label>
+                        <select id="jurisdiction" class="w-full border-b-2 border-gray-200 p-2 text-xs font-bold uppercase outline-none bg-transparent">
+                            <option>Low Risk (Standard)</option>
+                            <option>Medium Risk (Grey List)</option>
+                            <option>High Risk (FATF Red)</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="pillar-sequence" id="linear-seq"></div>
-            </div>
-        </div>
-
-        <div id="view-prep" class="view-content">
-            <h2 class="font-montserrat font-black text-2xl uppercase border-b-2 border-navy pb-6 mb-10">Analyst Prep</h2>
-            <input type="text" id="a-name" placeholder="ANALYST NAME ENTRY" class="border-b-2 border-navy outline-none bg-transparent font-bold text-xs uppercase w-64 mb-10">
-            <div id="a-list" class="space-y-2 max-w-xl"></div>
-            <div class="mt-10 flex gap-4 max-w-xl"><button onclick="log('APPROVE')" class="btn-action flex-1">Approve</button><button onclick="log('ESCALATE')" class="btn-action flex-1" style="background:white; color:var(--navy); border:2px solid var(--navy);">Escalate</button></div>
-        </div>
-
-        <div id="view-veto" class="view-content">
-            <h2 class="font-montserrat font-black text-2xl uppercase text-red-600 mb-10">Veto Terminal</h2>
-            <div class="bg-white p-8 border border-gray-200 max-w-xl shadow-sm">
-                <p class="font-mono text-[10px] text-gold mb-6 uppercase">ID: <span id="v-id">MC-000-000</span></p>
-                <textarea class="w-full h-32 border p-4 text-xs font-medium mb-6 outline-none" placeholder="RATIONALE..."></textarea>
-                <div class="flex gap-4"><button onclick="log('PASS')" class="btn-action flex-1" style="background:var(--gold); color:var(--navy);">Pass</button><button onclick="lockSystem()" class="btn-action flex-1" style="background:var(--audit-red);">Fail & Lock</button></div>
-            </div>
-        </div>
-
-        <div id="view-vault" class="view-content">
-            <h2 class="font-montserrat font-black text-2xl uppercase border-b-2 border-navy pb-6 mb-10">Logic Vault</h2>
-            <div class="max-w-xl bg-white p-10 border border-gray-200">
-                <p class="text-xs font-black text-gold uppercase tracking-widest mb-6">Locked Operating logic</p>
-                <div class="space-y-4 text-sm font-medium leading-relaxed">
-                    <p>01 Risk Taxonomy: Standardized classification logic.</p>
-                    <p>02 Customer ID: digital validation of identity assets.</p>
-                    <p>03 Diligence: source of wealth verification rules.</p>
+                <div class="mt-6 flex justify-between items-end">
+                    <div class="flex gap-4">
+                        <input type="text" id="a-name" placeholder="ANALYST SIGN-ON" class="border-b border-gray-300 text-[10px] font-bold uppercase p-1">
+                        <select id="tier-select" onchange="updateTierUI()" class="text-[10px] font-black uppercase bg-gray-50 border p-1">
+                            <option value="1">Tier 1: Low</option>
+                            <option value="2">Tier 2: Medium</option>
+                            <option value="3">Tier 3: High</option>
+                            <option value="4">Tier 4: Critical</option>
+                        </select>
+                    </div>
+                    <span class="text-[9px] font-black text-gold uppercase">Operational Status: <span class="text-navy">In-Progress</span></span>
                 </div>
             </div>
+
+            <div class="grid grid-cols-2 gap-4" id="pillar-grid"></div>
+
+            <div class="mt-10 pt-10 border-t flex gap-4">
+                <button id="btn-approve" onclick="finalizeAudit('APPROVED')" class="btn-action flex-1">Authorize Final Log</button>
+                <button onclick="finalizeAudit('ESCALATED')" class="btn-action flex-1 bg-white !text-navy border-2 border-navy">Escalate to Architect</button>
+            </div>
         </div>
 
+        <div id="view-framework" class="view-content">Framework Placeholder</div>
+        <div id="view-veto" class="view-content">Veto Placeholder</div>
+        <div id="view-vault" class="view-content">Vault Placeholder</div>
     </main>
 
     <script>
-        const P = ["Risk Taxonomy", "Customer ID", "Diligence", "Screening", "Evidence", "Adjudication", "Quality", "Governance"];
-        
-        window.onload = () => {
-            if(localStorage.getItem('MC_LOCKED') === 'true') document.getElementById('lock-screen').style.display = 'flex';
-            const id = `MC-${Math.floor(Math.random()*900+100)}-${Math.floor(Math.random()*900+100)}`;
-            document.getElementById('m-id').innerText = id; document.getElementById('v-id').innerText = id;
-            
-            // Build Linear Diagram with SVG Lines
-            const seq = document.getElementById('linear-seq');
-            const svg = document.getElementById('svg-lines');
-            P.forEach((p, i) => {
-                seq.innerHTML += `<div class="p-unit"><div class="p-box">0${i+1}</div><div class="p-tag">${p}</div></div>`;
-            });
-
-            document.getElementById('a-list').innerHTML = P.map((p, i) => `
-                <div class="p-4 bg-white border flex justify-between items-center"><span class="text-[10px] font-black uppercase">0${i+1} ${p}</span>
-                <div class="flex gap-2"><button onclick="scr(this,'p')" class="px-3 py-1 border text-[8px] font-black uppercase">Pass</button>
-                <button onclick="scr(this,'f')" class="px-3 py-1 border text-[8px] font-black uppercase">Fail</button></div></div>
-            `).join('');
+        const MC_LOGIC = {
+            1: { title: "Risk Taxonomy", meat: "Classification is the filter for resources. If you misidentify the beast, you use the wrong cage.", subs: ["Jurisdiction Alignment", "Business Model Fit", "Product Exposure"] },
+            2: { title: "Customer ID", meat: "Identity is the Digital Handshake. We do not accept 'close enough'. No ID, no entry.", subs: ["Liveness Verification", "Document Authenticity", "Proof of Nexus"] },
+            3: { title: "Diligence", meat: "The Wealth Narrative. We don't just want the money; we want the history of the money.", subs: ["UBO Transparency", "Source of Wealth (SoW)", "Professional Standing"] },
+            4: { title: "Screening", meat: "Signal vs. Noise. Automation handles the data; humans handle the truth.", subs: ["PEP Proximity", "Sanction Delta", "Adverse Media"] },
+            5: { title: "Evidence", meat: "The Regulatory Black Box. If it isn't timestamped, it is a liability.", subs: ["Metadata Integrity", "Audit Trail", "Retention Protocol"] },
+            6: { title: "Adjudication", meat: "Compliance is an objective science, not a subjective opinion.", subs: ["Logic Consistency", "Conflict of Interest", "Tolerance Check"] },
+            7: { title: "Quality", meat: "We audit ourselves so the regulators don't have to.", subs: ["Sampling Logic", "Error Rate", "Remediation Path"] },
+            8: { title: "Governance", meat: "Data flows up; safety flows down. Accuracy ensures Board-level security.", subs: ["Board Summarization", "Regulatory Delta", "Escalation Efficacy"] }
         };
 
-        function scr(b, t) { b.parentElement.querySelectorAll('button').forEach(x => x.classList.remove('active-p', 'active-f')); b.classList.add(t === 'p' ? 'active-p' : 'active-f'); }
-        function lockSystem() { localStorage.setItem('MC_LOCKED', 'true'); window.location.reload(); }
-        function unlock() { if(prompt("ARCHITECT KEY:") === "MC8VETO") { localStorage.removeItem('MC_LOCKED'); window.location.reload(); } }
-        function log(type) { alert(`${type} Logged.`); }
-        
+        let scoredPillars = {};
+
+        window.onload = () => {
+            const grid = document.getElementById('pillar-grid');
+            Object.keys(MC_LOGIC).forEach(key => {
+                grid.innerHTML += `
+                    <div class="pillar-card" id="card-${key}" onclick="openPillar(${key})">
+                        <div class="flex justify-between items-start">
+                            <span class="text-[9px] font-black text-gold uppercase">Pillar 0${key}</span>
+                            <span id="status-${key}" class="text-[8px] font-bold text-gray-300 uppercase">Awaiting Logic</span>
+                        </div>
+                        <h3 class="text-xs font-black uppercase mt-2">${MC_LOGIC[key].title}</h3>
+                    </div>
+                `;
+            });
+        };
+
+        function openPillar(id) {
+            const data = MC_LOGIC[id];
+            const content = document.getElementById('drawer-content');
+            content.innerHTML = `
+                <span class="text-[10px] font-black text-gold uppercase">Architect Insight</span>
+                <h2 class="text-xl font-black uppercase mb-6">${data.title}</h2>
+                <div class="bg-gray-50 p-6 border-l-4 border-navy mb-8">
+                    <p class="text-xs font-bold leading-relaxed italic">"${data.meat}"</p>
+                </div>
+                <div class="space-y-3 mb-8">
+                    ${data.subs.map((s, i) => `
+                        <div class="sub-pill" id="sub-${id}-${i}" onclick="checkSub(${id}, ${i})">
+                            <div class="w-4 h-4 border-2 border-navy rounded-sm"></div>
+                            ${s}
+                        </div>
+                    `).join('')}
+                </div>
+                <textarea id="rationale-${id}" class="w-full border-2 p-4 text-xs font-bold mb-6 outline-none focus:border-gold h-24" placeholder="ENTER COMPLIANCE RATIONALE..."></textarea>
+                <div class="flex gap-2">
+                    <button id="p-btn-${id}" disabled onclick="setScore(${id}, 'PASS')" class="btn-action flex-1 bg-green-600">Pass Pillar</button>
+                    <button id="f-btn-${id}" disabled onclick="setScore(${id}, 'FAIL')" class="btn-action flex-1 bg-red-600">Fail Pillar</button>
+                </div>
+            `;
+            document.getElementById('drawer').classList.add('open');
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function checkSub(pId, sId) {
+            document.getElementById(`sub-${pId}-${sId}`).classList.toggle('checked');
+            validatePillar(pId);
+        }
+
+        function validatePillar(id) {
+            const checkedCount = document.querySelectorAll('.sub-pill.checked').length;
+            const rationale = document.getElementById(`rationale-${id}`).value;
+            // Simplified: if current drawer has 3 checked, unlock
+            const currentChecked = document.querySelectorAll(`#drawer .sub-pill.checked`).length;
+            if (currentChecked === 3) {
+                document.getElementById(`p-btn-${id}`).disabled = false;
+                document.getElementById(`f-btn-${id}`).disabled = false;
+            }
+        }
+
+        function setScore(id, score) {
+            scoredPillars[id] = { score, rationale: document.getElementById(`rationale-${id}`).value };
+            document.getElementById(`card-${id}`).classList.add('scored');
+            document.getElementById(`status-${id}`).innerText = score;
+            document.getElementById(`status-${id}`).classList.add(score === 'PASS' ? 'text-green-600' : 'text-red-600');
+            closeDrawer();
+        }
+
+        function closeDrawer() {
+            document.getElementById('drawer').classList.remove('open');
+            document.getElementById('overlay').style.display = 'none';
+        }
+
         function switchView(v, el) {
-            // SECURITY HANDSHAKE RULES
-            if(v === 'veto' && prompt("VETO ACCESS CODE:") !== "MC8VETO") return;
-            if(v === 'vault' && prompt("VAULT ACCESS CODE:") !== "VAULT99") return;
-            
             document.querySelectorAll('.view-content').forEach(c => c.classList.remove('active'));
-            document.getElementById('view-'+v).classList.add('active');
+            document.getElementById('view-' + v).classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             el.classList.add('active');
+        }
+
+        function updateTierUI() {
+            const tier = document.getElementById('tier-select').value;
+            if(tier === "4") {
+                localStorage.setItem('MC_STATUS', 'LOCKED');
+                window.location.reload();
+            }
+        }
+
+        function unlockSystem() {
+            if(prompt("ACCESS CODE:") === "MC8VETO") {
+                localStorage.removeItem('MC_STATUS');
+                window.location.reload();
+            }
+        }
+
+        function finalizeAudit(status) {
+            if(Object.keys(scoredPillars).length < 8) return alert("All 8 Pillars must be audited.");
+            alert(`AUDIT ${status}: MC™ Registry Updated.`);
         }
     </script>
 </body>
