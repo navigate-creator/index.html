@@ -1,303 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MERRICK COMPLIANCE ™</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
-  <style>
-    :root { --navy-bg: #050b14; --gold: #F5C518; --blue-steel: #0B1F3F; --dot: #cbd5e1; --text-grey: #64748b; }
-    body { font-family: 'Inter', sans-serif; background: #fff; margin: 0; display: flex; height: 100vh; overflow: hidden; color: var(--blue-steel); }
-    .sidebar { width: 300px; background: var(--navy-bg); display: flex; flex-direction: column; border-right: 1px solid rgba(255,255,255,0.05); }
-    .brand-block { padding: 45px 30px; display: flex; align-items: center; gap: 15px; }
-    .m-logo { width: 50px; height: 50px; fill: white; }
-    .m-text-merrick { color: white; font-family: 'Montserrat'; font-weight: 900; font-size: 22px; letter-spacing: -0.5px; }
-    .m-text-compliance { color: var(--text-grey); font-size: 10px; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
-    .nav-item { padding: 18px 35px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #475569; cursor: pointer; transition: 0.2s; }
-    .nav-item.active { color: var(--gold); }
-    .viewport { flex: 1; position: relative; background-image: radial-gradient(var(--dot) 0.8px, transparent 0.8px); background-size: 20px 20px; overflow-y: auto; }
-    .view-content { display: none; width: 100%; height: 100%; padding: 40px; }
-    .view-content.active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
-    .fw-orbit-container { position: relative; width: 650px; height: 650px; display: flex; align-items: center; justify-content: center; scale: 0.85; }
-    .mc-core-center { position: absolute; width: 220px; height: 360px; border: 4px solid var(--gold); background: white; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 50; padding: 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); text-align: center; }
-    .orbit-node { position: absolute; width: 130px; cursor: pointer; transition: 0.3s; z-index: 60; }
-    .node-idx { background: var(--blue-steel); color: white; padding: 10px; font-family: 'Montserrat'; font-weight: 900; font-size: 12px; text-align: center; border-radius: 4px 4px 0 0; }
-    .node-lbl { background: white; border: 1.5px solid var(--gold); padding: 8px 4px; font-size: 8px; font-weight: 900; color: var(--blue-steel); text-transform: uppercase; border-radius: 0 0 4px 4px; text-align: center; white-space: nowrap; }
-    .analyst-header { background: white; padding: 30px; border: 1px solid #e2e8f0; width: 100%; max-width: 950px; margin-bottom: 20px; }
-    .header-label { font-size: 9px; font-weight: 900; color: #94a3b8; text-transform: uppercase; margin-bottom: 6px; display: block; }
-    .analyst-card { background: white; border: 1px solid #e2e8f0; padding: 18px 25px; cursor: pointer; transition: 0.2s; position: relative; margin-bottom: 4px; }
-    .status-tab { position: absolute; top: 12px; right: 15px; font-size: 8px; font-weight: 900; color: #cbd5e1; text-transform: uppercase; }
-    .btn-authorize { background: var(--blue-steel); color: white; padding: 18px 36px; font-weight: 900; font-size: 10px; text-transform: uppercase; border-radius: 4px; flex: 1; transition: 0.3s; cursor: pointer; }
-    .btn-escalate { background: var(--gold); color: var(--navy-bg); padding: 18px 36px; font-weight: 900; font-size: 10px; text-transform: uppercase; border-radius: 4px; flex: 1; transition: 0.3s; cursor: pointer; }
-    .matrix-table { width: 100%; max-width: 900px; border-collapse: collapse; background: white; border: 1px solid #e2e8f0; }
-    .matrix-table th { background: var(--blue-steel); color: white; font-size: 10px; padding: 15px; text-transform: uppercase; }
-    .matrix-table td { border: 1px solid #f1f5f9; padding: 15px; font-size: 10px; font-weight: 700; text-align: center; text-transform: uppercase; }
-    .matrix-hlt { background: rgba(245, 197, 24, 0.05); color: var(--gold); }
-    #drawer { position: fixed; right: -450px; top: 0; width: 450px; height: 100vh; background: white; border-left: 3px solid var(--gold); z-index: 1000; transition: 0.3s ease; padding: 40px; overflow-y: auto; }
-    #drawer.open { right: 0; }
-    .overlay { position: fixed; inset: 0; background: rgba(5, 11, 20, 0.8); z-index: 900; display: none; }
-    #lock-screen, #veto-lock { position: fixed; inset: 0; background: #991b1b; z-index: 10000; display: none; flex-direction: column; align-items: center; justify-content: center; color: white; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MERRICK COMPLIANCE ™</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root { --navy-bg: #050b14; --gold: #F5C518; --blue-steel: #0B1F3F; --dot: #cbd5e1; --text-grey: #64748b; }
+body { font-family: 'Inter', sans-serif; background: #fff; margin:0; display:flex; height:100vh; overflow:hidden; color:var(--blue-steel); }
+/* SIDEBAR */
+.sidebar { width:300px; background: var(--navy-bg); display:flex; flex-direction:column; border-right:1px solid rgba(255,255,255,0.05);}
+.brand-block { padding:45px 30px; display:flex; align-items:center; gap:15px;}
+.m-logo{width:50px;height:50px;fill:white;}
+.m-text-merrick{color:white;font-family:'Montserrat';font-weight:900;font-size:22px;letter-spacing:-0.5px;line-height:1;}
+.m-text-compliance{color:var(--text-grey);font-size:10px;font-weight:400;letter-spacing:2px;text-transform:uppercase;margin-top:4px;}
+.nav-item{padding:18px 35px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#475569;cursor:pointer;transition:0.2s;}
+.nav-item.active{color:var(--gold);}
+.viewport{flex:1;position:relative;background-image:radial-gradient(var(--dot) 0.8px, transparent 0.8px);background-size:20px 20px;overflow-y:auto;}
+.view-content{display:none;width:100%;height:100%;padding:40px;flex-direction:column;align-items:center;justify-content:center;}
+.view-content.active{display:flex;}
+/* FRAMEWORK */
+.fw-orbit-container{position:relative;width:650px;height:650px;display:flex;align-items:center;justify-content:center;scale:0.85;}
+.mc-core-center{position:absolute;width:220px;height:360px;border:4px solid var(--gold);background:white;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:50;padding:25px;box-shadow:0 20px 50px rgba(0,0,0,0.1);text-align:center;}
+.orbit-node{position:absolute;width:130px;cursor:pointer;transition:0.3s;z-index:60;}
+.node-idx{background:var(--blue-steel);color:white;padding:10px;font-family:'Montserrat';font-weight:900;font-size:12px;text-align:center;border-radius:4px 4px 0 0;}
+.node-lbl{background:white;border:1.5px solid var(--gold);padding:8px 4px;font-size:8px;font-weight:900;color:var(--blue-steel);text-transform:uppercase;border-radius:0 0 4px 4px;text-align:center;white-space:nowrap;}
+/* ANALYST PREP */
+.analyst-header{background:white;padding:30px;border:1px solid #e2e8f0;width:100%;max-width:950px;margin-bottom:20px;}
+.header-label{font-size:9px;font-weight:900;color:#94a3b8;text-transform:uppercase;margin-bottom:6px;display:block;}
+.analyst-card{background:white;border:1px solid #e2e8f0;padding:18px 25px;cursor:pointer;transition:0.2s;position:relative;margin-bottom:4px;}
+.status-tab{position:absolute;top:12px;right:15px;font-size:8px;font-weight:900;color:#cbd5e1;text-transform:uppercase;}
+.btn-authorize{background:var(--blue-steel);color:white;padding:18px 36px;font-weight:900;font-size:10px;text-transform:uppercase;border-radius:4px;flex:1;transition:0.3s;cursor:pointer;}
+.btn-escalate{background:var(--gold);color:var(--navy-bg);padding:18px 36px;font-weight:900;font-size:10px;text-transform:uppercase;border-radius:4px;flex:1;transition:0.3s;cursor:pointer;}
+.matrix-table{width:100%;max-width:900px;border-collapse:collapse;background:white;border:1px solid #e2e8f0;}
+.matrix-table th{background:var(--blue-steel);color:white;font-size:10px;padding:15px;text-transform:uppercase;}
+.matrix-table td{border:1px solid #f1f5f9;padding:15px;font-size:10px;font-weight:700;text-align:center;text-transform:uppercase;}
+.matrix-hlt{background:rgba(245,197,24,0.05);color:var(--gold);}
+#drawer{position:fixed;right:-450px;top:0;width:450px;height:100vh;background:white;border-left:3px solid var(--gold);z-index:1000;transition:0.3s ease;padding:40px;overflow-y:auto;}
+#drawer.open{right:0;}
+.overlay{position:fixed;inset:0;background:rgba(5,11,20,0.8);z-index:900;display:none;}
+#lock-screen{position:fixed;inset:0;background:#991b1b;z-index:10000;display:none;flex-direction:column;align-items:center;justify-content:center;color:white;}
+</style>
 </head>
 <body>
 
-<!-- ADMIN PASSKEY LOCK -->
 <div id="lock-screen">
-  <h1 class="text-6xl font-black mb-4 uppercase">SYSTEM LOCKED</h1>
-  <button onclick="unlockSystem('MC8ADMIN')" class="bg-white text-red-800 px-8 py-4 font-black uppercase text-xs rounded">Enter Admin Passkey</button>
-</div>
-
-<!-- VETO PASSKEY LOCK -->
-<div id="veto-lock">
-  <h1 class="text-6xl font-black mb-4 uppercase">VETO LOCKED</h1>
-  <button onclick="unlockSystem('MC8VETO', true)" class="bg-white text-red-800 px-8 py-4 font-black uppercase text-xs rounded">Enter Veto Passkey</button>
+<h1 class="text-6xl font-black mb-4 uppercase">Critical Halt</h1>
+<button onclick="unlockSystem()" class="bg-white text-red-800 px-8 py-4 font-black uppercase text-xs rounded">Resolution Handshake</button>
 </div>
 
 <div class="overlay" id="overlay" onclick="closeDrawer()"></div>
 <div id="drawer"><div id="drawer-content"></div></div>
 
 <nav class="sidebar">
-  <div class="brand-block">
-    <svg viewBox="0 0 100 100" class="m-logo"><rect x="12" y="30" width="16" height="40"/><path d="M12 30H50V40H32V70H12V30Z"/><rect x="34" y="30" width="16" height="40"/><path d="M56 42H88V50H72V58H88V66H56V42Z"/></svg>
-    <div class="brand-text">
-      <span class="m-text-merrick">MERRICK</span>
-      <span class="m-text-compliance">COMPLIANCE ™</span>
-    </div>
-  </div>
-  <div class="nav-list">
-    <div onclick="switchView('framework', this)" class="nav-item active">01 Framework</div>
-    <div onclick="switchView('prep', this)" class="nav-item">02 Analyst Prep</div>
-    <div onclick="switchView('veto', this)" class="nav-item">03 Veto Terminal</div>
-    <div onclick="switchView('matrix', this)" class="nav-item">04 Scoring Matrix</div>
-    <div onclick="switchView('vault', this)" class="nav-item">05 Logic Vault</div>
-  </div>
+<div class="brand-block">
+<svg viewBox="0 0 100 100" class="m-logo">
+<rect x="12" y="30" width="16" height="40"/><path d="M12 30H50V40H32V70H12V30Z"/><rect x="34" y="30" width="16" height="40"/><path d="M56 42H88V50H72V58H88V66H56V42Z"/>
+</svg>
+<div class="brand-text">
+<span class="m-text-merrick">MERRICK</span>
+<span class="m-text-compliance">COMPLIANCE ™</span>
+</div>
+</div>
+<div class="nav-list">
+<div onclick="switchView('framework', this)" class="nav-item active">01 Framework</div>
+<div onclick="switchView('prep', this)" class="nav-item">02 Analyst Prep</div>
+<div onclick="switchView('veto', this)" class="nav-item">03 Veto Terminal</div>
+<div onclick="switchView('matrix', this)" class="nav-item">04 Scoring Matrix</div>
+<div onclick="switchView('vault', this)" class="nav-item">05 Logic Vault</div>
+</div>
 </nav>
 
 <main class="viewport">
-  <!-- PAGE 1: FRAMEWORK -->
-  <div id="view-framework" class="view-content active">
-    <div class="fw-orbit-container" id="orbit-container">
-      <div class="mc-core-center" id="core-display">
-        <svg viewBox="0 0 100 100" class="w-12 h-12 mb-4" fill="var(--blue-steel)">
-          <rect x="12" y="30" width="16" height="40"/><path d="M12 30H50V40H32V70H12V30Z"/><rect x="34" y="30" width="16" height="40"/><path d="M56 42H88V50H72V58H88V66H56V42Z"/>
-        </svg>
-        <span id="core-title" class="text-[11px] font-black tracking-[3px] text-blue-steel uppercase">MC™ CORE</span>
-        <div id="core-depth" class="mt-6 text-[9px] font-bold text-gray-500 leading-relaxed uppercase">Select Pillar to Audit.</div>
-      </div>
-    </div>
-  </div>
+<div id="view-framework" class="view-content active">
+<div class="fw-orbit-container" id="orbit-container">
+<div class="mc-core-center" id="core-display">
+<svg viewBox="0 0 100 100" class="w-12 h-12 mb-4" fill="var(--blue-steel)">
+<rect x="12" y="30" width="16" height="40"/><path d="M12 30H50V40H32V70H12V30Z"/><rect x="34" y="30" width="16" height="40"/><path d="M56 42H88V50H72V58H88V66H56V42Z"/>
+</svg>
+<span id="core-title" class="text-[11px] font-black tracking-[3px] text-blue-steel uppercase">MC™ CORE</span>
+<div id="core-depth" class="mt-6 text-[9px] font-bold text-gray-500 leading-relaxed uppercase">Select Pillar to Audit.</div>
+</div>
+</div>
+</div>
 
-  <!-- PAGE 2: ANALYST PREP -->
-  <div id="view-prep" class="view-content">
-    <div class="analyst-header">
-      <div class="grid grid-cols-2 gap-10 mb-6">
-        <div>
-          <span class="header-label">Legal Entity Name</span>
-          <input type="text" id="ent-name" placeholder="ENTITY" class="w-full border-b-2 p-1 text-xs font-bold uppercase outline-none">
-        </div>
-        <div>
-          <span class="header-label">Jurisdictional Risk</span>
-          <select class="w-full border-b-2 p-1 text-xs font-bold uppercase outline-none bg-transparent">
-            <option>Low Risk</option><option>Medium Risk</option><option>High Risk</option>
-          </select>
-        </div>
-      </div>
-      <div class="grid grid-cols-2 gap-10 items-end">
-        <div>
-          <span class="header-label">Analyst ID</span>
-          <input type="text" placeholder="ID" class="w-full border-b text-[10px] font-bold uppercase outline-none">
-        </div>
-        <div class="flex justify-between items-center">
-          <div>
-            <span class="header-label">Risk Tier Selection</span>
-            <select id="tier-sel" onchange="handleTier(this)" class="border-b-2 text-xs font-black uppercase outline-none">
-              <option value="1">Tier 1: Low</option>
-              <option value="2">Tier 2: Medium</option>
-              <option value="3">Tier 3: High</option>
-              <option value="4">Tier 4: Critical</option>
-            </select>
-          </div>
-          <span class="text-[9px] font-black text-gold uppercase">Ready</span>
-        </div>
-      </div>
-      <div class="grid grid-cols-2 gap-x-4 gap-y-2 w-full max-w-[950px]" id="a-grid"></div>
-      <div class="mt-8 flex gap-6 w-full max-w-[950px]">
-        <button class="btn-authorize" onclick="alert('AUDIT LOGGED')">Authorize Audit</button>
-        <button class="btn-escalate" onclick="alert('ESCALATED')">Escalate to Architect</button>
-      </div>
-    </div>
-  </div>
+<div id="view-prep" class="view-content">
+<div class="analyst-header">
+<div class="grid grid-cols-2 gap-10 mb-6">
+<div>
+<span class="header-label">Legal Entity Name</span>
+<input type="text" id="ent-name" placeholder="ENTITY" class="w-full border-b-2 p-1 text-xs font-bold uppercase outline-none">
+</div>
+<div>
+<span class="header-label">Jurisdictional Risk</span>
+<select class="w-full border-b-2 p-1 text-xs font-bold uppercase outline-none bg-transparent">
+<option>Low Risk</option><option>Medium Risk</option><option>High Risk</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-10 items-end">
+<div>
+<span class="header-label">Analyst ID</span>
+<input type="text" placeholder="ID" class="w-full border-b text-[10px] font-bold uppercase outline-none">
+</div>
+<div class="flex justify-between items-center">
+<div>
+<span class="header-label">Risk Tier Selection</span>
+<select id="tier-sel" onchange="handleTier(this)" class="border-b-2 text-xs font-black uppercase outline-none">
+<option value="1">Tier 1: Low</option><option value="2">Tier 2: Medium</option><option value="3">Tier 3: High</option><option value="4">Tier 4: Critical</option>
+</select>
+</div>
+<span class="text-[9px] font-black text-gold uppercase">Ready</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-x-4 gap-y-2 w-full max-w-[950px]" id="a-grid"></div>
+<div class="mt-8 flex gap-6 w-full max-w-[950px]">
+<button class="btn-authorize" onclick="alert('AUDIT LOGGED')">Authorize Audit</button>
+<button class="btn-escalate" onclick="alert('ESCALATED')">Escalate to Architect</button>
+</div>
+</div>
 
-  <!-- PAGE 3: VETO TERMINAL -->
-  <div id="view-veto" class="view-content">
-    <div class="flex w-full h-full gap-6 items-stretch" style="min-height: 700px;">
-      <div class="w-80 bg-white border border-gray-200 flex flex-col shrink-0 shadow-sm">
-        <div class="p-5 border-b-2 border-gold bg-[#050b14] text-white">
-          <span class="text-[9px] font-black uppercase tracking-[3px] text-gold">The Docket</span>
-          <h3 class="text-md font-black uppercase mt-1">Pending Decrees</h3>
-        </div>
-        <div id="docket-feed" class="flex-1 overflow-y-auto p-3 space-y-2 bg-gray-50">
-          <div class="p-3 border-l-4 border-red-600 bg-white shadow-sm cursor-pointer hover:bg-red-50 transition-all group" onclick="loadSovereignCase('Global Logistics Corp', 4, 'B+', 7)">
-            <div class="flex justify-between items-center">
-              <span class="text-[10px] font-black text-blue-steel uppercase">Global Logistics</span>
-              <span class="text-[7px] font-black bg-red-600 text-white px-1.5 py-0.5 animate-pulse">CRITICAL</span>
-            </div>
-            <div class="flex justify-between mt-2">
-              <span class="text-[8px] font-bold text-gray-400">SLA: 00:04:12</span>
-              <span class="text-[8px] font-black text-red-600 uppercase opacity-0 group-hover:opacity-100">Review Case →</span>
-            </div>
-          </div>
-          <div class="p-3 border-l-4 border-gold bg-white shadow-sm cursor-pointer hover:bg-gray-50 transition-all group" onclick="loadSovereignCase('Alpha Hedge Fund', 3, 'A-', 4)">
-            <div class="flex justify-between items-center">
-              <span class="text-[10px] font-black text-blue-steel uppercase">Alpha Hedge Fund</span>
-              <span class="text-[7px] font-black bg-gold text-navy-bg px-1.5 py-0.5">ESCALATED</span>
-            </div>
-            <div class="flex justify-between mt-2">
-              <span class="text-[8px] font-bold text-gray-400">SLA: 01:15:30</span>
-              <span class="text-[8px] font-black text-gold uppercase opacity-0 group-hover:opacity-100">Review Case →</span>
-            </div>
-          </div>
-        </div>
-      </div>
+<script>
+const MC_DATA = {
+1: { title: "Risk Taxonomy", meat: "Classification is the filter.", depth: "Establishing the legal perimeter." },
+2: { title: "Customer ID", meat: "Identity Handshake.", depth: "Verification of document-to-human link." },
+3: { title: "Diligence", meat: "Wealth Narrative.", depth: "Investigative forensics of fund origin." },
+4: { title: "Screening", meat: "Signal vs Noise.", depth: "Sanctions and Adverse Media triangulation." },
+5: { title: "Evidence", meat: "Black Box.", depth: "Immutable preservation of metadata." },
+6: { title: "Adjudication", meat: "Science over Opinion.", depth: "Binary decision logic protocols." },
+7: { title: "Quality", meat: "Self-audit.", depth: "Internal remediation cycles." },
+8: { title: "Governance", meat: "Data flows up.", depth: "Board-level regulatory delta tracking." }
+};
 
-      <div class="flex-1 flex items-center justify-center">
-        <div id="sovereign-card-display" class="senior-card w-full max-w-4xl" style="background: white; border: 4px solid #F5C518; padding: 50px; position: relative;">
-          <div id="empty-state" class="py-20 text-center">
-            <svg viewBox="0 0 100 100" class="w-16 h-16 mx-auto mb-6 fill-gray-200">
-              <path d="M50 5L15 25V50C15 72.1 30.1 91.5 50 95C69.9 91.5 85 72.1 85 50V25L50 5Z"/>
-            </svg>
-            <p class="text-[10px] font-black uppercase text-gray-300 tracking-[5px]">Select Case from Docket to Issue Decree</p>
-          </div>
-          <div id="active-sovereign-case" class="hidden">
-            <header class="mb-8 border-b pb-4 flex justify-between items-end">
-              <div>
-                <span class="text-[9px] font-black text-gold uppercase tracking-[3px]">Institutional Risk Profile</span>
-                <h2 id="sov-entity-name" class="text-3xl font-black uppercase text-[#0B1F3F]">---</h2>
-              </div>
-              <div class="text-right">
-                <span class="text-[8px] font-black text-gray-300 uppercase">Master Registry</span>
-                <div class="text-[10px] font-black text-[#0B1F3F]">MC-DECREE-2026-X</div>
-              </div>
-            </header>
-            <div class="grid grid-cols-3 gap-8 mb-10">
-              <div class="border-l-2 border-gold pl-4">
-                <span class="text-[9px] font-black text-gray-400 uppercase mb-2 block">Regulatory Exposure</span>
-                <div class="flex items-end gap-2">
-                  <span id="sov-exposure" class="text-2xl font-black text-[#0B1F3F]">--</span>
-                  <span class="text-[10px] font-bold text-gray-300
-                      <!-- PAGE 03 - VETO TERMINAL -->
-        <div id="view-veto" class="view-content">
-            <div class="flex w-full h-full gap-6 items-stretch" style="min-height: 700px;">
+window.onload = () => {
+const orbit = document.getElementById('orbit-container');
+const grid = document.getElementById('a-grid');
+Object.keys(MC_DATA).forEach((k, i) => {
+const angle = (i * 45) * (Math.PI / 180);
+const x = Math.cos(angle) * 260; const y = Math.sin(angle) * 260;
+const node = document.createElement('div');
+node.className = 'orbit-node';
+node.style.left = `calc(50% + ${x}px - 65px)`; node.style.top = `calc(50% + ${y}px - 30px)`;
+node.innerHTML = `<div class="node-idx">0${k}</div><div class="node-lbl">${MC_DATA[k].title}</div>`;
+node.onclick = () => {
+document.getElementById('core-title').innerText = `0${k} ${MC_DATA[k].title}`;
+document.getElementById('core-depth').innerText = MC_DATA[k].depth;
+};
+orbit.appendChild(node);
+grid.innerHTML += `
+<div class="analyst-card" id="c-${k}" onclick="openAnalyst(${k})">
+<span class="status-tab" id="st-${k}">Awaiting</span>
+<span class="text-[9px] font-black text-gold uppercase mb-1 block">0${k}</span>
+<h3 class="text-[11px] font-black uppercase text-blue-steel">${MC_DATA[k].title}</h3>
+</div>`;
+});
+};
 
-                <!-- DOCKET / CASE FEED -->
-                <div class="w-80 bg-white border border-gray-200 flex flex-col shrink-0 shadow-sm">
-                    <div class="p-5 border-b-2 border-gold bg-[#050b14] text-white">
-                        <span class="text-[9px] font-black uppercase tracking-[3px] text-gold">The Docket</span>
-                        <h3 class="text-md font-black uppercase mt-1">Pending Decrees</h3>
-                    </div>
-                    <div id="docket-feed" class="flex-1 overflow-y-auto p-3 space-y-2 bg-gray-50">
-                        <!-- Example cases -->
-                        <div class="p-3 border-l-4 border-red-600 bg-white shadow-sm cursor-pointer hover:bg-red-50 transition-all group" onclick="loadSovereignCase('Global Logistics Corp', 4, 'B+', 7)">
-                            <div class="flex justify-between items-center">
-                                <span class="text-[10px] font-black text-blue-steel uppercase">Global Logistics</span>
-                                <span class="text-[7px] font-black bg-red-600 text-white px-1.5 py-0.5 animate-pulse">CRITICAL</span>
-                            </div>
-                            <div class="flex justify-between mt-2">
-                                <span class="text-[8px] font-bold text-gray-400">SLA: 00:04:12</span>
-                                <span class="text-[8px] font-black text-red-600 uppercase opacity-0 group-hover:opacity-100">Review Case →</span>
-                            </div>
-                        </div>
+function openAnalyst(id) {
+const d = MC_DATA[id];
+document.getElementById('drawer-content').innerHTML = `
+<h2 class="text-2xl font-black uppercase text-blue-steel mb-4">${d.title}</h2>
+<p class="italic text-xs text-gray-500 mb-8">"${d.meat}"</p>
+<div class="space-y-3 mb-10">
+<div class="p-4 bg-gray-100 flex gap-4 text-[11px] font-bold uppercase" onclick="handleCheck(this, ${id})"><input type="checkbox" class="sub-check"> Sub-Pillar Verification</div>
+<div class="p-4 bg-gray-100 flex gap-4 text-[11px] font-bold uppercase" onclick="handleCheck(this, ${id})"><input type="checkbox" class="sub-check"> Documentation Check</div>
+<div class="p-4 bg-gray-100 flex gap-4 text-[11px] font-bold uppercase" onclick="handleCheck(this, ${id})"><input type="checkbox" class="sub-check"> Logic Alignment</div>
+</div>
+<textarea class="w-full border-2 p-5 text-xs font-bold mb-8 h-32" placeholder="RATIONALE..."></textarea>
+<div class="flex gap-4">
+<button id="p-btn-${id}" disabled onclick="score(${id}, 'PASS')" class="flex-1 bg-green-600 text-white font-black py-5 text-[11px] uppercase rounded opacity-30">Pass</button>
+<button id="f-btn-${id}" disabled onclick="score(${id}, 'FAIL')" class="flex-1 bg-red-600 text-white font-black py-5 text-[11px] uppercase rounded opacity-30">Fail</button>
+</div>`;
+document.getElementById('drawer').classList.add('open');
+document.getElementById('overlay').style.display = 'block';
+}
 
-                        <div class="p-3 border-l-4 border-gold bg-white shadow-sm cursor-pointer hover:bg-gray-50 transition-all group" onclick="loadSovereignCase('Alpha Hedge Fund', 3, 'A-', 4)">
-                            <div class="flex justify-between items-center">
-                                <span class="text-[10px] font-black text-blue-steel uppercase">Alpha Hedge Fund</span>
-                                <span class="text-[7px] font-black bg-gold text-navy-bg px-1.5 py-0.5">ESCALATED</span>
-                            </div>
-                            <div class="flex justify-between mt-2">
-                                <span class="text-[8px] font-bold text-gray-400">SLA: 01:15:30</span>
-                                <span class="text-[8px] font-black text-gold uppercase opacity-0 group-hover:opacity-100">Review Case →</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+function handleCheck(el, id) {
+const cb = el.querySelector('.sub-check'); cb.checked = !cb.checked;
+el.style.background = cb.checked ? '#dcfce7' : '#f3f4f6';
+const checks = document.querySelectorAll('#drawer .sub-check:checked').length;
+const pBtn = document.getElementById(`p-btn-${id}`); const fBtn = document.getElementById(`f-btn-${id}`);
+if(checks === 3) { pBtn.disabled = false; pBtn.style.opacity = '1'; fBtn.disabled = false; fBtn.style.opacity = '1'; }
+else { pBtn.disabled = true; pBtn.style.opacity = '0.3'; fBtn.disabled = true; fBtn.style.opacity = '0.3'; }
+}
 
-                <!-- SOVEREIGN CASE DISPLAY -->
-                <div class="flex-1 flex items-center justify-center">
-                    <div id="sovereign-card-display" class="senior-card w-full max-w-4xl" style="background: white; border: 4px solid #F5C518; padding: 50px; position: relative;">
-                        
-                        <div id="empty-state" class="py-20 text-center">
-                            <svg viewBox="0 0 100 100" class="w-16 h-16 mx-auto mb-6 fill-gray-200">
-                                <path d="M50 5L15 25V50C15 72.1 30.1 91.5 50 95C69.9 91.5 85 72.1 85 50V25L50 5Z"/>
-                            </svg>
-                            <p class="text-[10px] font-black uppercase text-gray-300 tracking-[5px]">Select Case from Docket to Issue Decree</p>
-                        </div>
+function score(id, res) {
+document.getElementById(`c-${id}`).style.borderLeft = `8px solid ${res === 'PASS' ? '#16a34a' : '#dc2626'}`;
+document.getElementById(`st-${id}`).innerText = res; document.getElementById(`st-${id}`).style.color = res === 'PASS' ? '#16a34a' : '#dc2626';
+closeDrawer();
+}
 
-                        <div id="active-sovereign-case" class="hidden">
-                            <header class="mb-8 border-b pb-4 flex justify-between items-end">
-                                <div>
-                                    <span class="text-[9px] font-black text-gold uppercase tracking-[3px]">Institutional Risk Profile</span>
-                                    <h2 id="sov-entity-name" class="text-3xl font-black uppercase text-[#0B1F3F]">---</h2>
-                                </div>
-                                <div class="text-right">
-                                    <span class="text-[8px] font-black text-gray-300 uppercase">Master Registry</span>
-                                    <div class="text-[10px] font-black text-[#0B1F3F]">MC-DECREE-2026-X</div>
-                                </div>
-                            </header>
+function handleTier(s) { if(s.value === "4") document.getElementById('lock-screen').style.display = 'flex'; }
+function unlockSystem() { if(prompt("KEY:") === "MC8VETO") document.getElementById('lock-screen').style.display = 'none'; }
+function closeDrawer() { document.getElementById('drawer').classList.remove('open'); document.getElementById('overlay').style.display = 'none'; }
+function switchView(v, el) {
+document.querySelectorAll('.view-content').forEach(c => c.classList.remove('active'));
+document.getElementById('view-' + v).classList.add('active');
+document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+el.classList.add('active');
+}
+</script>
+</body>
+</html>
+<div id="view-veto" class="view-content">
+<h1 class="text-2xl font-black mb-6 uppercase">03 Veto Terminal</h1>
+<div class="grid grid-cols-3 gap-6 w-full max-w-[900px]">
+<button class="btn-escalate" onclick="promptVeto('MC8ADMIN')">Admin Override</button>
+<button class="btn-authorize" onclick="alert('VETO LOGGED')">Veto Case</button>
+<button class="btn-escalate" onclick="alert('LOCK ENGAGED')">Lock Node</button>
+</div>
+</div>
 
-                            <div class="grid grid-cols-3 gap-8 mb-10">
-                                <div class="border-l-2 border-gold pl-4">
-                                    <span class="text-[9px] font-black text-gray-400 uppercase mb-2 block">Regulatory Exposure</span>
-                                    <div class="flex items-end gap-2">
-                                        <span id="sov-exposure" class="text-2xl font-black text-[#0B1F3F]">--</span>
-                                        <span class="text-[10px] font-bold text-gray-300 mb-1">/ 10</span>
-                                    </div>
-                                </div>
-                                <div class="border-l-2 border-gold pl-4">
-                                    <span class="text-[9px] font-black text-gray-400 uppercase mb-2 block">Legal Immunity Grade</span>
-                                    <div id="sov-grade" class="text-2xl font-black text-[#0B1F3F]">--</div>
-                                </div>
-                                <div class="border-l-2 border-gold pl-4">
-                                    <span class="text-[9px] font-black text-gray-400 uppercase mb-2 block">Firm Precedent</span>
-                                    <div id="sov-precedent" class="text-2xl font-black text-[#0B1F3F]">MATCH</div>
-                                </div>
-                            </div>
+<div id="view-matrix" class="view-content">
+<h1 class="text-2xl font-black mb-6 uppercase">04 Scoring Matrix</h1>
+<table class="matrix-table">
+<thead><tr><th>Pillar</th><th>Score</th><th>Status</th><th>Tier</th></tr></thead>
+<tbody id="matrix-body"></tbody>
+</table>
+</div>
 
-                            <div class="bg-gray-50 p-6 border border-gray-100 mb-8">
-                                <span class="text-[9px] font-black text-gray-400 uppercase mb-2 block">Sovereign Decree / Learning Opportunity</span>
-                                <p class="text-[11px] leading-relaxed italic text-gray-500 mt-2">
-                                    Reviewing Analyst rationale against weighted metrics. Senior Decree will override or confirm based on the Institutional Risk Appetite.
-                                </p>
-                            </div>
+<div id="view-vault" class="view-content">
+<h1 class="text-2xl font-black mb-6 uppercase">05 Logic Vault</h1>
+<div class="grid grid-cols-2 gap-4 max-w-[900px] w-full">
+<textarea class="w-full h-48 border-2 p-4 text-xs font-bold" placeholder="Enter or review logic..."></textarea>
+<textarea class="w-full h-48 border-2 p-4 text-xs font-bold" placeholder="Compliance Notes..."></textarea>
+</div>
+<button class="btn-authorize mt-6" onclick="alert('VAULT SAVED')">Save Vault</button>
+</div>
 
-                            <div class="flex gap-4">
-                                <button class="btn-escalate" onclick="openSeniorMasterclass()" style="flex:1;">Review Senior Precedent</button>
-                                <button class="btn-authorize" onclick="alert('SOVEREIGN DECREE ISSUED')" style="flex:1;">Issue Master Decree</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<script>
+// Populate matrix with current scores
+function updateMatrix() {
+const tbody = document.getElementById('matrix-body');
+tbody.innerHTML = '';
+Object.keys(MC_DATA).forEach(k=>{
+const statusEl = document.getElementById(`st-${k}`);
+const tier = document.getElementById('tier-sel').value;
+tbody.innerHTML += `<tr>
+<td>0${k} ${MC_DATA[k].title}</td>
+<td>${statusEl ? statusEl.innerText : 'Pending'}</td>
+<td>${statusEl ? statusEl.innerText : 'Pending'}</td>
+<td>${tier}</td>
+</tr>`;
+});
+}
+setInterval(updateMatrix,2000);
 
-        <!-- SCRIPT: Load Sovereign Case -->
-        <script>
-            function loadSovereignCase(name, tier, grade, exposure){
-                // Hide placeholder, show card
-                document.getElementById('empty-state').classList.add('hidden');
-                document.getElementById('active-sovereign-case').classList.remove('hidden');
+// Veto admin key
+function promptVeto(adminKey){
+const entry = prompt("ENTER ADMIN PASSKEY");
+if(entry === adminKey){
+alert("ADMIN ACCESS GRANTED");
+document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+document.getElementById('view-vault').classList.add('active');
+} else { alert("ACCESS DENIED"); }
+}
 
-                // Inject values
-                document.getElementById('sov-entity-name').innerText = name;
-                document.getElementById('sov-grade').innerText = grade;
-                document.getElementById('sov-exposure').innerText = "0" + exposure;
+// Lock system example
+function engageLock(){
+document.getElementById('lock-screen').style.display = 'flex';
+}
 
-                // Border color based on tier
-                const card = document.getElementById('sovereign-card-display');
-                card.style.borderColor = (tier === 4) ? '#991b1b' : '#F5C518';
-            }
-
-            function openSeniorMasterclass(){
-                alert("Senior Architect Review Unlocked"); 
-            }
-        </script>
+// Optional: additional logic for vault, matrix, and terminal
+</script>
