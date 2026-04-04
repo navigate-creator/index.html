@@ -10,7 +10,7 @@
         :root { --navy-bg: #050b14; --gold: #F5C518; --blue-steel: #0B1F3F; --dot: #cbd5e1; --text-grey: #64748b; }
         body { font-family: 'Inter', sans-serif; background: #fff; margin: 0; display: flex; height: 100vh; overflow: hidden; color: var(--blue-steel); }
 
-        /* BRANDING (Surgical Precision) */
+        /* BRANDING */
         .sidebar { width: 300px; background: var(--navy-bg); display: flex; flex-direction: column; shrink-0; border-right: 1px solid rgba(255,255,255,0.05); }
         .brand-block { padding: 45px 30px; display: flex; align-items: center; gap: 15px; }
         .m-logo { width: 50px; height: 50px; fill: white; }
@@ -20,30 +20,27 @@
         .nav-item { padding: 18px 35px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #475569; cursor: pointer; transition: 0.2s; }
         .nav-item.active { color: var(--gold); }
 
-        /* DOT GRID VIEWPORT */
+        /* VIEWPORT & DOT GRID */
         .viewport { flex: 1; position: relative; background-image: radial-gradient(var(--dot) 0.8px, transparent 0.8px); background-size: 20px 20px; overflow-y: auto; }
         .view-content { display: none; width: 100%; height: 100%; padding: 40px; }
         .view-content.active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
 
-        /* CIRCULAR FRAMEWORK (Architect Directive) */
+        /* CIRCULAR FRAMEWORK */
         .fw-orbit-container { position: relative; width: 650px; height: 650px; display: flex; align-items: center; justify-content: center; scale: 0.85; }
         .mc-core-center { position: absolute; width: 220px; height: 360px; border: 4px solid var(--gold); background: white; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 50; padding: 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); text-align: center; }
-        
-        .orbit-node { position: absolute; width: 130px; cursor: pointer; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 60; }
-        .orbit-node:hover { transform: scale(1.1); }
+        .orbit-node { position: absolute; width: 130px; cursor: pointer; transition: 0.3s; z-index: 60; }
         .node-idx { background: var(--blue-steel); color: white; padding: 10px; font-family: 'Montserrat'; font-weight: 900; font-size: 12px; text-align: center; border-radius: 4px 4px 0 0; }
         .node-lbl { background: white; border: 1.5px solid var(--gold); padding: 8px 4px; font-size: 8px; font-weight: 900; color: var(--blue-steel); text-transform: uppercase; border-radius: 0 0 4px 4px; text-align: center; white-space: nowrap; }
 
-        /* ANALYST UI (Exact 2x2 Header) */
-        .analyst-header { background: white; padding: 40px; border: 1px solid #e2e8f0; width: 100%; max-width: 950px; margin-bottom: 30px; }
-        .header-label { font-size: 9px; font-weight: 900; color: #94a3b8; text-transform: uppercase; margin-bottom: 8px; display: block; }
-        .analyst-card { background: white; border: 1px solid #e2e8f0; padding: 30px; cursor: pointer; transition: 0.2s; position: relative; }
-        .status-tab { position: absolute; top: 15px; right: 15px; font-size: 8px; font-weight: 900; color: #cbd5e1; text-transform: uppercase; }
+        /* ANALYST STATION - COMPACT */
+        .analyst-header { background: white; padding: 30px; border: 1px solid #e2e8f0; width: 100%; max-width: 950px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+        .header-label { font-size: 9px; font-weight: 900; color: #94a3b8; text-transform: uppercase; margin-bottom: 6px; display: block; }
+        .analyst-card { background: white; border: 1px solid #e2e8f0; padding: 18px 25px; cursor: pointer; transition: 0.2s; position: relative; margin-bottom: 4px; }
+        .status-tab { position: absolute; top: 12px; right: 15px; font-size: 8px; font-weight: 900; color: #cbd5e1; text-transform: uppercase; }
 
         /* BUTTONS */
         .btn-authorize { background: var(--blue-steel); color: white; padding: 18px 36px; font-weight: 900; font-size: 10px; text-transform: uppercase; border-radius: 4px; flex: 1; transition: 0.3s; }
         .btn-escalate { background: var(--gold); color: var(--navy-bg); padding: 18px 36px; font-weight: 900; font-size: 10px; text-transform: uppercase; border-radius: 4px; flex: 1; transition: 0.3s; }
-        .btn-authorize:hover, .btn-escalate:hover { filter: brightness(1.1); transform: translateY(-1px); }
 
         #drawer { position: fixed; right: -450px; top: 0; width: 450px; height: 100vh; background: white; border-left: 3px solid var(--gold); z-index: 1000; transition: 0.3s ease; padding: 40px; overflow-y: auto; }
         #drawer.open { right: 0; }
@@ -90,14 +87,14 @@
 
         <div id="view-prep" class="view-content">
             <div class="analyst-header">
-                <div class="grid grid-cols-2 gap-10 mb-8">
+                <div class="grid grid-cols-2 gap-10 mb-6">
                     <div>
                         <span class="header-label">Legal Entity Name</span>
-                        <input type="text" placeholder="ENTER ENTITY NAME" class="w-full border-b-2 p-2 text-xs font-bold uppercase outline-none focus:border-navy">
+                        <input type="text" placeholder="ENTER ENTITY NAME" class="w-full border-b-2 p-1 text-xs font-bold uppercase outline-none focus:border-navy">
                     </div>
                     <div>
-                        <span class="header-label">Risk Level (Jurisdiction)</span>
-                        <select class="w-full border-b-2 p-2 text-xs font-bold uppercase outline-none bg-transparent">
+                        <span class="header-label">Jurisdictional Risk</span>
+                        <select class="w-full border-b-2 p-1 text-xs font-bold uppercase outline-none bg-transparent">
                             <option>Low Risk (Standard)</option><option>Medium Risk (Grey List)</option><option>High Risk (FATF Red)</option>
                         </select>
                     </div>
@@ -119,9 +116,9 @@
                 </div>
             </div>
             
-            <div class="grid grid-cols-2 gap-4 w-full max-w-[950px]" id="a-grid"></div>
+            <div class="grid grid-cols-2 gap-x-4 gap-y-2 w-full max-w-[950px]" id="a-grid"></div>
             
-            <div class="mt-12 flex gap-6 w-full max-w-[950px]">
+            <div class="mt-8 flex gap-6 w-full max-w-[950px]">
                 <button class="btn-authorize" onclick="alert('AUTHORIZED')">Authorize Final Audit</button>
                 <button class="btn-escalate" onclick="alert('ESCALATED')">Escalate to Architect</button>
             </div>
@@ -130,14 +127,14 @@
 
     <script>
         const MC_DATA = {
-            1: { title: "Risk Taxonomy", meat: "Classification is the filter for resources.", depth: "Establishing the legal and operational perimeter. Misalignment here cascades into regulatory leakage across all subsequent pillars." },
-            2: { title: "Customer ID", meat: "Identity is the Digital Handshake.", depth: "Verification of the link between human and document. Binary gate protocol: No verification, no entry. 100% authenticity required." },
-            3: { title: "Diligence", meat: "The Wealth Narrative.", depth: "Investigative forensics into the origin of wealth. We don't just track funds; we validate the life-cycle of the asset's creation." },
-            4: { title: "Screening", meat: "Signal vs. Noise.", depth: "Triangulating real-time global sanctions and adverse media. Human intelligence differentiates hits from false-positive background noise." },
-            5: { title: "Evidence", meat: "The Regulatory Black Box.", depth: "Immutable preservation of metadata and timestamps. The audit trail is the firm's legal flight recorder in the event of an inquiry." },
-            6: { title: "Adjudication", meat: "Science over Opinion.", depth: "Objective decision logic based on pre-defined firm risk appetite. Neutralizing 'vibes' in favor of binary risk metrics." },
-            7: { title: "Quality", meat: "Self-audit is safety.", depth: "Internal peer-review cycles and remediation protocols. We find the gaps before the regulator enters the building." },
-            8: { title: "Governance", meat: "Data flows up; safety flows down.", depth: "Board-level reporting and regulatory delta tracking. Ensuring the firm remains a moving target for compliance risk." }
+            1: { title: "Risk Taxonomy", meat: "Classification is the filter for resources. If you misidentify the beast, you use the wrong cage.", depth: "Establishing the legal and operational perimeter. Misalignment here cascades into regulatory leakage across all subsequent pillars." },
+            2: { title: "Customer ID", meat: "Identity is the Digital Handshake. We do not accept 'close enough'. No ID, no entry.", depth: "Verification of the link between human and document. Binary gate protocol: No verification, no entry. 100% authenticity required." },
+            3: { title: "Diligence", meat: "The Wealth Narrative. We don't just want the money; we want the history of the money.", depth: "Investigative forensics into the origin of wealth. We don't just track funds; we validate the life-cycle of the asset's creation." },
+            4: { title: "Screening", meat: "Signal vs. Noise. Automation handles the data; humans handle the truth.", depth: "Triangulating real-time global sanctions and adverse media. Human intelligence differentiates hits from false-positive background noise." },
+            5: { title: "Evidence", meat: "The Regulatory Black Box. If it isn't timestamped, it is a liability.", depth: "Immutable preservation of metadata and timestamps. The audit trail is the firm's legal flight recorder in the event of an inquiry." },
+            6: { title: "Adjudication", meat: "Compliance is an objective science, not a subjective opinion.", depth: "Objective decision logic based on pre-defined firm risk appetite. Neutralizing 'vibes' in favor of binary risk metrics." },
+            7: { title: "Quality", meat: "Self-audit is safety. We find the gaps before the regulator enters the building.", depth: "Internal peer-review cycles and remediation protocols. Ensuring the 8-Pillar standard never decays." },
+            8: { title: "Governance", meat: "Data flows up; safety flows down. Accuracy ensures Board-level security.", depth: "Board-level reporting and regulatory delta tracking. Ensuring the firm remains a moving target for compliance risk." }
         };
 
         window.onload = () => {
@@ -161,8 +158,8 @@
                 grid.innerHTML += `
                     <div class="analyst-card" id="c-${k}" onclick="openAnalyst(${k})">
                         <span class="status-tab">Awaiting</span>
-                        <span class="text-[9px] font-black text-gold uppercase mb-2 block">0${k}</span>
-                        <h3 class="text-[12px] font-black uppercase text-blue-steel">${MC_DATA[k].title}</h3>
+                        <span class="text-[9px] font-black text-gold uppercase mb-1 block">0${k}</span>
+                        <h3 class="text-[11px] font-black uppercase text-blue-steel">${MC_DATA[k].title}</h3>
                     </div>`;
             });
         };
@@ -204,7 +201,10 @@
         }
 
         function score(id, res) {
-            document.getElementById(`c-${id}`).style.borderLeft = `8px solid ${res === 'PASS' ? '#16a34a' : '#dc2626'}`;
+            const card = document.getElementById(`c-${id}`);
+            card.style.borderLeft = `8px solid ${res === 'PASS' ? '#16a34a' : '#dc2626'}`;
+            const tab = card.querySelector('.status-tab');
+            tab.innerText = res; tab.style.color = res === 'PASS' ? '#16a34a' : '#dc2626';
             closeDrawer();
         }
 
