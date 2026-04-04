@@ -1,0 +1,213 @@
+// pages/index.jsx
+import { useEffect, useState } from 'react';
+import { createClient } from '@supabase/supabase-js';
+import 'tailwindcss/tailwind.css';
+
+// ====== Supabase Setup ======
+const supabaseUrl = 'https://YOUR_SUPABASE_PROJECT.supabase.co';
+const supabaseKey = 'YOUR_SUPABASE_ANON_KEY';
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+export default function Home() {
+  const [pillars, setPillars] = useState([]);
+  const [pillarScores, setPillarScores] = useState([]);
+  const [pillarFiles, setPillarFiles] = useState([]);
+  const [tenant, setTenant] = useState('default');
+  const [decision, setDecision] = useState('');
+
+  // ====== Fetch Pillars from Supabase ======
+  const fetchPillars = async () => {
+    const { data, error } = await supabase.from('pillars').select('*').order('id');
+    if (error) console.error('Error fetching pillars:', error);
+    else {
+      setPillars(data);
+      setPillarScores(new Array(data.length).fill(0));
+      setPillarFiles(new Array(data.length).fill(null));
+    }
+  };
+
+  useEffect(() => { fetchPillars(); }, []);
+
+  // ====== Calculate Average Score and Decision ======
+  const calculateAverage = () => {
+    if (!pillarScores.length) return 0;
+    const total = pillarScores.reduce((acc, s) => acc + s, 0);
+    return Math.round(total / pillarScores.length);
+  };
+
+  const calculateDecision = (average) => {
+    if (average >= 85) return 'APPROVE';
+    if (average >= 70) return 'REVIEW';
+    if (average >= 50) return 'ESCALATE';
+    return 'FAIL';
+  };
+
+  const averageScore = calculateAverage();
+  const liveDecision = calculateDecision(averageScore);
+
+  // ====== Handle Score Input ======
+  const handleScoreChange = (index, value) => {
+    const newScores = [...pillarScores];
+    newScores[index] = value;
+    setPillarScores(newScores);
+  };
+
+  // ====== Handle File Upload per Pillar ======
+  const handleFileChange = async (index, file) => {
+    if (!file) return;
+
+    const fileName = `${tenant}/${pillarNameSafe(pillars[index].name)}-${Date.now()}.pdf`;
+    const { data, error } = await supabase.storage.from('evidence').upload(fileName, file);
+
+    if (error) console.error('Error uploading file:', error);
+    else {
+      const url = supabase.storage.from('evidence').getPublicUrl(data.path).publicUrl;
+      const newFiles = [...pillarFiles];
+      newFiles[index] = url;
+      setPillarFiles(newFiles);
+    }
+  };
+
+  const pillarNameSafe = (name) => name.toLowerCase().replace(/\s+/g, '-');
+
+  // ====== Submit Case ======
+  const handleSubmit = async () => {
+    const finalDecision = liveDecision;
+
+    const evidence_chain = pillars.map((p, i) => ({
+      pillar_id: p.id,
+      timestamp: new Date().toISOString(),
+      pdf_url: pillarFiles[i] || null
+    }));
+
+    const { data, error } = await supabase.from('cases').insert([
+      {
+        tenant_id: tenant,
+        entity_name: 'Sample Client',
+        pillar_scores: pillarScores,
+        final_score: averageScore,
+        status: finalDecision,
+        evidence_chain
+      }
+    ]);
+
+    if (error) console.error('Error saving case:', error);
+    else console.log('Case saved:', data);
+
+    setDecision(finalDecision);
+  };
+
+  return (
+    <div className="min-h-screen bg-[#FFFBF0] p-10 font-sans">
+      <h1 className="font-montserrat font-black text-3xl mb-8 text-[#0B1F3F]">MC™ Compliance Blueprint</h1>
+
+      {/* Tenant Selection */}
+      <div className="mb-6">
+        <label className="mr-2 font-bold text-[#0B1F3F]">Tenant:</label>
+        <select
+          value={tenant}
+          onChange={(e) => setTenant(e.target.value)}
+          className="border rounded p-1"
+        >
+          <option value="default">Default</option>
+          <option value="tenant_a">Tenant A</option>
+          <option value="tenant_b">Tenant B</option>
+        </select>
+      </div>
+
+      {/* Live Progress Bar */}
+      <div className="mb-6">
+        <div className="flex justify-between mb-1">
+          <span className="text-sm font-medium text-[#0B1F3F]">Average Score</span>
+          <span className="text-sm font-medium text-[#0B1F3F]">{averageScore}%</span>
+        </div>
+        <div className="w-full bg-gray-200 rounded h-4">
+          <div
+            className={`h-4 rounded ${
+              averageScore >= 85 ? 'bg-green-500' :
+              averageScore >= 70 ? 'bg-yellow-400' :
+              averageScore >= 50 ? 'bg-orange-400' : 'bg-red-500'
+            }`}
+            style={{ width: `${averageScore}%` }}
+          />
+        </div>
+        <div className="mt-1 font-bold text-[#0B1F3F]">Live Decision: {liveDecision}</div>
+      </div>
+
+      {/* Pillar Cards */}
+      {pillars.map((pillar, i) => (
+        <PillarCard
+          key={pillar.id}
+          pillar={pillar}
+          score={pillarScores[i]}
+          setScore={(val) => handleScoreChange(i, val)}
+          fileUrl={pillarFiles[i]}
+          onFileChange={(file) => handleFileChange(i, file)}
+        />
+      ))}
+
+      {/* Submit Button */}
+      <button
+        onClick={handleSubmit}
+        className="mt-6 bg-[#0B1F3F] text-white font-bold px-6 py-3 rounded hover:bg-[#081832]"
+      >
+        Submit Case
+      </button>
+
+      {/* Final Decision Display */}
+      {decision && (
+        <div className="mt-6 p-6 bg-white border-l-4 border-[#F5C518] rounded shadow-sm text-xl font-bold text-[#0B1F3F]">
+          Final Decision: {decision}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ====== Pillar Card Component ======
+const PillarCard = ({ pillar, score, setScore, fileUrl, onFileChange }) => {
+  const [showGuidance, setShowGuidance] = useState(false);
+
+  return (
+    <div className="border-l-4 border-[#F5C518] p-6 mb-4 bg-white rounded shadow-sm">
+      <h3 className="font-montserrat font-black text-lg">{pillar.name}</h3>
+      <p><b>HOW:</b> {pillar.how}</p>
+      <p><b>WHY:</b> {pillar.why}</p>
+      <p><b>OUTCOME:</b> {pillar.outcome}</p>
+
+      <button
+        onClick={() => setShowGuidance(!showGuidance)}
+        className="mt-2 text-xs font-bold text-[#0B1F3F] underline"
+      >
+        {showGuidance ? 'Hide Guidance' : 'Show Guidance'}
+      </button>
+
+      {showGuidance && (
+        <p className="text-slate-500 mt-1 text-xs">{pillar.guidance}</p>
+      )}
+
+      <input
+        type="number"
+        min="0"
+        max="100"
+        value={score}
+        onChange={(e) => setScore(Number(e.target.value))}
+        className="mt-2 border border-slate-300 p-2 rounded w-24"
+        placeholder="Score 0-100"
+      />
+
+      <div className="mt-2">
+        <input
+          type="file"
+          accept="application/pdf"
+          onChange={(e) => onFileChange(e.target.files[0])}
+        />
+        {fileUrl && (
+          <p className="text-xs text-slate-500 mt-1">
+            Uploaded: <a href={fileUrl} target="_blank" rel="noreferrer" className="underline text-blue-600">View PDF</a>
+          </p>
+        )}
+      </div>
+    </div>
+  );
+};
