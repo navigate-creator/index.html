@@ -5,42 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MC™ MASTER OS | MERRICK COMPLIANCE ™</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --navy: #0B1F3F; --gold: #F5C518; --border: rgba(255,255,255,0.1); --bg-dark: #061021; --grey-text: #9ca3af; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: white; margin: 0; overflow: hidden; display: flex; font-weight: 300; }
-        
-        /* SIDEBAR BRANDING (Upscaled per directive) */
-        .sidebar { width: 320px; height: 100vh; background: #081426; border-right: 1px solid var(--border); display: flex; flex-direction: column; shrink-0; z-index: 50; }
-        .sidebar-brand { display: flex; align-items: center; justify-content: center; gap: 24px; padding: 50px 30px; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
-        .m-logo-large { width: 75px; height: 75px; fill: white; shrink-0; } 
-        .m-name-large { font-family: 'Montserrat'; font-weight: 900; font-size: 28px; color: white; text-transform: uppercase; line-height: 1.1; letter-spacing: -1px; }
-        .m-compliance-large { font-family: 'Inter'; font-weight: 300; font-size: 12px; color: var(--grey-text); text-transform: uppercase; letter-spacing: 3px; }
+        :root { --navy-sidebar: #050b14; --gold: #F5C518; --navy-pillars: #0B1F3F; --dot-color: #cbd5e1; }
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; margin: 0; display: flex; height: 100vh; overflow: hidden; }
 
-        .nav-item { padding: 20px 40px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: rgba(255, 255, 255, 0.4); cursor: pointer; transition: 0.3s; border-left: 4px solid transparent; }
-        .nav-item.active { color: var(--gold); background: rgba(245, 197, 24, 0.05); border-left-color: var(--gold); }
+        /* PROFESSIONAL SIDEBAR (Match image_4eb0b3.png) */
+        .sidebar { width: 300px; background: var(--navy-sidebar); display: flex; flex-direction: column; shrink-0; border-right: 1px solid rgba(255,255,255,0.05); }
+        .brand-container { padding: 40px 30px; display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .logo-mc { width: 45px; height: 45px; fill: white; } /* Upscaled Monogram Only */
+        .brand-text { display: flex; flex-direction: column; }
+        .text-merrick { color: white; font-family: 'Montserrat'; font-weight: 900; font-size: 22px; letter-spacing: -0.5px; line-height: 1; }
+        .text-compliance { color: #64748b; font-size: 10px; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
 
-        /* VIEWPORT & DOT GRID (image_4e9e28.png) */
-        .viewport { flex: 1; height: 100vh; overflow-y: auto; background-color: #ffffff; background-image: radial-gradient(#cbd5e1 1px, transparent 1px); background-size: 24px 24px; color: var(--navy); position: relative; }
-        .view-content { display: none; padding: 80px 40px; animation: fadeIn 0.4s ease forwards; }
-        .view-content.active { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
+        .nav-list { flex: 1; margin-top: 20px; }
+        .nav-item { padding: 20px 30px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #475569; cursor: pointer; transition: 0.2s; }
+        .nav-item.active { color: var(--gold); }
+        .nav-item:hover { color: white; }
+
+        /* VIEWPORT & DOT GRID */
+        .viewport { flex: 1; position: relative; overflow-y: auto; background-image: radial-gradient(var(--dot-color) 0.8px, transparent 0.8px); background-size: 20px 20px; }
+        .view-content { display: none; padding: 60px; min-height: 100vh; width: 100%; }
+        .view-content.active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
 
         /* FRAMEWORK VISUALS (EXACT MATCH) */
-        .fw-container { display: flex; align-items: center; gap: 0; scale: 0.9; }
-        .mc-core-box { width: 180px; height: 320px; border: 4px solid var(--gold); background: white; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 20px 40px rgba(0,0,0,0.05); z-index: 10; }
-        
-        .pillar-flow { display: flex; align-items: flex-end; gap: 8px; margin-left: -2px; }
-        .pillar-node { display: flex; flex-direction: column; transition: 0.3s; cursor: pointer; }
-        .pillar-node:hover { transform: translateY(-5px); }
-        .p-num-box { background: var(--navy); color: white; width: 100%; padding: 12px 0; text-align: center; font-family: 'Montserrat'; font-weight: 900; font-size: 14px; border-radius: 4px 4px 0 0; }
-        .p-name-box { background: white; border: 1px solid var(--gold); padding: 10px 15px; min-width: 130px; text-align: center; font-size: 9px; font-weight: 900; text-transform: uppercase; color: var(--navy); white-space: nowrap; border-radius: 0 0 4px 4px; }
+        .fw-container { display: flex; align-items: center; scale: 0.85; }
+        .mc-core-block { width: 160px; height: 300px; border: 3px solid var(--gold); background: white; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-right: -2px; z-index: 10; }
+        .pillar-flow { display: flex; align-items: flex-end; gap: 8px; }
+        .p-node { display: flex; flex-direction: column; width: 130px; }
+        .p-head { background: var(--navy-pillars); color: white; padding: 12px; text-align: center; font-family: 'Montserrat'; font-weight: 900; font-size: 13px; border-radius: 4px 4px 0 0; }
+        .p-body { background: white; border: 1.5px solid var(--gold); padding: 10px 5px; text-align: center; font-size: 8px; font-weight: 900; text-transform: uppercase; color: var(--navy-pillars); border-radius: 0 0 4px 4px; white-space: nowrap; }
 
-        /* LOGIC DRAWER */
-        #drawer { position: fixed; right: -500px; top: 0; width: 500px; height: 100vh; background: white; border-left: 3px solid var(--gold); z-index: 1000; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); padding: 50px; overflow-y: auto; }
+        /* ANALYST PAGE (PRESERVED LOGIC) */
+        .analyst-header { background: white; padding: 30px; border: 1px solid #e2e8f0; width: 100%; max-width: 900px; margin-bottom: 30px; border-radius: 4px; }
+        .pillar-card { background: white; border: 1px solid #e2e8f0; padding: 20px; cursor: pointer; transition: 0.2s; }
+        .pillar-card:hover { border-color: var(--gold); }
+        .pillar-card.scored { border-left: 4px solid var(--gold); }
+
+        /* LOGIC DRAWER (Analyst Only) */
+        #drawer { position: fixed; right: -450px; top: 0; width: 450px; height: 100vh; background: white; border-left: 3px solid var(--gold); z-index: 1000; transition: 0.3s ease; padding: 40px; overflow-y: auto; }
         #drawer.open { right: 0; }
-        .drawer-overlay { position: fixed; inset: 0; background: rgba(6, 16, 33, 0.8); z-index: 900; display: none; }
+        .drawer-overlay { position: fixed; inset: 0; background: rgba(5, 11, 20, 0.7); z-index: 900; display: none; }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .btn-action { background: var(--navy-pillars); color: white; padding: 12px 24px; font-weight: 900; font-size: 10px; text-transform: uppercase; border-radius: 4px; }
+        .sub-pill { padding: 10px; background: #f8fafc; border-radius: 4px; font-size: 10px; font-weight: 700; display: flex; gap: 10px; margin-bottom: 5px; cursor: pointer; }
+        .sub-pill.checked { background: #dcfce7; color: #166534; }
     </style>
 </head>
 <body>
@@ -49,86 +58,124 @@
     <div id="drawer"><div id="drawer-content"></div></div>
 
     <nav class="sidebar">
-        <div class="sidebar-brand">
-            <svg viewBox="0 0 100 100" class="m-logo-large">
+        <div class="brand-container">
+            <svg viewBox="0 0 100 100" class="logo-mc">
                 <rect x="12" y="30" width="16" height="40"/><path d="M12 30H50V40H32V70H12V30Z"/><rect x="34" y="30" width="16" height="40"/><path d="M56 42H88V50H72V58H88V66H56V42Z"/>
             </svg>
-            <div class="brand-text-block">
-                <span class="m-name-large">MERRICK</span>
-                <span class="m-compliance-large">COMPLIANCE ™</span>
+            <div class="brand-text">
+                <span class="text-merrick">MERRICK</span>
+                <span class="text-compliance">COMPLIANCE ™</span>
             </div>
         </div>
-        <div onclick="switchView('framework', this)" class="nav-item active">01 Framework</div>
-        <div onclick="switchView('prep', this)" class="nav-item">02 Analyst Prep</div>
-        <div onclick="switchView('veto', this)" class="nav-item">03 Veto Terminal</div>
-        <div onclick="switchView('vault', this)" class="nav-item">04 Logic Vault</div>
+        <div class="nav-list">
+            <div onclick="switchView('framework', this)" class="nav-item active">01 Framework</div>
+            <div onclick="switchView('prep', this)" class="nav-item">02 Analyst Prep</div>
+            <div onclick="switchView('veto', this)" class="nav-item">03 Veto Terminal</div>
+            <div onclick="switchView('vault', this)" class="nav-item">04 Logic Vault</div>
+        </div>
     </nav>
 
     <main class="viewport">
         <div id="view-framework" class="view-content active">
             <div class="fw-container">
-                <div class="mc-core-box">
-                    <svg viewBox="0 0 100 100" class="w-16 h-16 mb-6" fill="var(--navy)">
+                <div class="mc-core-block">
+                    <svg viewBox="0 0 100 100" class="w-12 h-12 mb-4" fill="var(--navy-pillars)">
                         <rect x="12" y="30" width="16" height="40"/><path d="M12 30H50V40H32V70H12V30Z"/><rect x="34" y="30" width="16" height="40"/><path d="M56 42H88V50H72V58H88V66H56V42Z"/>
                     </svg>
-                    <span class="text-[11px] font-black tracking-[3px] text-navy uppercase">MC™ CORE</span>
+                    <span class="text-[10px] font-black tracking-[2px] text-navy-pillars">MC™ CORE</span>
                 </div>
-                
-                <div class="pillar-flow" id="fw-flow"></div>
+                <div class="pillar-flow" id="static-flow"></div>
             </div>
         </div>
 
-        <div id="view-prep" class="view-content">Analyst Station Blueprint Preserved.</div>
+        <div id="view-prep" class="view-content">
+            <div class="analyst-header">
+                <div class="grid grid-cols-2 gap-10 mb-6">
+                    <input type="text" placeholder="LEGAL ENTITY NAME" class="border-b-2 p-2 text-xs font-bold outline-none uppercase">
+                    <select class="border-b-2 p-2 text-xs font-bold outline-none uppercase bg-transparent">
+                        <option>Low Risk</option><option>Medium Risk</option><option>High Risk</option>
+                    </select>
+                </div>
+                <div class="flex justify-between items-center">
+                    <input type="text" placeholder="ANALYST ID" class="border-b text-[10px] font-bold uppercase w-32">
+                    <select id="tier-select" onchange="checkTier(this)" class="text-[10px] font-black uppercase border p-1">
+                        <option value="1">Tier 1</option><option value="2">Tier 2</option><option value="3">Tier 3</option><option value="4">Tier 4</option>
+                    </select>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4 w-full max-w-[900px]" id="analyst-grid"></div>
+            <div class="mt-8 flex gap-4 w-full max-w-[900px]">
+                <button class="btn-action flex-1">Authorize Audit</button>
+                <button class="btn-action flex-1 bg-white !text-navy-pillars border-2 border-navy-pillars">Escalate</button>
+            </div>
+        </div>
     </main>
 
     <script>
-        const MC_LOGIC = {
-            1: { title: "Risk Taxonomy", meat: "Classification is the filter for resources.", subs: ["Jurisdiction", "Business Model", "Product Exposure"] },
-            2: { title: "Customer ID", meat: "Identity is the Digital Handshake.", subs: ["Liveness", "Document Auth", "Nexus"] },
+        const MC_DATA = {
+            1: { title: "Risk Taxonomy", meat: "Classification is the filter for resources.", subs: ["Jurisdiction", "Business Model", "Product"] },
+            2: { title: "Customer ID", meat: "Identity is the Digital Handshake.", subs: ["Liveness", "Document", "Nexus"] },
             3: { title: "Diligence", meat: "The Wealth Narrative.", subs: ["UBO", "SoW", "Standing"] },
             4: { title: "Screening", meat: "Signal vs. Noise.", subs: ["PEP", "Sanction", "Media"] },
             5: { title: "Evidence", meat: "The Regulatory Black Box.", subs: ["Metadata", "Audit Trail", "Retention"] },
             6: { title: "Adjudication", meat: "Objective Science over Opinion.", subs: ["Consistency", "Conflict", "Tolerance"] },
-            7: { title: "Quality", meat: "We audit ourselves first.", subs: ["Sampling", "Error Rate", "Remediation"] },
+            7: { title: "Quality", meat: "Self-audit is institutional safety.", subs: ["Sampling", "Error Rate", "Remediation"] },
             8: { title: "Governance", meat: "Data flows up; safety flows down.", subs: ["Board Summary", "Regulatory Delta", "Escalation"] }
         };
 
         window.onload = () => {
-            const flow = document.getElementById('fw-flow');
-            Object.keys(MC_LOGIC).forEach(key => {
-                flow.innerHTML += `
-                    <div class="pillar-node" onclick="openPillar(${key})">
-                        <div class="p-num-box">0${key}</div>
-                        <div class="p-name-box">${MC_LOGIC[key].title}</div>
-                    </div>
-                `;
+            const flow = document.getElementById('static-flow');
+            const grid = document.getElementById('analyst-grid');
+            
+            Object.keys(MC_DATA).forEach(key => {
+                // Framework (Static)
+                flow.innerHTML += `<div class="p-node"><div class="p-head">0${key}</div><div class="p-body">${MC_DATA[key].title}</div></div>`;
+                // Analyst (Interactive)
+                grid.innerHTML += `
+                    <div class="pillar-card" id="card-${key}" onclick="openAnalystDrawer(${key})">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-[8px] font-black text-gold uppercase">Pillar 0${key}</span>
+                            <span id="stat-${key}" class="text-[8px] font-bold text-gray-400 uppercase">Pending</span>
+                        </div>
+                        <h3 class="text-[10px] font-black uppercase text-navy-pillars">${MC_DATA[key].title}</h3>
+                    </div>`;
             });
         };
 
-        function openPillar(id) {
-            const data = MC_LOGIC[id];
+        function openAnalystDrawer(id) {
+            const data = MC_DATA[id];
             document.getElementById('drawer-content').innerHTML = `
-                <h2 class="text-2xl font-black uppercase text-navy mb-4">${data.title}</h2>
-                <p class="italic text-gray-500 mb-8">"${data.meat}"</p>
-                <div class="space-y-4">
-                    ${data.subs.map(s => `<div class="p-4 bg-gray-50 font-bold text-[10px] uppercase border-l-4 border-gold">${s}</div>`).join('')}
+                <h2 class="text-xl font-black uppercase text-navy-pillars mb-2">${data.title}</h2>
+                <p class="text-xs italic text-gray-500 mb-6">"${data.meat}"</p>
+                <div class="space-y-2 mb-6">
+                    ${data.subs.map((s, i) => `<div class="sub-pill" onclick="this.classList.toggle('checked')"><span></span>${s}</div>`).join('')}
                 </div>
-            `;
+                <textarea class="w-full border p-3 text-xs font-bold mb-4 h-24 outline-none focus:border-gold" placeholder="COMPLIANCE RATIONALE..."></textarea>
+                <div class="flex gap-2">
+                    <button onclick="mark(${id}, 'PASS')" class="btn-action flex-1 bg-green-600">Pass</button>
+                    <button onclick="mark(${id}, 'FAIL')" class="btn-action flex-1 bg-red-600">Fail</button>
+                </div>`;
             document.getElementById('drawer').classList.add('open');
             document.getElementById('overlay').style.display = 'block';
         }
 
-        function closeDrawer() { 
-            document.getElementById('drawer').classList.remove('open'); 
-            document.getElementById('overlay').style.display = 'none'; 
+        function mark(id, res) {
+            document.getElementById(`card-${id}`).classList.add('scored');
+            document.getElementById(`stat-${id}`).innerText = res;
+            document.getElementById(`stat-${id}`).style.color = res === 'PASS' ? '#16a34a' : '#dc2626';
+            closeDrawer();
         }
 
+        function closeDrawer() { document.getElementById('drawer').classList.remove('open'); document.getElementById('overlay').style.display = 'none'; }
+        
         function switchView(v, el) {
             document.querySelectorAll('.view-content').forEach(c => c.classList.remove('active'));
             document.getElementById('view-' + v).classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             el.classList.add('active');
         }
+
+        function checkTier(s) { if(s.value === "4") alert("CRITICAL HALT INITIATED."); }
     </script>
 </body>
 </html>
