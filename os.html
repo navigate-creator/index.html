@@ -28,9 +28,13 @@
         #drawer.open { right: 0; }
         .drawer-overlay { position: fixed; inset: 0; background: rgba(6, 16, 33, 0.6); z-index: 900; display: none; }
 
-        /* PILLAR CARDS */
+        /* FRAMEWORK GRID */
+        .fw-card { background: white; border: 1px solid #E2E8F0; padding: 24px; border-radius: 4px; transition: 0.3s; cursor: pointer; position: relative; }
+        .fw-card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .fw-num { position: absolute; top: -10px; left: 20px; background: var(--navy); color: white; padding: 2px 8px; font-size: 9px; font-weight: 900; }
+
+        /* PILLAR CARDS (ANALYST) */
         .pillar-card { background: white; border: 1px solid #E2E8F0; padding: 20px; transition: 0.2s; cursor: pointer; }
-        .pillar-card:hover { border-color: var(--gold); transform: translateY(-2px); }
         .pillar-card.scored { border-left: 6px solid var(--gold); }
         
         .btn-action { background: var(--navy); color: white; padding: 14px 28px; font-weight: 900; font-size: 10px; text-transform: uppercase; border: none; cursor: pointer; border-radius: 4px; transition: 0.3s; }
@@ -45,18 +49,22 @@
 <body>
 
     <div id="lock-screen">
+        <svg viewBox="0 0 100 100" style="width:60px; height:60px; margin-bottom:24px;" fill="var(--gold)">
+            <rect x="12" y="30" width="16" height="40"/><path d="M12 30H50V40H32V70H12V30Z"/><rect x="34" y="30" width="16" height="40"/><path d="M56 42H88V50H72V58H88V66H56V42Z"/>
+        </svg>
         <h1 class="text-red-500 font-black text-4xl uppercase font-montserrat">System Locked</h1>
         <button onclick="unlockSystem()" class="mt-8 btn-action" style="background:var(--gold); color:var(--navy);">Resolution Handshake</button>
     </div>
 
     <div class="drawer-overlay" id="overlay" onclick="closeDrawer()"></div>
-    <div id="drawer">
-        <div id="drawer-content"></div>
-    </div>
+    <div id="drawer"><div id="drawer-content"></div></div>
 
     <nav class="sidebar">
-        <div class="p-8 border-b border-white/10 mb-6">
-            <span class="text-white font-black text-sm tracking-tighter uppercase font-montserrat">MC™ | MERRICK COMPLIANCE ™</span>
+        <div class="p-8 border-b border-white/10 mb-6 flex flex-col items-center">
+            <svg viewBox="0 0 100 100" class="w-10 h-10 mb-4" fill="white">
+                <rect x="12" y="30" width="16" height="40"/><path d="M12 30H50V40H32V70H12V30Z"/><rect x="34" y="30" width="16" height="40"/><path d="M56 42H88V50H72V58H88V66H56V42Z"/>
+            </svg>
+            <span class="text-white font-black text-[10px] tracking-tighter uppercase font-montserrat text-center leading-tight">MC™ | MERRICK<br>COMPLIANCE ™</span>
         </div>
         <div onclick="switchView('framework', this)" class="nav-item active">01 Framework</div>
         <div onclick="switchView('prep', this)" class="nav-item">02 Analyst Prep</div>
@@ -70,7 +78,18 @@
     </nav>
 
     <main class="viewport">
-        <div id="view-prep" class="view-content active">
+        <div id="view-framework" class="view-content active">
+            <header class="mb-12 border-b-2 border-navy pb-6">
+                <span class="text-[10px] font-black text-gold uppercase tracking-[4px]">Strategic Terminal</span>
+                <h2 class="font-montserrat font-black text-3xl uppercase mt-2">8 Pillar Compliance Framework</h2>
+                <p class="text-[11px] font-bold text-gray-400 mt-2 max-w-2xl uppercase leading-relaxed">Linear Governance Sequence: Institutional Defense & Regulatory Immunity.</p>
+            </header>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10" id="fw-grid">
+                </div>
+        </div>
+
+        <div id="view-prep" class="view-content">
             <div class="bg-white p-8 border border-gray-200 mb-10 rounded-lg shadow-sm">
                 <div class="grid grid-cols-2 gap-8">
                     <div>
@@ -96,21 +115,17 @@
                             <option value="4">Tier 4: Critical</option>
                         </select>
                     </div>
-                    <span class="text-[9px] font-black text-gold uppercase">Operational Status: <span class="text-navy">In-Progress</span></span>
                 </div>
             </div>
-
             <div class="grid grid-cols-2 gap-4" id="pillar-grid"></div>
-
             <div class="mt-10 pt-10 border-t flex gap-4">
                 <button id="btn-approve" onclick="finalizeAudit('APPROVED')" class="btn-action flex-1">Authorize Final Log</button>
                 <button onclick="finalizeAudit('ESCALATED')" class="btn-action flex-1 bg-white !text-navy border-2 border-navy">Escalate to Architect</button>
             </div>
         </div>
 
-        <div id="view-framework" class="view-content">Framework Placeholder</div>
-        <div id="view-veto" class="view-content">Veto Placeholder</div>
-        <div id="view-vault" class="view-content">Vault Placeholder</div>
+        <div id="view-veto" class="view-content">Veto Placeholder - Pending Review</div>
+        <div id="view-vault" class="view-content">Vault Placeholder - Pending Review</div>
     </main>
 
     <script>
@@ -128,8 +143,23 @@
         let scoredPillars = {};
 
         window.onload = () => {
+            if(localStorage.getItem('MC_STATUS') === 'LOCKED') document.getElementById('lock-screen').style.display = 'flex';
+            
             const grid = document.getElementById('pillar-grid');
+            const fwGrid = document.getElementById('fw-grid');
+
             Object.keys(MC_LOGIC).forEach(key => {
+                // Populate Framework
+                fwGrid.innerHTML += `
+                    <div class="fw-card" onclick="openPillar(${key})">
+                        <div class="fw-num">0${key}</div>
+                        <h3 class="text-xs font-black uppercase text-navy">${MC_LOGIC[key].title}</h3>
+                        <div class="mt-4 space-y-1">
+                            ${MC_LOGIC[key].subs.map(s => `<div class="text-[8px] font-bold text-gray-400 uppercase tracking-tighter">/ ${s}</div>`).join('')}
+                        </div>
+                    </div>
+                `;
+                // Populate Analyst Station
                 grid.innerHTML += `
                     <div class="pillar-card" id="card-${key}" onclick="openPillar(${key})">
                         <div class="flex justify-between items-start">
@@ -144,8 +174,7 @@
 
         function openPillar(id) {
             const data = MC_LOGIC[id];
-            const content = document.getElementById('drawer-content');
-            content.innerHTML = `
+            document.getElementById('drawer-content').innerHTML = `
                 <span class="text-[10px] font-black text-gold uppercase">Architect Insight</span>
                 <h2 class="text-xl font-black uppercase mb-6">${data.title}</h2>
                 <div class="bg-gray-50 p-6 border-l-4 border-navy mb-8">
@@ -154,15 +183,14 @@
                 <div class="space-y-3 mb-8">
                     ${data.subs.map((s, i) => `
                         <div class="sub-pill" id="sub-${id}-${i}" onclick="checkSub(${id}, ${i})">
-                            <div class="w-4 h-4 border-2 border-navy rounded-sm"></div>
-                            ${s}
+                            <div class="w-4 h-4 border-2 border-navy rounded-sm"></div>${s}
                         </div>
                     `).join('')}
                 </div>
-                <textarea id="rationale-${id}" class="w-full border-2 p-4 text-xs font-bold mb-6 outline-none focus:border-gold h-24" placeholder="ENTER COMPLIANCE RATIONALE..."></textarea>
+                <textarea id="rationale-${id}" class="w-full border-2 p-4 text-xs font-bold mb-6 outline-none focus:border-gold h-24" placeholder="ENTER RATIONALE..."></textarea>
                 <div class="flex gap-2">
-                    <button id="p-btn-${id}" disabled onclick="setScore(${id}, 'PASS')" class="btn-action flex-1 bg-green-600">Pass Pillar</button>
-                    <button id="f-btn-${id}" disabled onclick="setScore(${id}, 'FAIL')" class="btn-action flex-1 bg-red-600">Fail Pillar</button>
+                    <button id="p-btn-${id}" disabled onclick="setScore(${id}, 'PASS')" class="btn-action flex-1 bg-green-600">Pass</button>
+                    <button id="f-btn-${id}" disabled onclick="setScore(${id}, 'FAIL')" class="btn-action flex-1 bg-red-600">Fail</button>
                 </div>
             `;
             document.getElementById('drawer').classList.add('open');
@@ -171,59 +199,37 @@
 
         function checkSub(pId, sId) {
             document.getElementById(`sub-${pId}-${sId}`).classList.toggle('checked');
-            validatePillar(pId);
-        }
-
-        function validatePillar(id) {
-            const checkedCount = document.querySelectorAll('.sub-pill.checked').length;
-            const rationale = document.getElementById(`rationale-${id}`).value;
-            // Simplified: if current drawer has 3 checked, unlock
             const currentChecked = document.querySelectorAll(`#drawer .sub-pill.checked`).length;
             if (currentChecked === 3) {
-                document.getElementById(`p-btn-${id}`).disabled = false;
-                document.getElementById(`f-btn-${id}`).disabled = false;
+                document.getElementById(`p-btn-${pId}`).disabled = false;
+                document.getElementById(`f-btn-${pId}`).disabled = false;
             }
         }
 
         function setScore(id, score) {
-            scoredPillars[id] = { score, rationale: document.getElementById(`rationale-${id}`).value };
-            document.getElementById(`card-${id}`).classList.add('scored');
-            document.getElementById(`status-${id}`).innerText = score;
-            document.getElementById(`status-${id}`).classList.add(score === 'PASS' ? 'text-green-600' : 'text-red-600');
+            scoredPillars[id] = { score };
+            const card = document.getElementById(`card-${id}`);
+            if(card) card.classList.add('scored');
+            const status = document.getElementById(`status-${id}`);
+            if(status) { status.innerText = score; status.classList.add(score === 'PASS' ? 'text-green-600' : 'text-red-600'); }
             closeDrawer();
         }
 
-        function closeDrawer() {
-            document.getElementById('drawer').classList.remove('open');
-            document.getElementById('overlay').style.display = 'none';
-        }
+        function closeDrawer() { document.getElementById('drawer').classList.remove('open'); document.getElementById('overlay').style.display = 'none'; }
 
         function switchView(v, el) {
+            if(v === 'veto' && prompt("VETO CODE:") !== "MC8VETO") return;
+            if(v === 'vault' && prompt("VAULT CODE:") !== "VAULT99") return;
             document.querySelectorAll('.view-content').forEach(c => c.classList.remove('active'));
             document.getElementById('view-' + v).classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             el.classList.add('active');
         }
 
-        function updateTierUI() {
-            const tier = document.getElementById('tier-select').value;
-            if(tier === "4") {
-                localStorage.setItem('MC_STATUS', 'LOCKED');
-                window.location.reload();
-            }
-        }
-
-        function unlockSystem() {
-            if(prompt("ACCESS CODE:") === "MC8VETO") {
-                localStorage.removeItem('MC_STATUS');
-                window.location.reload();
-            }
-        }
-
-        function finalizeAudit(status) {
-            if(Object.keys(scoredPillars).length < 8) return alert("All 8 Pillars must be audited.");
-            alert(`AUDIT ${status}: MC™ Registry Updated.`);
-        }
+        function updateTierUI() { if(document.getElementById('tier-select').value === "4") lockSystem(); }
+        function lockSystem() { localStorage.setItem('MC_STATUS', 'LOCKED'); window.location.reload(); }
+        function unlockSystem() { if(prompt("ACCESS CODE:") === "MC8VETO") { localStorage.removeItem('MC_STATUS'); window.location.reload(); } }
+        function finalizeAudit(status) { if(Object.keys(scoredPillars).length < 8) return alert("Audit Incomplete."); alert(`Logged: ${status}`); }
     </script>
 </body>
 </html>
