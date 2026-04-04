@@ -5,168 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MC™ MASTER OS | MERRICK COMPLIANCE ™</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --navy: #0B1F3F; --gold: #F5C518; --audit-red: #ef4444; --border: rgba(255,255,255,0.1); --bg-dark: #061021; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: white; margin: 0; overflow: hidden; display: flex; }
+        :root { --navy: #0B1F3F; --gold: #F5C518; --border: rgba(255,255,255,0.1); --bg-dark: #061021; --grey-text: #9ca3af; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: white; margin: 0; overflow: hidden; display: flex; font-weight: 300; }
         
-        /* HARD LOCK */
-        #lock-screen { position: fixed; inset: 0; background: var(--bg-dark); z-index: 10000; display: none; flex-direction: column; align-items: center; justify-content: center; }
-        
-        /* SIDEBAR */
-        .sidebar { width: 280px; height: 100vh; background: #081426; border-right: 1px solid var(--border); display: flex; flex-direction: column; shrink-0; z-index: 50; }
-        .nav-item { padding: 18px 30px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: rgba(255, 255, 255, 0.4); cursor: pointer; transition: 0.3s; border-left: 4px solid transparent; }
+        /* SIDEBAR BRANDING (Upscaled per directive) */
+        .sidebar { width: 320px; height: 100vh; background: #081426; border-right: 1px solid var(--border); display: flex; flex-direction: column; shrink-0; z-index: 50; }
+        .sidebar-brand { display: flex; align-items: center; justify-content: center; gap: 24px; padding: 50px 30px; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
+        .m-logo-large { width: 75px; height: 75px; fill: white; shrink-0; } 
+        .m-name-large { font-family: 'Montserrat'; font-weight: 900; font-size: 28px; color: white; text-transform: uppercase; line-height: 1.1; letter-spacing: -1px; }
+        .m-compliance-large { font-family: 'Inter'; font-weight: 300; font-size: 12px; color: var(--grey-text); text-transform: uppercase; letter-spacing: 3px; }
+
+        .nav-item { padding: 20px 40px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: rgba(255, 255, 255, 0.4); cursor: pointer; transition: 0.3s; border-left: 4px solid transparent; }
         .nav-item.active { color: var(--gold); background: rgba(245, 197, 24, 0.05); border-left-color: var(--gold); }
 
-        /* VIEWPORT */
-        .viewport { flex: 1; height: 100vh; overflow-y: auto; background: #F8FAFC; color: var(--navy); position: relative; }
-        .view-content { display: none; padding: 60px; animation: fadeIn 0.4s ease forwards; }
-        .view-content.active { display: block; }
+        /* VIEWPORT & DOT GRID (image_4e9e28.png) */
+        .viewport { flex: 1; height: 100vh; overflow-y: auto; background-color: #ffffff; background-image: radial-gradient(#cbd5e1 1px, transparent 1px); background-size: 24px 24px; color: var(--navy); position: relative; }
+        .view-content { display: none; padding: 80px 40px; animation: fadeIn 0.4s ease forwards; }
+        .view-content.active { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
+
+        /* FRAMEWORK VISUALS (EXACT MATCH) */
+        .fw-container { display: flex; align-items: center; gap: 0; scale: 0.9; }
+        .mc-core-box { width: 180px; height: 320px; border: 4px solid var(--gold); background: white; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 20px 40px rgba(0,0,0,0.05); z-index: 10; }
+        
+        .pillar-flow { display: flex; align-items: flex-end; gap: 8px; margin-left: -2px; }
+        .pillar-node { display: flex; flex-direction: column; transition: 0.3s; cursor: pointer; }
+        .pillar-node:hover { transform: translateY(-5px); }
+        .p-num-box { background: var(--navy); color: white; width: 100%; padding: 12px 0; text-align: center; font-family: 'Montserrat'; font-weight: 900; font-size: 14px; border-radius: 4px 4px 0 0; }
+        .p-name-box { background: white; border: 1px solid var(--gold); padding: 10px 15px; min-width: 130px; text-align: center; font-size: 9px; font-weight: 900; text-transform: uppercase; color: var(--navy); white-space: nowrap; border-radius: 0 0 4px 4px; }
 
         /* LOGIC DRAWER */
-        #drawer { position: fixed; right: -450px; top: 0; width: 450px; height: 100vh; background: white; border-left: 2px solid var(--gold); box-shadow: -20px 0 50px rgba(0,0,0,0.1); z-index: 1000; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); padding: 40px; overflow-y: auto; color: var(--navy); }
+        #drawer { position: fixed; right: -500px; top: 0; width: 500px; height: 100vh; background: white; border-left: 3px solid var(--gold); z-index: 1000; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); padding: 50px; overflow-y: auto; }
         #drawer.open { right: 0; }
-        .drawer-overlay { position: fixed; inset: 0; background: rgba(6, 16, 33, 0.6); z-index: 900; display: none; }
+        .drawer-overlay { position: fixed; inset: 0; background: rgba(6, 16, 33, 0.8); z-index: 900; display: none; }
 
-        /* FRAMEWORK GRID */
-        .fw-card { background: white; border: 1px solid #E2E8F0; padding: 24px; border-radius: 4px; transition: 0.3s; cursor: pointer; position: relative; }
-        .fw-card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .fw-num { position: absolute; top: -10px; left: 20px; background: var(--navy); color: white; padding: 2px 8px; font-size: 9px; font-weight: 900; }
-
-        /* PILLAR CARDS (ANALYST) */
-        .pillar-card { background: white; border: 1px solid #E2E8F0; padding: 20px; transition: 0.2s; cursor: pointer; }
-        .pillar-card.scored { border-left: 6px solid var(--gold); }
-        
-        .btn-action { background: var(--navy); color: white; padding: 14px 28px; font-weight: 900; font-size: 10px; text-transform: uppercase; border: none; cursor: pointer; border-radius: 4px; transition: 0.3s; }
-        .btn-action:disabled { opacity: 0.2; cursor: not-allowed; }
-        
-        .sub-pill { padding: 12px; background: #F1F5F9; border-radius: 4px; font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 12px; margin-bottom: 8px; cursor: pointer; }
-        .sub-pill.checked { background: #DCFCE7; color: #166534; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
-
-    <div id="lock-screen">
-        <svg viewBox="0 0 100 100" style="width:60px; height:60px; margin-bottom:24px;" fill="var(--gold)">
-            <rect x="12" y="30" width="16" height="40"/><path d="M12 30H50V40H32V70H12V30Z"/><rect x="34" y="30" width="16" height="40"/><path d="M56 42H88V50H72V58H88V66H56V42Z"/>
-        </svg>
-        <h1 class="text-red-500 font-black text-4xl uppercase font-montserrat">System Locked</h1>
-        <button onclick="unlockSystem()" class="mt-8 btn-action" style="background:var(--gold); color:var(--navy);">Resolution Handshake</button>
-    </div>
 
     <div class="drawer-overlay" id="overlay" onclick="closeDrawer()"></div>
     <div id="drawer"><div id="drawer-content"></div></div>
 
     <nav class="sidebar">
-        <div class="p-8 border-b border-white/10 mb-6 flex flex-col items-center">
-            <svg viewBox="0 0 100 100" class="w-10 h-10 mb-4" fill="white">
+        <div class="sidebar-brand">
+            <svg viewBox="0 0 100 100" class="m-logo-large">
                 <rect x="12" y="30" width="16" height="40"/><path d="M12 30H50V40H32V70H12V30Z"/><rect x="34" y="30" width="16" height="40"/><path d="M56 42H88V50H72V58H88V66H56V42Z"/>
             </svg>
-            <span class="text-white font-black text-[10px] tracking-tighter uppercase font-montserrat text-center leading-tight">MC™ | MERRICK<br>COMPLIANCE ™</span>
+            <div class="brand-text-block">
+                <span class="m-name-large">MERRICK</span>
+                <span class="m-compliance-large">COMPLIANCE ™</span>
+            </div>
         </div>
         <div onclick="switchView('framework', this)" class="nav-item active">01 Framework</div>
         <div onclick="switchView('prep', this)" class="nav-item">02 Analyst Prep</div>
         <div onclick="switchView('veto', this)" class="nav-item">03 Veto Terminal</div>
         <div onclick="switchView('vault', this)" class="nav-item">04 Logic Vault</div>
-        
-        <div class="mt-auto p-8 border-t border-white/10 opacity-30 font-mono text-[8px] uppercase">
-            UNIT: <span id="m-id">MC-000-000</span><br>
-            SLA: <span id="sla-timer" class="text-gold">--:--:--</span>
-        </div>
     </nav>
 
     <main class="viewport">
         <div id="view-framework" class="view-content active">
-            <header class="mb-12 border-b-2 border-navy pb-6">
-                <span class="text-[10px] font-black text-gold uppercase tracking-[4px]">Strategic Terminal</span>
-                <h2 class="font-montserrat font-black text-3xl uppercase mt-2">8 Pillar Compliance Framework</h2>
-                <p class="text-[11px] font-bold text-gray-400 mt-2 max-w-2xl uppercase leading-relaxed">Linear Governance Sequence: Institutional Defense & Regulatory Immunity.</p>
-            </header>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10" id="fw-grid">
+            <div class="fw-container">
+                <div class="mc-core-box">
+                    <svg viewBox="0 0 100 100" class="w-16 h-16 mb-6" fill="var(--navy)">
+                        <rect x="12" y="30" width="16" height="40"/><path d="M12 30H50V40H32V70H12V30Z"/><rect x="34" y="30" width="16" height="40"/><path d="M56 42H88V50H72V58H88V66H56V42Z"/>
+                    </svg>
+                    <span class="text-[11px] font-black tracking-[3px] text-navy uppercase">MC™ CORE</span>
                 </div>
-        </div>
-
-        <div id="view-prep" class="view-content">
-            <div class="bg-white p-8 border border-gray-200 mb-10 rounded-lg shadow-sm">
-                <div class="grid grid-cols-2 gap-8">
-                    <div>
-                        <label class="text-[9px] font-black uppercase text-gray-400 mb-2 block">Client / Entity Name</label>
-                        <input type="text" id="client-name" placeholder="LEGAL ENTITY NAME" class="w-full border-b-2 border-gray-200 p-2 text-xs font-bold uppercase outline-none focus:border-navy">
-                    </div>
-                    <div>
-                        <label class="text-[9px] font-black uppercase text-gray-400 mb-2 block">Jurisdiction Risk</label>
-                        <select id="jurisdiction" class="w-full border-b-2 border-gray-200 p-2 text-xs font-bold uppercase outline-none bg-transparent">
-                            <option>Low Risk (Standard)</option>
-                            <option>Medium Risk (Grey List)</option>
-                            <option>High Risk (FATF Red)</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="mt-6 flex justify-between items-end">
-                    <div class="flex gap-4">
-                        <input type="text" id="a-name" placeholder="ANALYST SIGN-ON" class="border-b border-gray-300 text-[10px] font-bold uppercase p-1">
-                        <select id="tier-select" onchange="updateTierUI()" class="text-[10px] font-black uppercase bg-gray-50 border p-1">
-                            <option value="1">Tier 1: Low</option>
-                            <option value="2">Tier 2: Medium</option>
-                            <option value="3">Tier 3: High</option>
-                            <option value="4">Tier 4: Critical</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 gap-4" id="pillar-grid"></div>
-            <div class="mt-10 pt-10 border-t flex gap-4">
-                <button id="btn-approve" onclick="finalizeAudit('APPROVED')" class="btn-action flex-1">Authorize Final Log</button>
-                <button onclick="finalizeAudit('ESCALATED')" class="btn-action flex-1 bg-white !text-navy border-2 border-navy">Escalate to Architect</button>
+                
+                <div class="pillar-flow" id="fw-flow"></div>
             </div>
         </div>
 
-        <div id="view-veto" class="view-content">Veto Placeholder - Pending Review</div>
-        <div id="view-vault" class="view-content">Vault Placeholder - Pending Review</div>
+        <div id="view-prep" class="view-content">Analyst Station Blueprint Preserved.</div>
     </main>
 
     <script>
         const MC_LOGIC = {
-            1: { title: "Risk Taxonomy", meat: "Classification is the filter for resources. If you misidentify the beast, you use the wrong cage.", subs: ["Jurisdiction Alignment", "Business Model Fit", "Product Exposure"] },
-            2: { title: "Customer ID", meat: "Identity is the Digital Handshake. We do not accept 'close enough'. No ID, no entry.", subs: ["Liveness Verification", "Document Authenticity", "Proof of Nexus"] },
-            3: { title: "Diligence", meat: "The Wealth Narrative. We don't just want the money; we want the history of the money.", subs: ["UBO Transparency", "Source of Wealth (SoW)", "Professional Standing"] },
-            4: { title: "Screening", meat: "Signal vs. Noise. Automation handles the data; humans handle the truth.", subs: ["PEP Proximity", "Sanction Delta", "Adverse Media"] },
-            5: { title: "Evidence", meat: "The Regulatory Black Box. If it isn't timestamped, it is a liability.", subs: ["Metadata Integrity", "Audit Trail", "Retention Protocol"] },
-            6: { title: "Adjudication", meat: "Compliance is an objective science, not a subjective opinion.", subs: ["Logic Consistency", "Conflict of Interest", "Tolerance Check"] },
-            7: { title: "Quality", meat: "We audit ourselves so the regulators don't have to.", subs: ["Sampling Logic", "Error Rate", "Remediation Path"] },
-            8: { title: "Governance", meat: "Data flows up; safety flows down. Accuracy ensures Board-level security.", subs: ["Board Summarization", "Regulatory Delta", "Escalation Efficacy"] }
+            1: { title: "Risk Taxonomy", meat: "Classification is the filter for resources.", subs: ["Jurisdiction", "Business Model", "Product Exposure"] },
+            2: { title: "Customer ID", meat: "Identity is the Digital Handshake.", subs: ["Liveness", "Document Auth", "Nexus"] },
+            3: { title: "Diligence", meat: "The Wealth Narrative.", subs: ["UBO", "SoW", "Standing"] },
+            4: { title: "Screening", meat: "Signal vs. Noise.", subs: ["PEP", "Sanction", "Media"] },
+            5: { title: "Evidence", meat: "The Regulatory Black Box.", subs: ["Metadata", "Audit Trail", "Retention"] },
+            6: { title: "Adjudication", meat: "Objective Science over Opinion.", subs: ["Consistency", "Conflict", "Tolerance"] },
+            7: { title: "Quality", meat: "We audit ourselves first.", subs: ["Sampling", "Error Rate", "Remediation"] },
+            8: { title: "Governance", meat: "Data flows up; safety flows down.", subs: ["Board Summary", "Regulatory Delta", "Escalation"] }
         };
 
-        let scoredPillars = {};
-
         window.onload = () => {
-            if(localStorage.getItem('MC_STATUS') === 'LOCKED') document.getElementById('lock-screen').style.display = 'flex';
-            
-            const grid = document.getElementById('pillar-grid');
-            const fwGrid = document.getElementById('fw-grid');
-
+            const flow = document.getElementById('fw-flow');
             Object.keys(MC_LOGIC).forEach(key => {
-                // Populate Framework
-                fwGrid.innerHTML += `
-                    <div class="fw-card" onclick="openPillar(${key})">
-                        <div class="fw-num">0${key}</div>
-                        <h3 class="text-xs font-black uppercase text-navy">${MC_LOGIC[key].title}</h3>
-                        <div class="mt-4 space-y-1">
-                            ${MC_LOGIC[key].subs.map(s => `<div class="text-[8px] font-bold text-gray-400 uppercase tracking-tighter">/ ${s}</div>`).join('')}
-                        </div>
-                    </div>
-                `;
-                // Populate Analyst Station
-                grid.innerHTML += `
-                    <div class="pillar-card" id="card-${key}" onclick="openPillar(${key})">
-                        <div class="flex justify-between items-start">
-                            <span class="text-[9px] font-black text-gold uppercase">Pillar 0${key}</span>
-                            <span id="status-${key}" class="text-[8px] font-bold text-gray-300 uppercase">Awaiting Logic</span>
-                        </div>
-                        <h3 class="text-xs font-black uppercase mt-2">${MC_LOGIC[key].title}</h3>
+                flow.innerHTML += `
+                    <div class="pillar-node" onclick="openPillar(${key})">
+                        <div class="p-num-box">0${key}</div>
+                        <div class="p-name-box">${MC_LOGIC[key].title}</div>
                     </div>
                 `;
             });
@@ -175,61 +108,27 @@
         function openPillar(id) {
             const data = MC_LOGIC[id];
             document.getElementById('drawer-content').innerHTML = `
-                <span class="text-[10px] font-black text-gold uppercase">Architect Insight</span>
-                <h2 class="text-xl font-black uppercase mb-6">${data.title}</h2>
-                <div class="bg-gray-50 p-6 border-l-4 border-navy mb-8">
-                    <p class="text-xs font-bold leading-relaxed italic">"${data.meat}"</p>
-                </div>
-                <div class="space-y-3 mb-8">
-                    ${data.subs.map((s, i) => `
-                        <div class="sub-pill" id="sub-${id}-${i}" onclick="checkSub(${id}, ${i})">
-                            <div class="w-4 h-4 border-2 border-navy rounded-sm"></div>${s}
-                        </div>
-                    `).join('')}
-                </div>
-                <textarea id="rationale-${id}" class="w-full border-2 p-4 text-xs font-bold mb-6 outline-none focus:border-gold h-24" placeholder="ENTER RATIONALE..."></textarea>
-                <div class="flex gap-2">
-                    <button id="p-btn-${id}" disabled onclick="setScore(${id}, 'PASS')" class="btn-action flex-1 bg-green-600">Pass</button>
-                    <button id="f-btn-${id}" disabled onclick="setScore(${id}, 'FAIL')" class="btn-action flex-1 bg-red-600">Fail</button>
+                <h2 class="text-2xl font-black uppercase text-navy mb-4">${data.title}</h2>
+                <p class="italic text-gray-500 mb-8">"${data.meat}"</p>
+                <div class="space-y-4">
+                    ${data.subs.map(s => `<div class="p-4 bg-gray-50 font-bold text-[10px] uppercase border-l-4 border-gold">${s}</div>`).join('')}
                 </div>
             `;
             document.getElementById('drawer').classList.add('open');
             document.getElementById('overlay').style.display = 'block';
         }
 
-        function checkSub(pId, sId) {
-            document.getElementById(`sub-${pId}-${sId}`).classList.toggle('checked');
-            const currentChecked = document.querySelectorAll(`#drawer .sub-pill.checked`).length;
-            if (currentChecked === 3) {
-                document.getElementById(`p-btn-${pId}`).disabled = false;
-                document.getElementById(`f-btn-${pId}`).disabled = false;
-            }
+        function closeDrawer() { 
+            document.getElementById('drawer').classList.remove('open'); 
+            document.getElementById('overlay').style.display = 'none'; 
         }
-
-        function setScore(id, score) {
-            scoredPillars[id] = { score };
-            const card = document.getElementById(`card-${id}`);
-            if(card) card.classList.add('scored');
-            const status = document.getElementById(`status-${id}`);
-            if(status) { status.innerText = score; status.classList.add(score === 'PASS' ? 'text-green-600' : 'text-red-600'); }
-            closeDrawer();
-        }
-
-        function closeDrawer() { document.getElementById('drawer').classList.remove('open'); document.getElementById('overlay').style.display = 'none'; }
 
         function switchView(v, el) {
-            if(v === 'veto' && prompt("VETO CODE:") !== "MC8VETO") return;
-            if(v === 'vault' && prompt("VAULT CODE:") !== "VAULT99") return;
             document.querySelectorAll('.view-content').forEach(c => c.classList.remove('active'));
             document.getElementById('view-' + v).classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             el.classList.add('active');
         }
-
-        function updateTierUI() { if(document.getElementById('tier-select').value === "4") lockSystem(); }
-        function lockSystem() { localStorage.setItem('MC_STATUS', 'LOCKED'); window.location.reload(); }
-        function unlockSystem() { if(prompt("ACCESS CODE:") === "MC8VETO") { localStorage.removeItem('MC_STATUS'); window.location.reload(); } }
-        function finalizeAudit(status) { if(Object.keys(scoredPillars).length < 8) return alert("Audit Incomplete."); alert(`Logged: ${status}`); }
     </script>
 </body>
 </html>
