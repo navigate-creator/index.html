@@ -2,51 +2,121 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MC™ MASTER OS | Merrick Compliance</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     <style>
-        :root { --navy: #0B1F3F; --gold: #F5C518; --border: #E2E8F0; }
-        body { font-family: 'Inter', sans-serif; background: white; color: var(--navy); padding: 60px; position: relative; }
-        .pillar-def { border-left: 3px solid var(--navy); padding: 15px 25px; margin-bottom: 20px; background: #F8FAFC; }
-        .pillar-def h4 { font-size: 11px; font-weight: 900; text-transform: uppercase; margin-bottom: 5px; }
-        .pillar-def p { font-size: 11px; color: #64748B; line-height: 1.5; font-weight: 500; }
-        .tier-tag { font-size: 8px; font-weight: 900; padding: 3px 8px; border-radius: 2px; text-transform: uppercase; margin-right: 10px; }
-        .watermark { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 10vw; font-weight: 900; opacity: 0.02; pointer-events: none; white-space: nowrap; }
+        :root { --navy: #0B1F3F; --gold: #F5C518; --audit-red: #ef4444; --border: rgba(255,255,255,0.1); }
+        body { font-family: 'Inter', sans-serif; background-color: #061021; color: white; margin: 0; overflow: hidden; display: flex; }
+        
+        .sidebar { width: 260px; height: 100vh; background: #081426; border-right: 1px solid var(--border); display: flex; flex-direction: column; shrink-0; z-index: 50; }
+        .nav-item { padding: 16px 24px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: rgba(255, 255, 255, 0.4); cursor: pointer; border-left: 4px solid transparent; transition: 0.3s; }
+        .nav-item.active { color: var(--gold); background: rgba(245, 197, 24, 0.05); border-left-color: var(--gold); }
+
+        .viewport { flex: 1; height: 100vh; overflow-y: auto; background: #FDFDFD; color: var(--navy); position: relative; }
+        .view-content { display: none; padding: 60px; animation: fadeIn 0.4s ease forwards; }
+        .view-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* LINEAR DIAGRAM DESIGN */
+        .linear-container { display: flex; align-items: center; justify-content: center; margin: 80px auto; }
+        .core-block { width: 160px; height: 300px; background: white; border: 3px solid var(--gold); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-right: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .p-unit { display: flex; flex-direction: column; align-items: center; width: 100px; }
+        .p-box { width: 42px; height: 42px; background: var(--navy); color: white; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 11px; margin-bottom: 10px; }
+        .p-tag { width: 100%; padding: 6px 2px; background: white; border: 1px solid var(--gold); font-size: 7px; font-weight: 900; text-transform: uppercase; text-align: center; white-space: nowrap; }
+
+        #lock-screen { position: fixed; inset: 0; background: #061021; z-index: 10000; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        .btn-action { background: var(--navy); color: white; padding: 14px 28px; font-weight: 900; font-size: 10px; text-transform: uppercase; border: none; cursor: pointer; border-radius: 4px; }
+        .active-p { background: var(--gold) !important; color: var(--navy) !important; }
+        .active-f { background: var(--audit-red) !important; color: white !important; }
     </style>
 </head>
 <body>
-    <div class="watermark">PROPRIETARY IP</div>
-    <div class="max-w-4xl mx-auto space-y-12">
-        <header class="border-b-4 border-navy pb-6">
-            <span style="font-size:9px; font-weight:900; color:var(--gold); letter-spacing:4px; text-transform:uppercase;">Proprietary Vault</span>
-            <h2 style="font-family:Montserrat; font-weight:900; font-size:32px; text-transform:uppercase; letter-spacing:-1.5px;">MC™ 8 Pillar Framework</h2>
-        </header>
 
-        <section>
-            <h3 style="font-size:10px; font-weight:900; text-transform:uppercase; letter-spacing:2px; margin-bottom:20px; color:var(--gold);">01 // Framework Definitions</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="pillar-def"><h4>01 Risk Taxonomy</h4><p>Defining "high risk" thresholds based on business models and carrier expectations.</p></div>
-                <div class="pillar-def"><h4>02 Customer ID (CIP)</h4><p>Mandatory digital validation of identification and address for all entities.</p></div>
-                <div class="pillar-def"><h4>03 Diligence (EDD)</h4><p>Strict verification of source of wealth and professional standing for high-value files.</p></div>
-                <div class="pillar-def"><h4>04 Screen & Triage</h4><p>Automated Sanctions/PEP checks with standardized manual triage rules.</p></div>
-                <div class="pillar-def"><h4>05 Evidence Chain</h4><p>Immutable, timestamped history of compliance actions for future audit defense.</p></div>
-                <div class="pillar-def"><h4>06 Adjudication</h4><p>Non-negotiable approval vs rejection rules that eliminate individual human bias.</p></div>
-            </div>
-        </section>
-
-        <section style="background:var(--navy); color:white; padding:40px;">
-            <h3 style="font-size:10px; font-weight:900; text-transform:uppercase; letter-spacing:2px; margin-bottom:25px; color:var(--gold);">02 // Risk Scoring Matrix</h3>
-            <div class="space-y-4">
-                <div class="flex items-center"><span class="tier-tag" style="background: #22c55e;">Tier 1</span><p style="font-size:11px; font-weight:600; opacity:0.8;">Standard checks. System auto-approve if 100% clean.</p></div>
-                <div class="flex items-center"><span class="tier-tag" style="background: #3b82f6;">Tier 2</span><p style="font-size:11px; font-weight:600; opacity:0.8;">Manual review required. Senior Analyst sign-off.</p></div>
-                <div class="flex items-center"><span class="tier-tag" style="background: #f59e0b;">Tier 3</span><p style="font-size:11px; font-weight:600; opacity:0.8;">Enhanced Due Diligence + Mandatory Architect sign-off.</p></div>
-                <div class="flex items-center"><span class="tier-tag" style="background: #ef4444;">Tier 4</span><p style="font-size:11px; font-weight:600; opacity:0.8;">Immediate Halt. Escalation to Legal and MLRO rejection.</p></div>
-            </div>
-        </section>
-
-        <footer class="text-center opacity-30">
-            <p style="font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:4px;">&copy; 2024 Merrick Compliance Strategic Systems</p>
-        </footer>
+    <div id="lock-screen">
+        <h1 class="font-montserrat font-black text-4xl text-red-600 uppercase">System Locked</h1>
+        <p class="text-white font-bold mt-4 uppercase text-xs">Architect Resolution Handshake Required</p>
+        <button onclick="unlockSystem()" class="mt-10 btn-action" style="background:var(--gold); color:var(--navy);">Resolution Handshake</button>
     </div>
+
+    <nav class="sidebar">
+        <div class="p-8 border-b border-white/10 mb-6">
+            <span class="text-white font-black text-sm tracking-tighter uppercase font-montserrat">Merrick Compliance</span>
+        </div>
+        <div onclick="switchView('framework', this)" class="nav-item active">01 System Logic</div>
+        <div onclick="switchView('prep', this)" class="nav-item">02 Analyst Prep</div>
+        <div onclick="switchView('veto', this)" class="nav-item">03 Veto Terminal</div>
+        <div onclick="switchView('vault', this)" class="nav-item">04 Logic Vault</div>
+        
+        <div class="mt-auto p-8 border-t border-white/10 opacity-30 font-mono text-[8px] uppercase">
+            UNIT_ID: <span id="m-id">MC-000-000</span><br>
+            STAMP: <span id="m-date">2026.04.03</span>
+        </div>
+    </nav>
+
+    <main class="viewport">
+        <div id="view-framework" class="view-content active">
+            <h2 class="font-montserrat font-black text-2xl uppercase border-b-2 border-navy pb-4 mb-10">Strategic Framework</h2>
+            <div class="linear-container">
+                <div class="core-block">
+                    <svg viewBox="0 0 100 100" class="w-10 h-10 mb-4" fill="var(--navy)"><rect x="12" y="30" width="16" height="40"/><path d="M12 30H50V40H32V70H12V30Z"/><rect x="34" y="30" width="16" height="40"/><path d="M56 42H88V50H72V58H88V66H56V42Z"/></svg>
+                    <span class="text-[9px] font-black text-navy uppercase">MC™ CORE</span>
+                </div>
+                <div class="flex items-center gap-4" id="linear-seq"></div>
+            </div>
+        </div>
+
+        <div id="view-prep" class="view-content">
+            <h2 class="font-montserrat font-black text-2xl uppercase border-b-2 border-navy pb-6 mb-10">Analyst Prep</h2>
+            <input type="text" id="a-name" placeholder="ANALYST NAME" class="border-b border-navy outline-none bg-transparent font-bold text-xs uppercase w-64 mb-10">
+            <div id="a-list" class="space-y-2 max-w-xl"></div>
+            <div class="mt-10 flex gap-4 max-w-xl"><button onclick="log('APPROVE')" class="btn-action flex-1">Approve</button><button onclick="log('ESCALATE')" class="btn-action flex-1" style="background:white; color:var(--navy); border:2px solid var(--navy);">Escalate</button></div>
+        </div>
+
+        <div id="view-veto" class="view-content">
+            <h2 class="font-montserrat font-black text-2xl uppercase text-red-600 mb-10">Veto Terminal</h2>
+            <div class="bg-white p-8 border border-gray-200 max-w-xl">
+                <p class="font-mono text-[10px] text-gold mb-6 uppercase">Active: <span id="v-id">MC-000-000</span></p>
+                <textarea class="w-full h-32 border p-4 text-xs font-medium mb-6" placeholder="RATIONALE..."></textarea>
+                <div class="flex gap-4"><button onclick="log('PASS')" class="btn-action flex-1" style="background:var(--gold); color:var(--navy);">Pass</button><button onclick="triggerFail()" class="btn-action flex-1" style="background:var(--audit-red);">Fail & Lock</button></div>
+            </div>
+        </div>
+
+        <div id="view-vault" class="view-content">
+            <h2 class="font-montserrat font-black text-2xl uppercase border-b-2 border-navy pb-6 mb-10">Proprietary Vault</h2>
+            <div class="max-w-2xl bg-white p-10 border border-gray-200 shadow-sm">
+                <p class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Locked Operating logic</p>
+                <div class="space-y-4 text-sm font-medium leading-relaxed">
+                    <p>01 Risk Taxonomy: Defined business model thresholds.</p>
+                    <p>02 CIP: Mandatory ID/Address digital validation.</p>
+                    <p>03 EDD: Deep-source wealth corroboration logic.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const P = ["Risk Taxonomy", "Customer ID", "Diligence", "Screening", "Evidence", "Adjudication", "Quality", "Governance"];
+        window.onload = () => {
+            if(localStorage.getItem('MC_STATUS') === 'LOCKED') document.getElementById('lock-screen').style.display = 'flex';
+            const id = `MC-${Math.floor(Math.random()*900+100)}-${Math.floor(Math.random()*900+100)}`;
+            document.getElementById('m-id').innerText = id; document.getElementById('v-id').innerText = id;
+            document.getElementById('linear-seq').innerHTML = P.map((p, i) => `<div class="p-unit"><div class="p-box">0${i+1}</div><div class="p-tag">${p}</div></div>`).join('');
+            document.getElementById('a-list').innerHTML = P.map((p, i) => `<div class="p-4 bg-white border flex justify-between items-center"><span class="text-[10px] font-black uppercase">0${i+1} ${p}</span><div class="flex gap-2"><button onclick="scr(this,'p')" class="px-3 py-1 border text-[8px] font-black uppercase">Pass</button><button onclick="scr(this,'f')" class="px-3 py-1 border text-[8px] font-black uppercase">Fail</button></div></div>`).join('');
+        };
+        function scr(b, t) { b.parentElement.querySelectorAll('button').forEach(x => x.classList.remove('active-p', 'active-f')); b.classList.add(t === 'p' ? 'active-p' : 'active-f'); }
+        function triggerFail() { localStorage.setItem('MC_STATUS', 'LOCKED'); window.location.reload(); }
+        function unlockSystem() { if(prompt("ENTER ARCHITECT KEY:") === "MC8VETO") { localStorage.removeItem('MC_STATUS'); window.location.reload(); } }
+        function log(type) { alert(`${type} Logged.`); }
+        function switchView(v, el) {
+            if(v === 'veto' && prompt("VETO ACCESS CODE:") !== "MC8VETO") return;
+            if(v === 'vault' && prompt("VAULT ACCESS CODE:") !== "VAULT99") return;
+            document.querySelectorAll('.view-content').forEach(c => c.classList.remove('active'));
+            document.getElementById('view-'+v).classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            el.classList.add('active');
+        }
+    </script>
 </body>
 </html>
