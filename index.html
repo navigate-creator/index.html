@@ -252,14 +252,9 @@
             document.getElementById('core-info').classList.add('hidden');
         }
 
-        /* FUNCTION TO ENFORCE PASSKEY MC8ADMIN */
+        /* FUNCTION TO LAUNCH OS DIRECTLY */
         function launchOS() {
-            const passkey = prompt("ENTER SYSTEM ACCESS CODE:");
-            if (passkey === "MC8ADMIN") {
-                window.location.href = 'os.html';
-            } else {
-                alert("ACCESS DENIED: INVALID CODE.");
-            }
+            window.location.href = 'os.html';
         }
     </script>
 </body>
